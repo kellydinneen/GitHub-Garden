@@ -7,16 +7,23 @@ const GitHubActivityMap = (props) => {
   const [events, setEvents] = useState([]);
   const [locations, setLocations] = useState([]);
   const [markers, setMarkers] = useState([]);
+  const [ghError, setGhError] = useState('');
+  const [individualError, setIndividualError] = ('')
+  const [geoErrors, setGeoErrors] = ([])
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const result = await fetch('https://api.github.com/events', {
-        headers: {
-          authorization: "token a28d7e80e53dee17c87b109f37a23b3f2f3d3337"
-        }
-      })
-      const data = await result.json()
-      setEvents(data)
+      try {
+        const result = await fetch('https://api.github.com/events', {
+          headers: {
+            authorization: "token a28d7e80e53dee17c87b109f37a23b3f2f3d3337"
+          }
+        })
+        const data = await result.json()
+        setEvents(data)
+      } catch (err) {
+        setGhError(err)
+      }
     }
     fetchEvents()
   }, [])
@@ -26,16 +33,21 @@ const GitHubActivityMap = (props) => {
     const fetchLocations = async () => {
       const userLocations = await Promise.all(
         events.map(async (item) => {
-          const result = await fetch(item.actor.url, {
-            headers: {
-              authorization: "token a28d7e80e53dee17c87b109f37a23b3f2f3d3337"
-            }
-          })
-        const data = await result.json();
-        return data
+          try {
+            const result = await fetch(item.actor.url, {
+              headers: {
+                authorization: "token a28d7e80e53dee17c87b109f37a23b3f2f3d3337"
+              }
+            })
+            const data = await result.json();
+            return data
+          } catch (err) {
+            setIndividualError(err)
+          }
       }))
 
-    //get locations
+
+    //get locations from geosearch
       const places = userLocations.filter(loc => loc.location).map(loc => loc.location);
       const coords = await Promise.all(
         places.map(async place => {
@@ -43,8 +55,8 @@ const GitHubActivityMap = (props) => {
             const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place}&key=e0b4a3f2213247859e55897af976da36`)
             const data = await result.json();
             return data.results[0].geometry
-          } catch(e) {
-            console.log(`No coordinates for ${place}`)
+          } catch(err) {
+            setGeoErrors([...geoErrors, `No coordinates for ${place}` ])
           }
         })
       )
