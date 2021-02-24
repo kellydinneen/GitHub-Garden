@@ -8,7 +8,6 @@ const GitHubActivityMap = (props) => {
   const [locations, setLocations] = useState([]);
   const [markers, setMarkers] = useState([]);
 
-
   useEffect(() => {
     const fetchEvents = async () => {
       const result = await fetch('https://api.github.com/events', {
@@ -54,6 +53,18 @@ const GitHubActivityMap = (props) => {
     fetchLocations();
   }, [events])
 
+  useEffect(() => {
+    const markers = locations.map(location => {
+      return (
+      <Marker position={[location.lat, location.lng]}>
+        <Popup>
+          A pretty CSS3 popup. <br /> Easily customizable.
+        </Popup>
+      </Marker>
+    )
+    })
+    setMarkers(markers)
+  }, [locations])
 
   return (
     <div className='github-activity-map-container'>
