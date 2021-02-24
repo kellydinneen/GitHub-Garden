@@ -8,8 +8,8 @@ const GitHubActivityMap = (props) => {
   const [locations, setLocations] = useState([]);
   const [markers, setMarkers] = useState([]);
   const [ghError, setGhError] = useState('');
-  const [individualError, setIndividualError] = ('')
-  const [geoErrors, setGeoErrors] = ([])
+  const [individualError, setIndividualError] = useState('');
+  const [geoErrors, setGeoErrors] = useState([]);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -66,9 +66,9 @@ const GitHubActivityMap = (props) => {
   }, [events])
 
   useEffect(() => {
-    const markers = locations.map(location => {
+    const markers = locations.map((location, index) => {
       return (
-      <Marker position={[location.lat, location.lng]}>
+      <Marker key={index} position={[location.lat, location.lng]}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
