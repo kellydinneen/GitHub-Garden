@@ -8,6 +8,20 @@ const GitHubActivityMap = (props) => {
   const [locations, setLocations] = useState([]);
   const [markers, setMarkers] = useState([]);
 
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const result = await fetch('https://api.github.com/events', {
+        headers: {
+          authorization: "token a28d7e80e53dee17c87b109f37a23b3f2f3d3337"
+        }
+      })
+      const data = await result.json()
+      setEvents(data)
+    }
+    fetchEvents()
+  }, [])
+
   return (
     <div className='github-activity-map-container'>
       { props.error && props.error }
