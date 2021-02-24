@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './GitHubActivityMap.css';
 import { MapContainer, TileLayer, Circle, Popup } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
 const dotEnv = require('dotenv').config();
 
 
@@ -71,9 +72,14 @@ const GitHubActivityMap = (props) => {
   }, [events])
 
   useEffect(() => {
-    const markers = locations.map((location, index) => {
+
+    const markers = locations.filter(location => location).map((location, index) => {
       return (
-      <Circle className="circle-marker" key={index} center={[location.lat, location.lng]}>
+      <Circle
+        className="circle-marker"
+        key={index}
+        center={[location.lat, location.lng]}
+      >
         <Popup>
           {location.city || location.country}
         </Popup>

@@ -3,3 +3,23 @@
   width: 90vw;
   border: 2px solid black;
 }
+
+.circle-marker {
+  stroke-width: 10;
+  animation-name: circle;
+  animation-duration: 4s;
+  transition-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes circle {
+  0% {
+    stroke-width: 12;
+    opacity: 0.9;
+  }
+
+  100% {
+    stroke-width: 250;
+    opacity: 0.0;
+  }
+}
