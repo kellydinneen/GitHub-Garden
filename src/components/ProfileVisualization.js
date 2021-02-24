@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import D3ComponentTemplate from './D3ComponentTemplate.js';
 import './ProfileVisualization.css';
 
 const ProfileVisualization = (props) => {
   const [userGitHubData, setUserGitHubData] = useState([]);
   const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
+  const [dataForViz, setDataForViz] = useState([]);
   const [error, setError] = useState('');
 
   const fetchUserGitHubData = async () => {
@@ -32,7 +34,9 @@ const ProfileVisualization = (props) => {
       <a href={userGitHubData.html_url}>
         <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
       </a>
-      <div className="user-visualizations-box"></div>
+      <div className="user-visualizations-box">
+        <D3ComponentTemplate data={dataForViz}/>
+      </div>
       <input
         aria-label="Search bar for GitHub users"
         className="search-bar"
