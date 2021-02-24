@@ -7,7 +7,7 @@
 .circle-marker {
   stroke-width: 10;
   animation-name: circle;
-  animation-duration: 4s;
+  animation-duration: 1.2s;
   transition-timing-function: linear;
   animation-fill-mode: forwards;
 }
@@ -15,11 +15,11 @@
 @keyframes circle {
   0% {
     stroke-width: 0;
-    opacity: 0.9;
+    opacity: 1;
   }
 
   100% {
-    stroke-width: 250;
-    opacity: 0.0;
+    stroke-width: 100;
+    opacity: 0;
   }
 }
