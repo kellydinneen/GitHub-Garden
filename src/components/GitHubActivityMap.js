@@ -58,8 +58,6 @@ const GitHubActivityMap = (props) => {
             const data = await result.json();
             return {
               ...data.results[0].geometry,
-              city: data.results[0].components.city,
-              country: data.results[0].components.country
             }
           } catch(err) {
             setGeoErrors([...geoErrors, `No coordinates for ${place}` ])
@@ -80,9 +78,6 @@ const GitHubActivityMap = (props) => {
         key={index}
         center={[location.lat, location.lng]}
       >
-        <Popup>
-          {location.city || location.country}
-        </Popup>
       </Circle>
     )
     })

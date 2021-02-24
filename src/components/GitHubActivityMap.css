@@ -14,7 +14,7 @@
 
 @keyframes circle {
   0% {
-    stroke-width: 12;
+    stroke-width: 0;
     opacity: 0.9;
   }
 
