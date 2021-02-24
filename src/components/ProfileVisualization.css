@@ -1,0 +1,10 @@
+.user-profile-pic {
+  height: 20vh;
+  border-radius: 50%;
+}
+.user-visualizations-box {
+  height: 60vh;
+  width: 90vw;
+  border: 2px solid black;
+  margin-bottom: 10vh;
+}

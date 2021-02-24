@@ -30,8 +30,9 @@ const ProfileVisualization = (props) => {
     <main>
       <h1>{userGitHubData.name || `@${userGitHubData.login}`}</h1>
       <a href={userGitHubData.html_url}>
-        <img src={userGitHubData.avatar_url}/>
+        <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
       </a>
+      <div className="user-visualizations-box"></div>
       <input
         aria-label="Search bar for GitHub users"
         className="search-bar"
