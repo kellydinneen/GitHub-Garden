@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './GitHubActivityMap.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+const dotEnv = require('dotenv').config();
+
 
 const GitHubActivityMap = (props) => {
 
@@ -16,7 +18,7 @@ const GitHubActivityMap = (props) => {
       try {
         const result = await fetch('https://api.github.com/events', {
           headers: {
-            authorization: "token a28d7e80e53dee17c87b109f37a23b3f2f3d3337"
+            authorization: `token ${process.env.REACT_APP_API_KEY}`
           }
         })
         const data = await result.json()
@@ -36,7 +38,7 @@ const GitHubActivityMap = (props) => {
           try {
             const result = await fetch(item.actor.url, {
               headers: {
-                authorization: "token a28d7e80e53dee17c87b109f37a23b3f2f3d3337"
+                authorization: `token ${process.env.REACT_APP_API_KEY}`
               }
             })
             const data = await result.json();
@@ -48,13 +50,11 @@ const GitHubActivityMap = (props) => {
 
     //get locations from geosearch
       const places = userLocations.filter(loc => loc.location).map(loc => loc.location);
-      console.log(places)
       const coords = await Promise.all(
         places.map(async place => {
           try {
-            const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place}&key=e0b4a3f2213247859e55897af976da36`)
+            const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place}&key=${process.env.REACT_APP_GEO_KEY}`)
             const data = await result.json();
-            console.log(data)
             return {
               ...data.results[0].geometry,
               city: data.results[0].components.city,
