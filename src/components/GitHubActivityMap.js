@@ -18,7 +18,7 @@ const GitHubActivityMap = (props) => {
       try {
         const result = await fetch('https://api.github.com/events', {
           headers: {
-            authorization: `token ${process.env.REACT_APP_API_KEY}`
+            authorization: `token ${process.env.REACT_APP_GH_KEY}`
           }
         })
         const data = await result.json()
@@ -38,7 +38,7 @@ const GitHubActivityMap = (props) => {
           try {
             const result = await fetch(item.actor.url, {
               headers: {
-                authorization: `token ${process.env.REACT_APP_API_KEY}`
+                authorization: `token ${process.env.REACT_APP_GH_KEY}`
               }
             })
             const data = await result.json();
@@ -71,7 +71,7 @@ const GitHubActivityMap = (props) => {
   }, [events])
 
   useEffect(() => {
-    const markers = locations.map((location, index) => {
+    const markers = locations.filter(location => location !== undefined).map((location, index) => {
       return (
       <Marker key={index} position={[location.lat, location.lng]}>
         <Popup>

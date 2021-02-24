@@ -7,26 +7,31 @@ const ProfileVisualization = (props) => {
   const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
   const [error, setError] = useState('');
 
-  const getUserGitHubData = async () => {
-    const url = '';
-    setError('');
+  const fetchUserGitHubData = async () => {
     try {
-      //some async stufff using props.userNameToSearch
-      setUserGitHubData(['some data']);
-    } catch(error) {
-      setError(error.message)
+      const result = await fetch(`https://api.github.com/users/${props.userNameToSearch}`, {
+        headers: {
+          authorization: `token ${process.env.REACT_APP_GH_KEY}`
+        }
+      })
+      const userData = await result.json();
+      setUserGitHubData(userData);
+      console.log(userGitHubData);;
+    } catch (error) {
+      setError(error)
     }
   }
 
   useEffect(() => {
-    getUserGitHubData()
+    fetchUserGitHubData()
   }, [])
-
-  console.log(props);
 
   return (
     <main>
-      <h1>Visualizations for @{props.userNameToSearch}'s GitHub'</h1>
+      <h1>{userGitHubData.name || `@${userGitHubData.login}`}</h1>
+      <a href={userGitHubData.html_url}>
+        <img src={userGitHubData.avatar_url}/>
+      </a>
       <input
         aria-label="Search bar for GitHub users"
         className="search-bar"
