@@ -48,6 +48,7 @@ const GitHubActivityMap = (props) => {
 
     //get locations from geosearch
       const places = userLocations.filter(loc => loc.location).map(loc => loc.location);
+      console.log(places)
       const coords = await Promise.all(
         places.map(async place => {
           try {
