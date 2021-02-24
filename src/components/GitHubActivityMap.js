@@ -69,7 +69,9 @@ const GitHubActivityMap = (props) => {
   //   }
   //   fetchLocations();
   // }, [events])
+
   //test data
+  // COMMENT THIS OUT WHEN USING FOR REAL
   useEffect(() => {
     setLocations([
       {lat: 40.745255, lng: -74.034775},
