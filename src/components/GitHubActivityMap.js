@@ -70,8 +70,7 @@ const GitHubActivityMap = (props) => {
   }, [events])
 
   useEffect(() => {
-
-    const markers = locations.filter(location => location).map((location, index) => {
+    const markers = locations.filter(location => location !== undefined).map((location, index) => {
       return (
       <Circle
         className="circle-marker"
