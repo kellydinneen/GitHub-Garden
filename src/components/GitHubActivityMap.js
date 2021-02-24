@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './GitHubActivityMap.css';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Circle, Popup } from 'react-leaflet'
 const dotEnv = require('dotenv').config();
 
 
@@ -18,7 +18,7 @@ const GitHubActivityMap = (props) => {
       try {
         const result = await fetch('https://api.github.com/events', {
           headers: {
-            authorization: `token ${process.env.REACT_APP_API_KEY}`
+            authorization: `token ${process.env.REACT_APP_GH_KEY}`
           }
         })
         const data = await result.json()
@@ -38,7 +38,7 @@ const GitHubActivityMap = (props) => {
           try {
             const result = await fetch(item.actor.url, {
               headers: {
-                authorization: `token ${process.env.REACT_APP_API_KEY}`
+                authorization: `token ${process.env.REACT_APP_GH_KEY}`
               }
             })
             const data = await result.json();
@@ -73,11 +73,11 @@ const GitHubActivityMap = (props) => {
   useEffect(() => {
     const markers = locations.map((location, index) => {
       return (
-      <Marker key={index} position={[location.lat, location.lng]}>
+      <Circle className="circle-marker" key={index} center={[location.lat, location.lng]}>
         <Popup>
           {location.city || location.country}
         </Popup>
-      </Marker>
+      </Circle>
     )
     })
     setMarkers(markers)
