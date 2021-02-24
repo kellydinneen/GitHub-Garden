@@ -6,10 +6,11 @@ import ProfileVisualization from './ProfileVisualization';
 import './App.css';
 
 const App = () => {
+
   const [globalGitHubData, setGlobalGitHubData] = useState([]);
   const [error, setError] = useState('');
   const [userNameToSearch, setUserNameToSearch] = useState('');
-
+  //
   const getGlobalGitHubData = async () => {
     const url = '';
     setError('');

@@ -1,16 +1,99 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './GitHubActivityMap.css';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+const dotEnv = require('dotenv').config();
+
 
 const GitHubActivityMap = (props) => {
 
-  //d3 and leaflet stuff
+  const [events, setEvents] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [markers, setMarkers] = useState([]);
+  const [ghError, setGhError] = useState('');
+  const [individualError, setIndividualError] = useState('');
+  const [geoErrors, setGeoErrors] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const result = await fetch('https://api.github.com/events', {
+          headers: {
+            authorization: `token ${process.env.REACT_APP_API_KEY}`
+          }
+        })
+        const data = await result.json()
+        setEvents(data)
+      } catch (err) {
+        setGhError(err)
+      }
+    }
+    fetchEvents()
+  }, [])
+
+  useEffect(() => {
+    //fetch user data
+    const fetchLocations = async () => {
+      const userLocations = await Promise.all(
+        events.map(async (item) => {
+          try {
+            const result = await fetch(item.actor.url, {
+              headers: {
+                authorization: `token ${process.env.REACT_APP_API_KEY}`
+              }
+            })
+            const data = await result.json();
+            return data
+          } catch (err) {
+            setIndividualError(err)
+          }
+      }))
+
+    //get locations from geosearch
+      const places = userLocations.filter(loc => loc.location).map(loc => loc.location);
+      const coords = await Promise.all(
+        places.map(async place => {
+          try {
+            const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place}&key=${process.env.REACT_APP_GEO_KEY}`)
+            const data = await result.json();
+            return {
+              ...data.results[0].geometry,
+              city: data.results[0].components.city,
+              country: data.results[0].components.country
+            }
+          } catch(err) {
+            setGeoErrors([...geoErrors, `No coordinates for ${place}` ])
+          }
+        })
+      )
+      setLocations(coords)
+    }
+    fetchLocations();
+  }, [events])
+
+  useEffect(() => {
+    const markers = locations.map((location, index) => {
+      return (
+      <Marker key={index} position={[location.lat, location.lng]}>
+        <Popup>
+          {location.city || location.country}
+        </Popup>
+      </Marker>
+    )
+    })
+    setMarkers(markers)
+  }, [locations])
 
   return (
     <div className='github-activity-map-container'>
       { props.error && props.error }
       {!props.error &&
-        //would be d3 and leaflet stuff
-        <h1>{props.globalGitHubData}</h1>
+        <MapContainer center={[51.505, -0.09]} zoom={1.5} scrollWheelZoom={false} style={{height : '100%'}}>
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {markers.length && markers}
+        </MapContainer>
       }
     </div>
   )
