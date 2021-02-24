@@ -27,29 +27,32 @@ const App = () => {
   }, [])
 
   return (
-      <Switch>
-        <Route
-             path="/"
-             render={() => (
-               <Home
-                 globalGitHubData={globalGitHubData}
-                 error={error}
-                 userNameToSearch={userNameToSearch}
-                 setUserNameToSearch={setUserNameToSearch}
-               />
-             )}
-             exact
-          />
-           <Route
-                path="/visualizations/:user"
-                render={() => (
-                  <ProfileVisualization
-                    userNameToSearch={userNameToSearch}
-                  />
-                )}
-                exact
+      <>
+        <Header />
+        <Switch>
+          <Route
+               path="/"
+               render={() => (
+                 <Home
+                   globalGitHubData={globalGitHubData}
+                   error={error}
+                   userNameToSearch={userNameToSearch}
+                   setUserNameToSearch={setUserNameToSearch}
+                 />
+               )}
+               exact
             />
-        </Switch>
+             <Route
+                  path="/visualizations/:user"
+                  render={() => (
+                    <ProfileVisualization
+                      userNameToSearch={userNameToSearch}
+                    />
+                  )}
+                  exact
+              />
+          </Switch>
+        </>
   )
 }
 export default App
