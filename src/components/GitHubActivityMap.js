@@ -46,7 +46,6 @@ const GitHubActivityMap = (props) => {
           }
       }))
 
-
     //get locations from geosearch
       const places = userLocations.filter(loc => loc.location).map(loc => loc.location);
       const coords = await Promise.all(
@@ -54,7 +53,12 @@ const GitHubActivityMap = (props) => {
           try {
             const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place}&key=e0b4a3f2213247859e55897af976da36`)
             const data = await result.json();
-            return data.results[0].geometry
+            console.log(data)
+            return {
+              ...data.results[0].geometry,
+              city: data.results[0].components.city,
+              country: data.results[0].components.country
+            }
           } catch(err) {
             setGeoErrors([...geoErrors, `No coordinates for ${place}` ])
           }
@@ -70,7 +74,7 @@ const GitHubActivityMap = (props) => {
       return (
       <Marker key={index} position={[location.lat, location.lng]}>
         <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
+          {location.city || location.country}
         </Popup>
       </Marker>
     )
