@@ -31,6 +31,7 @@ const ProfileVisualization = (props) => {
         setError(err)
       }
   }
+  
   useEffect(() => {
     loadUser();
     loadRepos();
