@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import D3ComponentTemplate from './D3ComponentTemplate.js';
+import Garden from './Garden.js';
+import './Garden.css';
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
 import dataClean from './dataCleaning.js';
