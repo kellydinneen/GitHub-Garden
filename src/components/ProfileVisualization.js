@@ -25,24 +25,26 @@ const ProfileVisualization = (props) => {
 
   const fetchRepoContributor = async () => {
     const userName = userGitHubData.login;
-    const filteredUserRepos = userRepos.filter(async repo => {
-      try {
-        const contributorsPromise = await pvAPI.fetchGitHubData(`${repo.contributors_url}`);
-        const contributorsList = await contributorsPromise.json();
-        const contributorNames = contributorsList.filter(person => person.login);
-        return contributorNames.includes(userName);
-      } catch(err) {
-        setError(err)
-      }
-    })
-    setUserRepos(filteredUserRepos);
+    const repoContainsUser = await Promise.all(
+      userRepos.map(async repo => {
+        try {
+          const contributorsPromise = await pvAPI.fetchGitHubData(`${repo.contributors_url}`);
+          const contributorsList = await contributorsPromise.json();
+          const contributorNames = contributorsList.map(person => person.login);
+          return contributorNames.includes(userName)
+        } catch(err) {
+          setError(err)
+        }
+    }))
+    const filteredUserRepos = userRepos.filter((repo, index) => repoContainsUser[index])
+    setFilteredRepos(filteredUserRepos);
   }
 
   const loadRepos = async () => {
     try {
       const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}/repos`);
         const repoData = await userPromise.json();
-        setFilteredUserRepos(repoData)
+        setUserRepos(repoData)
       } catch (err) {
         setError(err)
       }
