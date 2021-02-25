@@ -96,6 +96,18 @@ const ProfileVisualization = (props) => {
     setBranchNames(namesOfBranches)
   }
 
+  const consolidateData = () => {
+    const cleanUserData = filteredRepos.map((repo, index) => {
+      return {
+        name: repo.name,
+        branches: branchNames[index],
+        lifespan: lifespans[index],
+        languages: repoLangs[index]
+      }
+    })
+    console.log(cleanUserData)
+  }
+
   useEffect(() => {
     loadUser();
     loadRepos();
@@ -109,6 +121,7 @@ const ProfileVisualization = (props) => {
     getBranchNames();
     getLifeSpans();
     getLanguages();
+    consolidateData();
   }, [filteredRepos])
 
 
