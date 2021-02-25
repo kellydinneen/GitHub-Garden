@@ -9,6 +9,9 @@ const ProfileVisualization = (props) => {
   const [userGitHubData, setUserGitHubData] = useState([]);
   const [userRepos, setUserRepos] = useState([]);
   const [filteredRepos, setFilteredRepos] = useState([]);
+  const [lifespans, setLifespans] = useState([])
+  const [branchNames, setBranchNames] = useState([]);
+  const [repoLangs, setRepoLangs] = useState([]);
   const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
   const [dataForViz, setDataForViz] = useState([]);
   const [error, setError] = useState('');
@@ -16,12 +19,23 @@ const ProfileVisualization = (props) => {
   const loadUser = async () => {
     try {
       const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}`);
-        const userData = await userPromise.json();
-        setUserGitHubData(userData)
-      } catch (err) {
-        setError(err)
-      }
+      const userData = await userPromise.json();
+      setUserGitHubData(userData)
+    } catch (err) {
+      setError(err)
     }
+  }
+
+  const getLifeSpans = () => {
+    const oneDayInMilliseconds = 1000 * 60 * 60 * 24;
+    const repoAges = filteredRepos.map(repo => {
+      const creationDate = new Date(repo.created_at).getTime();
+      const lastUpdate = new Date(repo.updated_at).getTime();
+      const repoAge = (lastUpdate - creationDate) / oneDayInMilliseconds
+      return repoAge.toFixed(0)
+    })
+    setLifespans(repoAges)
+  }
 
   const fetchRepoContributor = async () => {
     const userName = userGitHubData.login;
@@ -31,23 +45,55 @@ const ProfileVisualization = (props) => {
           const contributorsPromise = await pvAPI.fetchGitHubData(`${repo.contributors_url}`);
           const contributorsList = await contributorsPromise.json();
           const contributorNames = contributorsList.map(person => person.login);
-          return contributorNames.includes(userName)
+          return contributorNames.includes(userName);
         } catch(err) {
           setError(err)
         }
-    }))
-    const filteredUserRepos = userRepos.filter((repo, index) => repoContainsUser[index])
-    setFilteredRepos(filteredUserRepos);
+    }));
+    const filteredUserRepos = userRepos.filter((repo, index) => repoContainsUser[index]);
+    await setFilteredRepos(filteredUserRepos);
   }
 
   const loadRepos = async () => {
     try {
       const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}/repos`);
-        const repoData = await userPromise.json();
-        setUserRepos(repoData)
-      } catch (err) {
-        setError(err)
-      }
+      const repoData = await userPromise.json();
+      setUserRepos(repoData)
+    } catch (err) {
+      setError(err)
+    }
+  }
+
+  const getLanguages = async () => {
+    const languages = await Promise.all(
+      filteredRepos.map(async repo => {
+        try {
+          const languagesPromise = await pvAPI.fetchGitHubData(`${repo.url}/languages`);
+          const languagesList = await languagesPromise.json();
+          return languagesList
+        } catch(err) {
+          setError(err)
+        }
+    }));
+    setRepoLangs(languages)
+  }
+
+  const getBranchNames = async () => {
+    const repoBranches = await Promise.all(
+      filteredRepos.map(async repo => {
+        try {
+          const branchesPromise = await pvAPI.fetchGitHubData(`https://api.github.com/repos/${props.userNameToSearch}/${repo.name}/branches`);
+          const branches = await branchesPromise.json();
+          return branches
+        } catch(err) {
+          setError(err)
+        }
+    }));
+    const namesOfBranches = repoBranches.map(repo => {
+      const names = repo.map(branch => branch.name);
+      return names
+    })
+    setBranchNames(namesOfBranches)
   }
 
   useEffect(() => {
@@ -58,6 +104,13 @@ const ProfileVisualization = (props) => {
   useEffect(() => {
     fetchRepoContributor();
   }, [userRepos])
+
+  useEffect(() => {
+    getBranchNames();
+    getLifeSpans();
+    getLanguages();
+  }, [filteredRepos])
+
 
   return (
     <main>
