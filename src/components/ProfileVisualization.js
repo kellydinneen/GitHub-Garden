@@ -31,11 +31,21 @@ const ProfileVisualization = (props) => {
         setError(err)
       }
   }
-  
+
   useEffect(() => {
     loadUser();
     loadRepos();
   }, [])
+
+  useEffect(() => {
+    try {
+      const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}/repos`);
+        const repoData = await userPromise.json();
+        setUserRepos(repoData)
+      } catch (err) {
+        setError(err)
+      }
+  }, [userRepos])
 
   return (
     <main>
