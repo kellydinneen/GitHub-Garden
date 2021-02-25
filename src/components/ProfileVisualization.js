@@ -8,6 +8,7 @@ import dataClean from './dataCleaning.js';
 const ProfileVisualization = (props) => {
   const [userGitHubData, setUserGitHubData] = useState([]);
   const [userRepos, setUserRepos] = useState([]);
+  const [filteredRepos, setFilteredRepos] = useState([]);
   const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
   const [dataForViz, setDataForViz] = useState([]);
   const [error, setError] = useState('');
@@ -22,11 +23,26 @@ const ProfileVisualization = (props) => {
       }
     }
 
+  const fetchRepoContributor = async () => {
+    const userName = userGitHubData.login;
+    const filteredUserRepos = userRepos.filter(async repo => {
+      try {
+        const contributorsPromise = await pvAPI.fetchGitHubData(`${repo.contributors_url}`);
+        const contributorsList = await contributorsPromise.json();
+        const contributorNames = contributorsList.filter(person => person.login);
+        return contributorNames.includes(userName);
+      } catch(err) {
+        setError(err)
+      }
+    })
+    setUserRepos(filteredUserRepos);
+  }
+
   const loadRepos = async () => {
     try {
       const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}/repos`);
         const repoData = await userPromise.json();
-        setUserRepos(repoData)
+        setFilteredUserRepos(repoData)
       } catch (err) {
         setError(err)
       }
@@ -38,13 +54,7 @@ const ProfileVisualization = (props) => {
   }, [])
 
   useEffect(() => {
-    try {
-      const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}/repos`);
-        const repoData = await userPromise.json();
-        setUserRepos(repoData)
-      } catch (err) {
-        setError(err)
-      }
+    fetchRepoContributor();
   }, [userRepos])
 
   return (
