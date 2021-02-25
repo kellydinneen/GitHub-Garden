@@ -12,6 +12,7 @@ const ProfileVisualization = (props) => {
   const [lifespans, setLifespans] = useState([])
   const [branchNames, setBranchNames] = useState([]);
   const [repoLangs, setRepoLangs] = useState([]);
+  const [cleanUserData, setCleanUserData] = useState([]);
   const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
   const [dataForViz, setDataForViz] = useState([]);
   const [error, setError] = useState('');
@@ -97,7 +98,7 @@ const ProfileVisualization = (props) => {
   }
 
   const consolidateData = () => {
-    const cleanUserData = filteredRepos.map((repo, index) => {
+    const cleanedUserData = filteredRepos.map((repo, index) => {
       return {
         name: repo.name,
         branches: branchNames[index],
@@ -105,7 +106,7 @@ const ProfileVisualization = (props) => {
         languages: repoLangs[index]
       }
     })
-    console.log(cleanUserData)
+    setCleanUserData(cleanedUserData);
   }
 
   useEffect(() => {
@@ -121,9 +122,11 @@ const ProfileVisualization = (props) => {
     getBranchNames();
     getLifeSpans();
     getLanguages();
-    consolidateData();
   }, [filteredRepos])
 
+  useEffect(() => {
+    consolidateData();
+  }, [repoLangs, branchNames])
 
   return (
     <main>
