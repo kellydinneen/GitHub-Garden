@@ -102,7 +102,7 @@ const ProfileVisualization = (props) => {
       return {
         name: repo.name,
         branches: branchNames[index],
-        lifespan: lifespans[index],
+        lifespan: lifespans[index] === 0? 1:lifespans[index],
         languages: repoLangs[index]
       }
     })
@@ -135,7 +135,7 @@ const ProfileVisualization = (props) => {
         <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
       </a>
       <div className="user-visualizations-box">
-        <Garden data={cleanUserData}/>
+        {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
       </div>
       <input
         aria-label="Search bar for GitHub users"
@@ -147,7 +147,7 @@ const ProfileVisualization = (props) => {
       <Link to={{
         pathname:`/visualizations/${newUserNameToSearch}`,
       }}>
-        <button>Search</button>
+        <button className='search-button'>Search</button>
       </Link>
     </main>
   )
