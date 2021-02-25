@@ -13,75 +13,7 @@ const GitHubActivityMap = (props) => {
   const [individualError, setIndividualError] = useState('');
   const [geoErrors, setGeoErrors] = useState([]);
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const result = await fetch('https://api.github.com/events', {
-          headers: {
-            authorization: `token ${process.env.REACT_APP_GH_KEY}`
-          }
-        })
-        const data = await result.json()
-        setEvents(data)
-      } catch (err) {
-        setGhError(err)
-      }
-    }
-    fetchEvents()
-  }, [])
 
-  useEffect(() => {
-    //fetch user data
-    const fetchLocations = async () => {
-      const userLocations = await Promise.all(
-        events.map(async (item) => {
-          try {
-            const result = await fetch(item.actor.url, {
-              headers: {
-                authorization: `token ${process.env.REACT_APP_GH_KEY}`
-              }
-            })
-            const data = await result.json();
-            return data
-          } catch (err) {
-            setIndividualError(err)
-          }
-      }))
-
-    //get locations from geosearch
-      const places = userLocations.filter(loc => loc.location).map(loc => loc.location);
-      const coords = await Promise.all(
-        places.map(async place => {
-          try {
-            const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place}&key=${process.env.REACT_APP_GEO_KEY}`)
-            const data = await result.json();
-            return {
-              ...data.results[0].geometry,
-              city: data.results[0].components.city,
-              country: data.results[0].components.country
-            }
-          } catch(err) {
-            setGeoErrors([...geoErrors, `No coordinates for ${place}` ])
-          }
-        })
-      )
-      setLocations(coords)
-    }
-    fetchLocations();
-  }, [events])
-
-  useEffect(() => {
-    const markers = locations.filter(location => location !== undefined).map((location, index) => {
-      return (
-      <Marker key={index} position={[location.lat, location.lng]}>
-        <Popup>
-          {location.city || location.country}
-        </Popup>
-      </Marker>
-    )
-    })
-    setMarkers(markers)
-  }, [locations])
 
   return (
     <div className='github-activity-map-container'>

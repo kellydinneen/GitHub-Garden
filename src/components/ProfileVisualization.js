@@ -2,30 +2,38 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import D3ComponentTemplate from './D3ComponentTemplate.js';
 import './ProfileVisualization.css';
+import pvAPI from './ProfileVisualizationApi';
+import dataClean from './dataCleaning.js';
 
 const ProfileVisualization = (props) => {
   const [userGitHubData, setUserGitHubData] = useState([]);
+  const [userRepos, setUserRepos] = useState([]);
   const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
   const [dataForViz, setDataForViz] = useState([]);
   const [error, setError] = useState('');
 
-  const fetchUserGitHubData = async () => {
+  const loadUser = async () => {
     try {
-      const result = await fetch(`https://api.github.com/users/${props.userNameToSearch}`, {
-        headers: {
-          authorization: `token ${process.env.REACT_APP_GH_KEY}`
-        }
-      })
-      const userData = await result.json();
-      setUserGitHubData(userData);
-      console.log(userGitHubData);;
-    } catch (error) {
-      setError(error)
+      const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}`);
+        const userData = await userPromise.json();
+        setUserGitHubData(userData)
+      } catch (err) {
+        setError(err)
+      }
     }
-  }
 
+  const loadRepos = async () => {
+    try {
+      const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}/repos`);
+        const repoData = await userPromise.json();
+        setUserRepos(repoData)
+      } catch (err) {
+        setError(err)
+      }
+  }
   useEffect(() => {
-    fetchUserGitHubData()
+    loadUser();
+    loadRepos();
   }, [])
 
   return (
