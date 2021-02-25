@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Garden from './Garden.js';
-import './Garden.css';
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
 import dataClean from './dataCleaning.js';
@@ -136,7 +135,7 @@ const ProfileVisualization = (props) => {
         <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
       </a>
       <div className="user-visualizations-box">
-        <D3ComponentTemplate data={dataForViz}/>
+        <Garden data={cleanUserData}/>
       </div>
       <input
         aria-label="Search bar for GitHub users"
