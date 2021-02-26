@@ -5,12 +5,12 @@ import './Garden.css';
 const Garden = (props) => {
 
   const colorsByLanguage = {
-    javascript: '#DE2016',
-    html: '#BD3E54',
-    css: '#FCD732',
-    ruby:'#26369E',
-    python:'#76678C',
-    java:'#F19233'
+    "JavaScript": '#DE2016',
+    "HTML": '#FF3EAA',
+    "CSS": '#FCD732',
+    "SCSS":'#26369E',
+    "Python":'#76678C',
+    "Java":'#F19233'
   }
 
   const repositories = props.data;
@@ -30,7 +30,7 @@ const Garden = (props) => {
     .domain(Object.keys(colorsByLanguage))
     .range(Object.values(colorsByLanguage))
 
-  console.log(colorScale(Object.keys(repositories[0].languages)[2]))
+  console.log(colorsByLanguage[repositories[3].languages[2]])
   const petalPathThree = 'M50,0 C70,40 80,70 70,150 L50,135 L30,150 M50,0 C 30,40 20,70 30,150';
   const petalPathTwo = 'M50,0 C90,40 80,70 70,120 L50,105 L30,120 M50,0 C 10,40 20,70 30,120';
   const petalPathOne = 'M50,0 C100,40 100,70 70,100 L50,85 L30,100 M50,0 C 0,40 0,70 30,100';
@@ -41,42 +41,41 @@ const Garden = (props) => {
     .attr('x', 0)
     .attr('y', 0)
     .attr('transform', (d,i) => `translate(${100 + i * 200}, ${yStemScale(d.lifespan)})`)
-    console.log(repositories.map(rep => rep.languages))
   petalGroup.append('path')
     .attr('d', petalPathThree)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[2]))
+    .attr('fill', d => colorsByLanguage[d.languages[2]] || 'none')
     .attr('transform', `translate(-50, -180)`)
   petalGroup.append('path')
     .attr('d', petalPathThree)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[2]))
+    .attr('fill', d => colorsByLanguage[d.languages[2]] || 'none')
     .attr('transform', `translate(-50, -180)rotate(120, 50, 160)`)
   petalGroup.append('path')
     .attr('d', petalPathThree)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[2]))
+    .attr('fill', d => colorsByLanguage[d.languages[2]] || 'none')
     .attr('transform', `translate(-50, -180)rotate(240 50 160)`)
   petalGroup.append('path')
     .attr('d', petalPathTwo)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[1]))
+    .attr('fill', d => colorsByLanguage[d.languages[1]] || 'none')
     .attr('transform', `translate(-50, -150)rotate(60 50 130)`)
   petalGroup.append('path')
     .attr('d', petalPathTwo)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[1]))
+    .attr('fill', d => colorsByLanguage[d.languages[1]] || 'none')
     .attr('transform', `translate(-50, -150)rotate(180 50 130)`)
   petalGroup.append('path')
     .attr('d', petalPathTwo)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[1]))
+    .attr('fill', d => colorsByLanguage[d.languages[1]] || 'none')
     .attr('transform', `translate(-50, -150)rotate(300 50 130)`)
   petalGroup.append('path')
     .attr('d', petalPathOne)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
+    .attr('fill', d => colorsByLanguage[d.languages[0]] || 'none')
     .attr('transform', `translate(-50, -130)`)
   petalGroup.append('path')
     .attr('d', petalPathOne)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
+    .attr('fill', d => colorsByLanguage[d.languages[0]] || 'none')
     .attr('transform', `translate(-50, -130)rotate(120, 50, 110)`)
   petalGroup.append('path')
     .attr('d', petalPathOne)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
+    .attr('fill', d => colorsByLanguage[d.languages[0]] || 'none')
     .attr('transform', `translate(-50, -130)rotate(240,  50, 110)`)
 
   //   DRAW STEMS

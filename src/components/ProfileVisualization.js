@@ -72,10 +72,14 @@ const ProfileVisualization = (props) => {
           const languagesPromise = await pvAPI.fetchGitHubData(`${repo.url}/languages`);
           const languagesData = await languagesPromise.json();
           const languagesList = [];
+          let languageLines = 0;
+          //get langs
           for (let language in languagesData) {
             languagesList.push(language)
+            languageLines += languagesData[language]
           }
-          return languagesList
+
+          return [...languagesList, languageLines]
         } catch(err) {
           setError(err)
         }
