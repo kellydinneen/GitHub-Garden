@@ -18,7 +18,7 @@ const GitHubActivityMap = (props) => {
   // useEffect(() => {
   //   const fetchEvents = async () => {
   //     try {
-  //       const result = await fetch('https://api.github.com/events', {
+  //       const result = await fetch('https://api.github.com/events?per_page=100', {
   //         headers: {
   //           authorization: `token ${process.env.REACT_APP_GH_KEY}`
   //         }

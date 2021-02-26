@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import D3ComponentTemplate from './D3ComponentTemplate.js';
+import Garden from './Garden.js';
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
 import dataClean from './dataCleaning.js';
@@ -70,8 +70,16 @@ const ProfileVisualization = (props) => {
       filteredRepos.map(async repo => {
         try {
           const languagesPromise = await pvAPI.fetchGitHubData(`${repo.url}/languages`);
-          const languagesList = await languagesPromise.json();
-          return languagesList
+          const languagesData = await languagesPromise.json();
+          const languagesList = [];
+          let languageLines = 0;
+          //get langs
+          for (let language in languagesData) {
+            languagesList.push(language)
+            languageLines += languagesData[language]
+          }
+
+          return [...languagesList, languageLines]
         } catch(err) {
           setError(err)
         }
@@ -98,15 +106,17 @@ const ProfileVisualization = (props) => {
   }
 
   const consolidateData = () => {
-    const cleanedUserData = filteredRepos.map((repo, index) => {
-      return {
-        name: repo.name,
-        branches: branchNames[index],
-        lifespan: lifespans[index],
-        languages: repoLangs[index]
-      }
-    })
-    setCleanUserData(cleanedUserData);
+    if (repoLangs.length) {
+      const cleanedUserData = filteredRepos.map((repo, index) => {
+        return {
+          name: repo.name,
+          branches: branchNames[index],
+          lifespan: lifespans[index] === 0? 1:lifespans[index],
+          languages: repoLangs[index]
+        }
+      })
+      setCleanUserData(cleanedUserData);
+    }
   }
 
   useEffect(() => {
@@ -135,7 +145,7 @@ const ProfileVisualization = (props) => {
         <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
       </a>
       <div className="user-visualizations-box">
-        <D3ComponentTemplate data={dataForViz}/>
+        {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
       </div>
       <input
         aria-label="Search bar for GitHub users"
@@ -147,7 +157,7 @@ const ProfileVisualization = (props) => {
       <Link to={{
         pathname:`/visualizations/${newUserNameToSearch}`,
       }}>
-        <button>Search</button>
+        <button className='search-button'>Search</button>
       </Link>
     </main>
   )
