@@ -42,7 +42,7 @@ const Garden = (props) => {
   //  }
   // ]
 
-  const gardenWidth = 160 * repositories.length;
+  const gardenWidth = 200 * repositories.length;
   const gardenHeight = 800;
 
   const drawGarden = () => {
@@ -81,24 +81,70 @@ const Garden = (props) => {
   //   //one layer for each language
   //   // const petalLayer =
   //   // console.log('PETAL LAYER', petalLayer)
-  const petalPath = 'M50,0 C100,40 100,70 70,100 L50,85 L30,100 M50,0 C 0,40 0,70 30,100';
-
-  const petalGroup = flowerBed.selectAll('g')
+  // const petalPath = 'M50,0 C100,40 100,70 70,100 L50,85 L30,100 M50,0 C 0,40 0,70 30,100';
+  //
+  // const petalGroup = flowerBed.selectAll('g')
+  //   .data(repositories).enter().append('g')
+  //   .attr('x', 0)
+  //   .attr('y', 0)
+  //   .attr('transform', (d,i) => `translate(${50 + i * 150}, ${yStemScale(d.lifespan)})`)
+  //
+  // petalGroup.append('path')
+  //   .attr('d', petalPath)
+  //   .attr('fill', d => colorScale(Object.keys(d.languages)[0]) || 'black')
+  //   .attr('transform', `translate(-50, -130)`)
+  // petalGroup.append('path')
+  //   .attr('d', petalPath)
+  //   .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
+  //   .attr('transform', `translate(-50, -130)rotate(120, 50, 110)`)
+  // petalGroup.append('path')
+  //   .attr('d', petalPath)
+  //   .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
+  //   .attr('transform', `translate(-50, -130)rotate(240,  50, 110)`)
+  const petalPathThree = 'M50,0 C70,40 80,70 70,150 L50,135 L30,150 M50,0 C 30,40 20,70 30,150';
+  const petalPathTwo = 'M50,0 C90,40 80,70 70,120 L50,105 L30,120 M50,0 C 10,40 20,70 30,120';
+  const petalPathOne = 'M50,0 C100,40 100,70 70,100 L50,85 L30,100 M50,0 C 0,40 0,70 30,100';
+  const petalGroup = flowerBed.selectAll('.petal-layers')
     .data(repositories).enter().append('g')
+    .attr('class', 'petal-layers')
     .attr('x', 0)
     .attr('y', 0)
-    .attr('transform', (d,i) => `translate(${50 + i * 150}, ${yStemScale(d.lifespan)})`)
+    .attr('transform', (d,i) => `translate(${100 + i * 200}, ${yStemScale(d.lifespan)})`)
 
   petalGroup.append('path')
-    .attr('d', petalPath)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[0]) || 'black')
+    .attr('d', petalPathThree)
+    .attr('fill', d => colorScale(Object.keys(d.languages)[2]))
+    .attr('transform', `translate(-50, -180)`)
+  petalGroup.append('path')
+    .attr('d', petalPathThree)
+    .attr('fill', d => colorScale(Object.keys(d.languages)[2]))
+    .attr('transform', `translate(-50, -180)rotate(120, 50, 160)`)
+  petalGroup.append('path')
+    .attr('d', petalPathThree)
+    .attr('fill', d => colorScale(Object.keys(d.languages)[2]))
+    .attr('transform', `translate(-50, -180)rotate(240 50 160)`)
+  petalGroup.append('path')
+    .attr('d', petalPathTwo)
+    .attr('fill', d => colorScale(Object.keys(d.languages)[1]))
+    .attr('transform', `translate(-50, -150)rotate(60 50 130)`)
+  petalGroup.append('path')
+    .attr('d', petalPathTwo)
+    .attr('fill', d => colorScale(Object.keys(d.languages)[1]))
+    .attr('transform', `translate(-50, -150)rotate(180 50 130)`)
+  petalGroup.append('path')
+    .attr('d', petalPathTwo)
+    .attr('fill', d => colorScale(Object.keys(d.languages)[1]))
+    .attr('transform', `translate(-50, -150)rotate(300 50 130)`)
+  petalGroup.append('path')
+    .attr('d', petalPathOne)
+    .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
     .attr('transform', `translate(-50, -130)`)
   petalGroup.append('path')
-    .attr('d', petalPath)
+    .attr('d', petalPathOne)
     .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
     .attr('transform', `translate(-50, -130)rotate(120, 50, 110)`)
   petalGroup.append('path')
-    .attr('d', petalPath)
+    .attr('d', petalPathOne)
     .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
     .attr('transform', `translate(-50, -130)rotate(240,  50, 110)`)
 
@@ -110,7 +156,7 @@ const Garden = (props) => {
       .attr('class','stem')
       .attr('id', (d, i) => `myStem${i}`)
       .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
-      .attr('transform', (d, i) => `translate(${50 + i * 150},0)`)
+      .attr('transform', (d, i) => `translate(${100 + i * 200},0)`)
       .attr('stroke-width', 5)
       .attr('stroke', 'green')
       .attr('fill', 'none')
@@ -138,7 +184,7 @@ const Garden = (props) => {
     const flowerCenter = flowerBed.selectAll('circle')
       .data(repositories).enter().append('circle')
       .attr('r', 25)
-      .attr('cx', (d, i) => 50 + i * 150)
+      .attr('cx', (d, i) => 100 + i * 200)
       .attr('cy', d => yStemScale(d.lifespan) - 20)
       .attr('stroke-width', 1)
       .attr('stroke', 'blue')
