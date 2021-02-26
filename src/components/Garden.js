@@ -14,103 +14,34 @@ const Garden = (props) => {
   }
 
   const repositories = props.data;
-  console.log(repositories.map(rep => rep.languages))
-  // [
-  //     {
-  //      name: 'a',
-  //      activeLife: 80,
-  //      branches: ['branch 1', 'branch 2', 'branch 3', 'branch 4', 'branch 5'],
-  //      languages: ['java', 'ruby']
-  //     },
-  //     {
-  //      name: 'b',
-  //      activeLife: 300,
-  //      branches:['branch 1', 'branch 2', 'branch 3'],
-  //      languages: ['javascript', 'css', 'html']
-  //    },
-  //    {
-  //     name: 'c',
-  //     activeLife: 165,
-  //     branches:['branch 1', 'branch 2', 'branch 3', 'branch 4', 'branch 5', 'branch 6', 'branch 7', 'branch 8', 'branch 9', 'branch 10'],
-  //     languages: ['css']
-  //   },
-  //   {
-  //    name: 'd',
-  //    activeLife: 5,
-  //    branches:['branch 1'],
-  //    languages: ['ruby']
-  //  }
-  // ]
 
   const gardenWidth = 200 * repositories.length;
   const gardenHeight = 800;
 
   const drawGarden = () => {
-  //   //GET FLOWER BED
     const flowerBed = d3.select('svg');
-  //
-  //   //DEFINE SCALES
-  //   //x-scale
-  //
-  //   //y-scale (based on repo age)
     const maxLifespan = d3.max(repositories, d => d.lifespan)
     const minLifespan = d3.min(repositories, d => d.lifespan)
     const yStemScale = d3.scaleQuantize()
       .domain([minLifespan, maxLifespan])
       .range([gardenHeight/2, gardenHeight/3, gardenHeight/4, gardenHeight/5])
 
-  //
-  //   //language to color scale
   const colorScale = d3.scaleOrdinal()
     .domain(Object.keys(colorsByLanguage))
     .range(Object.values(colorsByLanguage))
-  //
-  //   // //language use to petals scale
-  //   // const numPetalsScale = d3.scaleQuantize()
-  //   //   .domain()
-  //
-  //   // const flowerWidth = 900 / repositories.length
-  //   //DRAW FLOWER CENTERS
 
-  //
-  //   // console.log('FLOWER CENTER', flower center)
-  //
-  //
-  //   //DRAW PETAL LAYERS
-  //   //multiple petals per layers
-  //   //one layer for each language
-  //   // const petalLayer =
-  //   // console.log('PETAL LAYER', petalLayer)
-  // const petalPath = 'M50,0 C100,40 100,70 70,100 L50,85 L30,100 M50,0 C 0,40 0,70 30,100';
-  //
-  // const petalGroup = flowerBed.selectAll('g')
-  //   .data(repositories).enter().append('g')
-  //   .attr('x', 0)
-  //   .attr('y', 0)
-  //   .attr('transform', (d,i) => `translate(${50 + i * 150}, ${yStemScale(d.lifespan)})`)
-  //
-  // petalGroup.append('path')
-  //   .attr('d', petalPath)
-  //   .attr('fill', d => colorScale(Object.keys(d.languages)[0]) || 'black')
-  //   .attr('transform', `translate(-50, -130)`)
-  // petalGroup.append('path')
-  //   .attr('d', petalPath)
-  //   .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
-  //   .attr('transform', `translate(-50, -130)rotate(120, 50, 110)`)
-  // petalGroup.append('path')
-  //   .attr('d', petalPath)
-  //   .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
-  //   .attr('transform', `translate(-50, -130)rotate(240,  50, 110)`)
+  console.log(colorScale(Object.keys(repositories[0].languages)[2]))
   const petalPathThree = 'M50,0 C70,40 80,70 70,150 L50,135 L30,150 M50,0 C 30,40 20,70 30,150';
   const petalPathTwo = 'M50,0 C90,40 80,70 70,120 L50,105 L30,120 M50,0 C 10,40 20,70 30,120';
   const petalPathOne = 'M50,0 C100,40 100,70 70,100 L50,85 L30,100 M50,0 C 0,40 0,70 30,100';
+
   const petalGroup = flowerBed.selectAll('.petal-layers')
     .data(repositories).enter().append('g')
     .attr('class', 'petal-layers')
     .attr('x', 0)
     .attr('y', 0)
     .attr('transform', (d,i) => `translate(${100 + i * 200}, ${yStemScale(d.lifespan)})`)
-
+    console.log(repositories.map(rep => rep.languages))
   petalGroup.append('path')
     .attr('d', petalPathThree)
     .attr('fill', d => colorScale(Object.keys(d.languages)[2]))

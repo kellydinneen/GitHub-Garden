@@ -70,7 +70,11 @@ const ProfileVisualization = (props) => {
       filteredRepos.map(async repo => {
         try {
           const languagesPromise = await pvAPI.fetchGitHubData(`${repo.url}/languages`);
-          const languagesList = await languagesPromise.json();
+          const languagesData = await languagesPromise.json();
+          const languagesList = [];
+          for (let language in languagesData) {
+            languagesList.push(language)
+          }
           return languagesList
         } catch(err) {
           setError(err)
