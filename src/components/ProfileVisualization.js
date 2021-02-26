@@ -98,15 +98,17 @@ const ProfileVisualization = (props) => {
   }
 
   const consolidateData = () => {
-    const cleanedUserData = filteredRepos.map((repo, index) => {
-      return {
-        name: repo.name,
-        branches: branchNames[index],
-        lifespan: lifespans[index] === 0? 1:lifespans[index],
-        languages: repoLangs[index]
-      }
-    })
-    setCleanUserData(cleanedUserData);
+    if (repoLangs.length) {
+      const cleanedUserData = filteredRepos.map((repo, index) => {
+        return {
+          name: repo.name,
+          branches: branchNames[index],
+          lifespan: lifespans[index] === 0? 1:lifespans[index],
+          languages: repoLangs[index]
+        }
+      })
+      setCleanUserData(cleanedUserData);
+    }
   }
 
   useEffect(() => {

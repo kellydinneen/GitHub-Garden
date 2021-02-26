@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as d3 from "d3";
 import './Garden.css';
 
@@ -14,7 +14,7 @@ const Garden = (props) => {
   }
 
   const repositories = props.data;
-  console.log(repositories.map(rep => rep.lifespan))
+  console.log(repositories.map(rep => rep.languages))
   // [
   //     {
   //      name: 'a',
@@ -42,13 +42,12 @@ const Garden = (props) => {
   //  }
   // ]
 
-  const gardenWidth = 100 * repositories.length;
+  const gardenWidth = 160 * repositories.length;
   const gardenHeight = 800;
 
-  // const drawGarden = () => {
+  const drawGarden = () => {
   //   //GET FLOWER BED
     const flowerBed = d3.select('svg');
-    console.log(flowerBed);
   //
   //   //DEFINE SCALES
   //   //x-scale
@@ -72,14 +71,7 @@ const Garden = (props) => {
   //
   //   // const flowerWidth = 900 / repositories.length
   //   //DRAW FLOWER CENTERS
-  const flowerCenter = flowerBed.selectAll('circle')
-    .data(repositories).enter().append('circle')
-    .attr('r', 20)
-    .attr('cx', (d, i) => 50 + i * 150)
-    .attr('cy', d => yStemScale(d.lifespan) - 20)
-    .attr('stroke-width', 1)
-    .attr('stroke', 'blue')
-    .attr('fill', 'blue')
+
   //
   //   // console.log('FLOWER CENTER', flower center)
   //
@@ -90,6 +82,7 @@ const Garden = (props) => {
   //   // const petalLayer =
   //   // console.log('PETAL LAYER', petalLayer)
   const petalPath = 'M50,0 C100,40 100,70 70,100 L50,85 L30,100 M50,0 C 0,40 0,70 30,100';
+
   const petalGroup = flowerBed.selectAll('g')
     .data(repositories).enter().append('g')
     .attr('x', 0)
@@ -98,29 +91,61 @@ const Garden = (props) => {
 
   petalGroup.append('path')
     .attr('d', petalPath)
-    .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
+    .attr('fill', d => colorScale(Object.keys(d.languages)[0]) || 'black')
     .attr('transform', `translate(-50, -130)`)
   petalGroup.append('path')
     .attr('d', petalPath)
     .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
     .attr('transform', `translate(-50, -130)rotate(120, 50, 110)`)
-    // .attr('transform', `translate(110, 0)rotate(120)`)
   petalGroup.append('path')
     .attr('d', petalPath)
     .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
     .attr('transform', `translate(-50, -130)rotate(240,  50, 110)`)
-    // .attr('transform', `translate(-100, 100)rotate(240)`)
 
   //   DRAW STEMS
   //   height scaled to activeLife
     const stem = flowerBed.selectAll('.stem')
-      .data(repositories).enter().append('path')
+      .data(repositories).enter()
+      .append('path')
       .attr('class','stem')
-      .attr('d', d => `M0,600 L0,${yStemScale(d.lifespan)}`)
+      .attr('id', (d, i) => `myStem${i}`)
+      .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
       .attr('transform', (d, i) => `translate(${50 + i * 150},0)`)
       .attr('stroke-width', 5)
       .attr('stroke', 'green')
-  //
+      .attr('fill', 'none')
+
+      const animate = () => {
+        flowerBed.selectAll('.stem')
+          .transition().duration(2000)
+          .attr('d', d => `M0,600 C -20 ${yStemScale(d.lifespan)}, 20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
+            .attr('stroke', 'green')
+          .transition().duration(2000)
+          .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
+          .on("end", animate)
+      }
+    animate();
+
+
+    flowerBed.selectAll('.repoName')
+      .data(repositories).enter()
+      .append('text')
+      .append('textPath')
+      .attr('xlink:href', (d, i) => `#myStem${i}`)
+      .text(d => d.name)
+      .attr('font-size', '1.5rem')
+
+    const flowerCenter = flowerBed.selectAll('circle')
+      .data(repositories).enter().append('circle')
+      .attr('r', 25)
+      .attr('cx', (d, i) => 50 + i * 150)
+      .attr('cy', d => yStemScale(d.lifespan) - 20)
+      .attr('stroke-width', 1)
+      .attr('stroke', 'blue')
+      .attr('fill', 'blue')
+      //Append the month names to each slice
+
+
   //   console.log('STEMS', stem)
   //
   //   //DRAW ROOTS
@@ -128,11 +153,11 @@ const Garden = (props) => {
   //   //text path w branch name
   //   // const root =
   //   // console.log('ROOTS', roots)
-  // }
+  }
   //
-  // useEffect(() => {
-  //     drawGarden()
-  // }, [])
+  useEffect(() => {
+      drawGarden()
+  }, [])
 
   return (
     <svg className='flowerbed' width={gardenWidth} height={gardenHeight}></svg>
