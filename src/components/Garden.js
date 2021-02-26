@@ -62,6 +62,9 @@ const Garden = (props) => {
 
   //
   //   //language to color scale
+  const colorScale = d3.scaleOrdinal()
+    .domain(Object.keys(colorsByLanguage))
+    .range(Object.values(colorsByLanguage))
   //
   //   // //language use to petals scale
   //   // const numPetalsScale = d3.scaleQuantize()
@@ -72,7 +75,7 @@ const Garden = (props) => {
   const flowerCenter = flowerBed.selectAll('circle')
     .data(repositories).enter().append('circle')
     .attr('r', 20)
-    .attr('cx', (d, i) => 50 + i * 100)
+    .attr('cx', (d, i) => 50 + i * 150)
     .attr('cy', d => yStemScale(d.lifespan) - 20)
     .attr('stroke-width', 1)
     .attr('stroke', 'blue')
@@ -86,13 +89,35 @@ const Garden = (props) => {
   //   //one layer for each language
   //   // const petalLayer =
   //   // console.log('PETAL LAYER', petalLayer)
-  //
-  //   //DRAW STEMS
-  //   //height scaled to activeLife
-    const stem = flowerBed.selectAll('path')
+  const petalPath = 'M50,0 C100,40 100,70 70,100 L50,85 L30,100 M50,0 C 0,40 0,70 30,100';
+  const petalGroup = flowerBed.selectAll('g')
+    .data(repositories).enter().append('g')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('transform', (d,i) => `translate(${50 + i * 150}, ${yStemScale(d.lifespan)})`)
+
+  petalGroup.append('path')
+    .attr('d', petalPath)
+    .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
+    .attr('transform', `translate(-50, -130)`)
+  petalGroup.append('path')
+    .attr('d', petalPath)
+    .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
+    .attr('transform', `translate(-50, -130)rotate(120, 50, 110)`)
+    // .attr('transform', `translate(110, 0)rotate(120)`)
+  petalGroup.append('path')
+    .attr('d', petalPath)
+    .attr('fill', d => colorScale(Object.keys(d.languages)[0]))
+    .attr('transform', `translate(-50, -130)rotate(240,  50, 110)`)
+    // .attr('transform', `translate(-100, 100)rotate(240)`)
+
+  //   DRAW STEMS
+  //   height scaled to activeLife
+    const stem = flowerBed.selectAll('.stem')
       .data(repositories).enter().append('path')
+      .attr('class','stem')
       .attr('d', d => `M0,600 L0,${yStemScale(d.lifespan)}`)
-      .attr('transform', (d, i) => `translate(${50 + i * 100},0)`)
+      .attr('transform', (d, i) => `translate(${50 + i * 150},0)`)
       .attr('stroke-width', 5)
       .attr('stroke', 'green')
   //
