@@ -19,7 +19,7 @@ const Garden = (props) => {
 
     const yStemScale = d3.scaleQuantize()
       .domain([minLifespan, maxLifespan])
-      .range([gardenHeight/2, gardenHeight/3, gardenHeight/4, gardenHeight/5])
+      .range([gardenHeight - 300, gardenHeight - 350, gardenHeight - 400, gardenHeight - 450, gardenHeight/2, gardenHeight/3, gardenHeight/4])
 
       const stem = flowerBed.selectAll('.stem')
         .data(repositories).enter()
