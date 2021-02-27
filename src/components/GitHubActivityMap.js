@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './GitHubActivityMap.css';
 import { MapContainer, TileLayer, Circle, Popup, Marker } from 'react-leaflet'
+import 'leaflet/dist/leaflet.js'
 import 'leaflet/dist/leaflet.css'
+import Legend from './Legend.js'
 const dotEnv = require('dotenv').config();
 
 
 const GitHubActivityMap = (props) => {
-
+  const [map, setMap] = useState(null);
   const [ghError, setGhError] = useState('');
   const [individualError, setIndividualError] = useState('');
   const [geoErrors, setGeoErrors] = useState([]);
@@ -105,8 +107,8 @@ const GitHubActivityMap = (props) => {
         } else {
           clearInterval(timer)
         }
-      }, 1300)
-    }
+      }, 1300)}
+
     startMap();
   }, [])
 
@@ -129,12 +131,18 @@ const GitHubActivityMap = (props) => {
     <div className='github-activity-map-container'>
       { props.error && props.error }
       {!props.error &&
-        <MapContainer center={[51.505, -0.09]} zoom={1.5} scrollWheelZoom={false} style={{height : '100%'}}>
+        <MapContainer
+          center={[51.505, -0.09]}
+          zoom={1.5}
+          scrollWheelZoom={false}
+          style={{height : '100%'}}
+          whenCreated={setMap}>
           <TileLayer
             attribution='© <a href="https://stadiamaps.com/">Stadia Maps</a>, © <a href="https://openmaptiles.org/">OpenMapTiles</a> © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
             url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
           />
           {currentMarker && currentMarker}
+          {map && <Legend map={map}/>}
         </MapContainer>
       }
     </div>
