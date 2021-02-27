@@ -107,9 +107,13 @@ const GitHubActivityMap = (props) => {
         } else {
           clearInterval(timer)
         }
-      }, 1300)}
+      }, 1300)
+      return (timer) => {
+        clearInterval(timer)
+      }
+    }
 
-    // startMap();
+    startMap();
   }, [])
 
   //test data
