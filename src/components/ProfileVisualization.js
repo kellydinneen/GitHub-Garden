@@ -3,31 +3,25 @@ import { Link } from "react-router-dom";
 import Garden from './Garden.js';
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
-import dataClean from './dataCleaning.js';
 
 const ProfileVisualization = (props) => {
-  const [userGitHubData, setUserGitHubData] = useState([]);
-  const [userRepos, setUserRepos] = useState([]);
-  const [filteredRepos, setFilteredRepos] = useState([]);
-  const [lifespans, setLifespans] = useState([])
-  const [branchNames, setBranchNames] = useState([]);
-  const [repoLangs, setRepoLangs] = useState([]);
+  const [userGitHubData, setUserGitHubData] = useState('')
   const [cleanUserData, setCleanUserData] = useState([]);
   const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
-  const [dataForViz, setDataForViz] = useState([]);
   const [error, setError] = useState('');
 
   const loadUser = async () => {
     try {
       const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}`);
       const userData = await userPromise.json();
-      setUserGitHubData(userData)
+      setUserGitHubData(userData);
+      return userData;
     } catch (err) {
       setError(err)
     }
   }
 
-  const getLifeSpans = () => {
+  const getLifespans = (filteredRepos) => {
     const oneDayInMilliseconds = 1000 * 60 * 60 * 24;
     const repoAges = filteredRepos.map(repo => {
       const creationDate = new Date(repo.created_at).getTime();
@@ -35,11 +29,11 @@ const ProfileVisualization = (props) => {
       const repoAge = (lastUpdate - creationDate) / oneDayInMilliseconds
       return repoAge.toFixed(0)
     })
-    setLifespans(repoAges)
+    return repoAges;
   }
 
-  const fetchRepoContributor = async () => {
-    const userName = userGitHubData.login;
+  const fetchRepoContributor = async (user, userRepos) => {
+    const userName = user.login;
     const repoContainsUser = await Promise.all(
       userRepos.map(async repo => {
         try {
@@ -52,20 +46,20 @@ const ProfileVisualization = (props) => {
         }
     }));
     const filteredUserRepos = userRepos.filter((repo, index) => repoContainsUser[index]);
-    await setFilteredRepos(filteredUserRepos);
+    return filteredUserRepos
   }
 
   const loadRepos = async () => {
     try {
       const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}/repos`);
       const repoData = await userPromise.json();
-      setUserRepos(repoData)
+      return repoData
     } catch (err) {
       setError(err)
     }
   }
 
-  const getLanguages = async () => {
+  const getLanguages = async (filteredRepos) => {
     const languages = await Promise.all(
       filteredRepos.map(async repo => {
         try {
@@ -73,21 +67,20 @@ const ProfileVisualization = (props) => {
           const languagesData = await languagesPromise.json();
           const languagesList = [];
           let languageLines = 0;
-          //get langs
+
           for (let language in languagesData) {
             languagesList.push(language)
             languageLines += languagesData[language]
           }
-
           return [...languagesList, languageLines]
         } catch(err) {
           setError(err)
         }
     }));
-    setRepoLangs(languages)
+    return languages
   }
 
-  const getBranchNames = async () => {
+  const getBranchNames = async (filteredRepos) => {
     const repoBranches = await Promise.all(
       filteredRepos.map(async repo => {
         try {
@@ -102,41 +95,34 @@ const ProfileVisualization = (props) => {
       const names = repo.map(branch => branch.name);
       return names
     })
-    setBranchNames(namesOfBranches)
+    return namesOfBranches
   }
 
-  const consolidateData = () => {
-    if (repoLangs.length) {
-      const cleanedUserData = filteredRepos.map((repo, index) => {
-        return {
-          name: repo.name,
-          branches: branchNames[index],
-          lifespan: lifespans[index] === 0? 1:lifespans[index],
-          languages: repoLangs[index]
-        }
-      })
-      setCleanUserData(cleanedUserData);
+  const consolidateData = (filteredRepos, branchNames, lifespans, repoLangs) => {
+    const cleanedUserData = filteredRepos.map((repo, index) => {
+      return {
+        name: repo.name,
+        branches: branchNames[index],
+        lifespan: lifespans[index] === 0 ? 1 : lifespans[index],
+        languages: repoLangs[index]
+      }
+    })
+    return cleanedUserData;
+  }
+
+  useEffect(() => {
+    const loadUserInformation = async () => {
+      const userGitHub = await loadUser();
+      const usersRepos = await loadRepos();
+      const filteredByContributorUserRepos = await fetchRepoContributor(userGitHub, usersRepos);
+      const branchNames = await getBranchNames(filteredByContributorUserRepos)
+      const languages = await getLanguages(filteredByContributorUserRepos);
+      const lifespans = getLifespans(filteredByContributorUserRepos);
+      const consolidatedData = consolidateData(filteredByContributorUserRepos, branchNames, lifespans, languages);
+      setCleanUserData(consolidatedData)
     }
-  }
-
-  useEffect(() => {
-    loadUser();
-    loadRepos();
+    loadUserInformation();
   }, [])
-
-  useEffect(() => {
-    fetchRepoContributor();
-  }, [userRepos])
-
-  useEffect(() => {
-    getBranchNames();
-    getLifeSpans();
-    getLanguages();
-  }, [filteredRepos])
-
-  useEffect(() => {
-    consolidateData();
-  }, [repoLangs, branchNames])
 
   return (
     <main>
