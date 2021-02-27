@@ -10,7 +10,6 @@ require('dotenv').config();
 const GitHubActivityMap = (props) => {
   const [map, setMap] = useState(null);
   const [clicked, setClicked] = useState(false);
-  const [timer, setTimer] = useState(null);
   const [error, setError] = useState('');
   const [currentMarker, setCurrentMarker] = useState('');
 
@@ -95,20 +94,21 @@ const GitHubActivityMap = (props) => {
   }
 
   useEffect(() => {
+    let timer = '';
     const startMap = async () => {
       const fetchedEvents = await fetchEvents();
       const fetchedUserProfiles = await fetchUserProfiles(fetchedEvents);
       const coordsAndTypes = await fetchUserLocations(fetchedUserProfiles);
       const markers = createMarkers(coordsAndTypes)
       let index = 0;
-      setTimer(window.setInterval(() => {
+      timer = window.setInterval(() => {
         if (index < markers.length) {
           setCurrentMarker(markers[index]);
           index++
         } else {
           clearInterval(timer)
         }
-      }, 1300))
+      }, 1300)
     }
     startMap();
     return () => {
