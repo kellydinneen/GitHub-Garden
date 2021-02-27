@@ -1,7 +1,8 @@
 .github-activity-map-container {
   height: 70vh;
-  width: 90vw;
+  width: 95vw;
   border: 2px solid black;
+  margin-bottom: 50px;
 }
 
 .circle-marker {
