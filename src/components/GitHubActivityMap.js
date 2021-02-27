@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './GitHubActivityMap.css';
-import { MapContainer, TileLayer, Circle, Popup, Marker } from 'react-leaflet'
+import { MapContainer, TileLayer, Circle } from 'react-leaflet'
 import 'leaflet/dist/leaflet.js'
 import 'leaflet/dist/leaflet.css'
 import Legend from './Legend.js'
-const dotEnv = require('dotenv').config();
+require('dotenv').config();
 
 
 const GitHubActivityMap = (props) => {
   const [map, setMap] = useState(null);
-  const [ghError, setGhError] = useState('');
-  const [individualError, setIndividualError] = useState('');
-  const [geoErrors, setGeoErrors] = useState([]);
+  const [error, setError] = useState('');
   const [currentMarker, setCurrentMarker] = useState('');
 
   const colorKey = {
@@ -34,7 +32,7 @@ const GitHubActivityMap = (props) => {
       const events = await result.json()
       return events
     } catch (err) {
-      setGhError(err)
+      setError(err)
     }
   }
 
@@ -50,7 +48,7 @@ const GitHubActivityMap = (props) => {
           const data = await result.json();
           return { userData: data, eventType: item.type }
         } catch (err) {
-          setIndividualError(err)
+          setError(err)
         }
     }))
     return userProfiles
@@ -72,7 +70,7 @@ const GitHubActivityMap = (props) => {
           }
           return newPlace
         } catch(err) {
-          setGeoErrors([...geoErrors, `No coordinates for ${place.location}` ])
+          setError(err)
         }
       })
     )
@@ -112,7 +110,7 @@ const GitHubActivityMap = (props) => {
         }
       }, 1300)
     }
-    startMap();
+    // startMap();
     return () => {
       window.clearInterval(timer)
     }
@@ -135,7 +133,7 @@ const GitHubActivityMap = (props) => {
 
   return (
     <div className='github-activity-map-container'>
-      { props.error && props.error }
+      { error && <p>Oops we had an error</p> }
       {!props.error &&
         <MapContainer
           center={[51.505, -0.09]}

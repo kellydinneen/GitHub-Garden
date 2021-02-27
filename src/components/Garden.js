@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import * as d3 from "d3";
 import './Garden.css';
 
@@ -25,10 +25,6 @@ const Garden = (props) => {
     const yStemScale = d3.scaleQuantize()
       .domain([minLifespan, maxLifespan])
       .range([gardenHeight/2, gardenHeight/3, gardenHeight/4, gardenHeight/5])
-
-  const colorScale = d3.scaleOrdinal()
-    .domain(Object.keys(colorsByLanguage))
-    .range(Object.values(colorsByLanguage))
 
   console.log(colorsByLanguage[repositories[3].languages[2]])
   const petalPathThree = 'M50,0 C70,40 80,70 70,150 L50,135 L30,150 M50,0 C 30,40 20,70 30,150';
@@ -80,7 +76,7 @@ const Garden = (props) => {
 
   //   DRAW STEMS
   //   height scaled to activeLife
-    const stem = flowerBed.selectAll('.stem')
+    flowerBed.selectAll('.stem')
       .data(repositories).enter()
       .append('path')
       .attr('class','stem')
@@ -111,7 +107,7 @@ const Garden = (props) => {
       .text(d => d.name)
       .attr('font-size', '1.5rem')
 
-    const flowerCenter = flowerBed.selectAll('circle')
+    flowerBed.selectAll('circle')
       .data(repositories).enter().append('circle')
       .attr('r', 25)
       .attr('cx', (d, i) => 100 + i * 200)
