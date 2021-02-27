@@ -147,7 +147,12 @@ const Garden = (props) => {
         .attr('fill', 'green')
         .attr('stroke', 'green')
         .attr('id', (d,i) => `${d.name + i}`)
-        .attr('d', `M0,0 C-10,40 10,100 0,120`)
+        .attr('d', () => {
+          const arrayOfLengths = [0, 110, 130, 150, 170, 180, 190, 210, 250];
+          const arrayOfCurves = [-20, -5, 5, 10, 15, 20, 25];
+          const index = (array) => [Math.floor(Math.random() * array.length)];
+          return `M0,0 C-10,40 ${arrayOfCurves[index(arrayOfCurves)]},100 0,${arrayOfLengths[index(arrayOfLengths)]}`;
+        })
         .attr('transform', (d,i) => `rotate(${280 + i * d.rotationFactor})`)
 
     }
