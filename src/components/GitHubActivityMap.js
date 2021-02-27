@@ -109,7 +109,7 @@ const GitHubActivityMap = (props) => {
         }
       }, 1300)}
 
-    startMap();
+    // startMap();
   }, [])
 
   //test data

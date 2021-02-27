@@ -4,8 +4,6 @@ import GitHubActivityMap from './GitHubActivityMap';
 import './Home.css';
 
 const Home = (props) => {
-
-
   return (
     <main>
       <input
