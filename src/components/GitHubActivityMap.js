@@ -63,6 +63,7 @@ const GitHubActivityMap = (props) => {
     const coordsAndTypes = await Promise.all(
       places.map(async place => {
         try {
+          console.log('fetched')
           const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place.location}&key=${process.env.REACT_APP_GEO_KEY}`)
           const data = await result.json();
           const newPlace = {
@@ -79,7 +80,7 @@ const GitHubActivityMap = (props) => {
   }
 
   const createMarkers = (coordsAndTypes) => {
-    const circlePings = coordsAndTypes.filter(location => location.coordinates !== undefined).map((location, index) => {
+    const circlePings = coordsAndTypes.filter(location => location !== undefined).map((location, index) => {
       return (
       <Circle
         className="circle-marker"
@@ -94,13 +95,15 @@ const GitHubActivityMap = (props) => {
   }
 
   useEffect(() => {
+    let timer = '';
     const startMap = async () => {
+      console.log('ran')
       const fetchedEvents = await fetchEvents();
       const fetchedUserProfiles = await fetchUserProfiles(fetchedEvents);
       const coordsAndTypes = await fetchUserLocations(fetchedUserProfiles);
       const markers = createMarkers(coordsAndTypes)
       let index = 0;
-      const timer = setInterval(() => {
+      timer = window.setInterval(() => {
         if (index < markers.length) {
           setCurrentMarker(markers[index]);
           index++
@@ -108,12 +111,11 @@ const GitHubActivityMap = (props) => {
           clearInterval(timer)
         }
       }, 1300)
-      return (timer) => {
-        clearInterval(timer)
-      }
     }
-
     startMap();
+    return () => {
+      window.clearInterval(timer)
+    }
   }, [])
 
   //test data
