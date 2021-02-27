@@ -4,82 +4,86 @@ import './Garden.css';
 
 const Garden = (props) => {
 
-  const colorsByLanguage = {
-    "JavaScript": '#DE2016',
-    "HTML": '#FF3EAA',
-    "CSS": '#FCD732',
-    "SCSS":'#26369E',
-    "Python":'#76678C',
-    "Java":'#F19233'
-  }
-
   const repositories = props.data;
+  console.log(repositories);
 
   const gardenWidth = 200 * repositories.length;
   const gardenHeight = 800;
 
   const drawGarden = () => {
     const flowerBed = d3.select('svg');
+
     const maxLifespan = d3.max(repositories, d => d.lifespan)
     const minLifespan = d3.min(repositories, d => d.lifespan)
+
     const yStemScale = d3.scaleQuantize()
       .domain([minLifespan, maxLifespan])
       .range([gardenHeight/2, gardenHeight/3, gardenHeight/4, gardenHeight/5])
 
-  const colorScale = d3.scaleOrdinal()
-    .domain(Object.keys(colorsByLanguage))
-    .range(Object.values(colorsByLanguage))
+    const flowerSizeScale = d3.scaleQuantize()
+      .domain([minLifespan, maxLifespan])
+      .range([0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1])
 
-  console.log(colorsByLanguage[repositories[3].languages[2]])
-  const petalPathThree = 'M50,0 C70,40 80,70 70,150 L50,135 L30,150 M50,0 C 30,40 20,70 30,150';
-  const petalPathTwo = 'M50,0 C90,40 80,70 70,120 L50,105 L30,120 M50,0 C 10,40 20,70 30,120';
-  const petalPathOne = 'M50,0 C100,40 100,70 70,100 L50,85 L30,100 M50,0 C 0,40 0,70 30,100';
+    const colorsByLanguage = {
+      "JavaScript": '#DE2016',
+      "HTML": '#FF3EAA',
+      "CSS": '#FCD732',
+      "SCSS":'#26369E',
+      "Python":'#76678C',
+      "Java":'#F19233',
+      "none": 'none'
+      }
 
-  const petalGroup = flowerBed.selectAll('.petal-layers')
-    .data(repositories).enter().append('g')
-    .attr('class', 'petal-layers')
-    .attr('x', 0)
-    .attr('y', 0)
-    .attr('transform', (d,i) => `translate(${100 + i * 200}, ${yStemScale(d.lifespan)})`)
-  petalGroup.append('path')
-    .attr('d', petalPathThree)
-    .attr('fill', d => colorsByLanguage[d.languages[2]] || 'none')
-    .attr('transform', `translate(-50, -180)`)
-  petalGroup.append('path')
-    .attr('d', petalPathThree)
-    .attr('fill', d => colorsByLanguage[d.languages[2]] || 'none')
-    .attr('transform', `translate(-50, -180)rotate(120, 50, 160)`)
-  petalGroup.append('path')
-    .attr('d', petalPathThree)
-    .attr('fill', d => colorsByLanguage[d.languages[2]] || 'none')
-    .attr('transform', `translate(-50, -180)rotate(240 50 160)`)
-  petalGroup.append('path')
-    .attr('d', petalPathTwo)
-    .attr('fill', d => colorsByLanguage[d.languages[1]] || 'none')
-    .attr('transform', `translate(-50, -150)rotate(60 50 130)`)
-  petalGroup.append('path')
-    .attr('d', petalPathTwo)
-    .attr('fill', d => colorsByLanguage[d.languages[1]] || 'none')
-    .attr('transform', `translate(-50, -150)rotate(180 50 130)`)
-  petalGroup.append('path')
-    .attr('d', petalPathTwo)
-    .attr('fill', d => colorsByLanguage[d.languages[1]] || 'none')
-    .attr('transform', `translate(-50, -150)rotate(300 50 130)`)
-  petalGroup.append('path')
-    .attr('d', petalPathOne)
-    .attr('fill', d => colorsByLanguage[d.languages[0]] || 'none')
-    .attr('transform', `translate(-50, -130)`)
-  petalGroup.append('path')
-    .attr('d', petalPathOne)
-    .attr('fill', d => colorsByLanguage[d.languages[0]] || 'none')
-    .attr('transform', `translate(-50, -130)rotate(120, 50, 110)`)
-  petalGroup.append('path')
-    .attr('d', petalPathOne)
-    .attr('fill', d => colorsByLanguage[d.languages[0]] || 'none')
-    .attr('transform', `translate(-50, -130)rotate(240,  50, 110)`)
+    const petalPathThree = 'M0,-150 C20,-110 30,-80 20,0 L0,-15 L-20,0 M0,-150 C-20,-110 -30,-80 -20,0';
+    const petalPathTwo = 'M0,-120 C40,-80 30,-50 20,0 L0,-15 L-20,0 M0,-120 C-40,-80 -30,-50 -20,0';
+    const petalPathOne = 'M0,-100 C50,-60 50,-30 20,0 L0,-15 L-20,0 M0,-100 C-50,-60 -50,-30 -20,0';
+    const petalPaths = [petalPathOne, petalPathTwo, petalPathThree];
+    const petalRotationStarts = [0,60,0];
 
-  //   DRAW STEMS
-  //   height scaled to activeLife
+    const flowerPositionBox = flowerBed.selectAll('.flower-box')
+      .data(repositories).enter().append('svg')
+      .attr('class', '.flower-box')
+      .attr('height', '300')
+      .attr('width', '300')
+      .attr('viewBox','-150 -150 300 300')
+      .attr('x', (d, i) => i * 200 - 50)
+      .attr('y', d => yStemScale(d.lifespan) - 175)
+
+    const petalLayer = flowerPositionBox.selectAll('.petal-layer')
+      .data((d) => {
+        console.log('data from flower:', d);
+        return [
+          {
+            color: colorsByLanguage[d.languages[2]],
+            path: petalPaths[2],
+            petalRotationStart: petalRotationStarts[2],
+            scale: flowerSizeScale(d.lifespan)
+          },
+          {
+            color: colorsByLanguage[d.languages[1]],
+            path: petalPaths[1],
+            petalRotationStart: petalRotationStarts[1],
+            scale: flowerSizeScale(d.lifespan)
+          },
+          {
+            color: colorsByLanguage[d.languages[0]],
+            path: petalPaths[0],
+            petalRotationStart: petalRotationStarts[0],
+            scale: flowerSizeScale(d.lifespan)
+          },
+        ];
+      })
+      .enter().append('g')
+      .attr('class', 'petal-layer')
+
+    const petal = petalLayer.selectAll('.petal')
+      .data(d => [d,d,d])
+      .enter().append('path')
+      .attr('class', 'petal')
+      .attr('fill', d => d.color)
+      .attr('d', d => d.path)
+      .attr('transform', (d,i) => `rotate(${d.petalRotationStart + i * 120 || 0})scale(${d.scale})`)
+
     const stem = flowerBed.selectAll('.stem')
       .data(repositories).enter()
       .append('path')
@@ -113,7 +117,7 @@ const Garden = (props) => {
 
     const flowerCenter = flowerBed.selectAll('circle')
       .data(repositories).enter().append('circle')
-      .attr('r', 25)
+      .attr('r', 15)
       .attr('cx', (d, i) => 100 + i * 200)
       .attr('cy', d => yStemScale(d.lifespan) - 20)
       .attr('stroke-width', 1)
@@ -127,10 +131,8 @@ const Garden = (props) => {
   //   //DRAW ROOTS
   //   //one root for each branch
   //   //text path w branch name
-  //   // const root =
-  //   // console.log('ROOTS', roots)
-  }
-  //
+
+
   useEffect(() => {
       drawGarden()
   }, [])
