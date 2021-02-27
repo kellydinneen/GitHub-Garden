@@ -122,6 +122,8 @@ const GitHubActivityMap = (props) => {
   }
 
   return (
+    <>
+    {!clicked && <button onClick={handleMapClick}>Start demo!</button>}
     <div className='github-activity-map-container'>
       { error && <p>Oops we had an error</p> }
       {!props.error &&
@@ -140,6 +142,7 @@ const GitHubActivityMap = (props) => {
         </MapContainer>
       }
     </div>
+    </>
   )
 }
 export default GitHubActivityMap;
