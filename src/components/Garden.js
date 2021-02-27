@@ -12,7 +12,7 @@ const Garden = (props) => {
   const gardenHeight = 800;
 
   const drawGarden = () => {
-    const flowerBed = d3.select('svg');
+    const flowerBed = d3.select('.flowerbed');
 
     const maxLifespan = d3.max(repositories, d => d.lifespan)
     const minLifespan = d3.min(repositories, d => d.lifespan)
@@ -45,7 +45,7 @@ const Garden = (props) => {
 
     const flowerSizeScale = d3.scaleQuantize()
       .domain([minLifespan, maxLifespan])
-      .range([0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1])
+      .range([0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85])
 
     const colorsByLanguage = {
       "JavaScript": '#DE2016',
@@ -77,19 +77,19 @@ const Garden = (props) => {
         console.log('data from flower:', d);
         return [
           {
-            color: colorsByLanguage[d.languages[2]],
+            color: colorsByLanguage[d.languages[2]] || 'none',
             path: petalPaths[2],
             petalRotationStart: petalRotationStarts[2],
             scale: flowerSizeScale(d.lifespan)
           },
           {
-            color: colorsByLanguage[d.languages[1]],
+            color: colorsByLanguage[d.languages[1]] || 'none',
             path: petalPaths[1],
             petalRotationStart: petalRotationStarts[1],
             scale: flowerSizeScale(d.lifespan)
           },
           {
-            color: colorsByLanguage[d.languages[0]],
+            color: colorsByLanguage[d.languages[0]] || 'none',
             path: petalPaths[0],
             petalRotationStart: petalRotationStarts[0],
             scale: flowerSizeScale(d.lifespan)
