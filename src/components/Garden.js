@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from "d3";
 import './Garden.css';
+const _ = require('lodash');
 
 const Garden = (props) => {
 
@@ -84,6 +85,15 @@ const Garden = (props) => {
       .attr('d', d => d.path)
       .attr('transform', (d,i) => `rotate(${d.petalRotationStart + i * 120 || 0})scale(${d.scale})`)
 
+    const flowerCenter = flowerBed.selectAll('circle')
+      .data(repositories).enter().append('circle')
+      .attr('r', 15)
+      .attr('cx', (d, i) => 100 + i * 200)
+      .attr('cy', d => yStemScale(d.lifespan) - 20)
+      .attr('stroke-width', 1)
+      .attr('stroke', 'blue')
+      .attr('fill', 'blue')
+
     const stem = flowerBed.selectAll('.stem')
       .data(repositories).enter()
       .append('path')
@@ -107,30 +117,40 @@ const Garden = (props) => {
     animate();
 
 
-    flowerBed.selectAll('.repoName')
-      .data(repositories).enter()
-      .append('text')
-      .append('textPath')
-      .attr('xlink:href', (d, i) => `#myStem${i}`)
-      .text(d => d.name)
-      .attr('font-size', '1.5rem')
+      flowerBed.selectAll('.repoName')
+        .data(repositories).enter()
+        .append('text')
+        .append('textPath')
+        .attr('xlink:href', (d, i) => `#myStem${i}`)
+        .text(d => d.name)
+        .attr('font-size', '1.5rem')
 
-    const flowerCenter = flowerBed.selectAll('circle')
-      .data(repositories).enter().append('circle')
-      .attr('r', 15)
-      .attr('cx', (d, i) => 100 + i * 200)
-      .attr('cy', d => yStemScale(d.lifespan) - 20)
-      .attr('stroke-width', 1)
-      .attr('stroke', 'blue')
-      .attr('fill', 'blue')
-      //Append the month names to each slice
+      const rootBox = flowerBed.selectAll('.root-box')
+        .data(repositories).enter().append('svg')
+        .attr('class', '.root-box')
+        .attr('height', '200')
+        .attr('width', '200')
+        .attr('viewBox','-150 -150 300 300')
+        .attr('x', (d, i) => i * 200)
+        .attr('y', 500)
 
+      const root = rootBox.selectAll('.root')
+        .data(d => d.branches.map(branch => {
+          return {
+            repo: d.name,
+            name: branch,
+            rotationFactor: d.branches.length === 1 ? 0 : 160 / d.branches.length
+          }
+        }))
+        .enter().append('path')
+        .attr('class', 'root')
+        .attr('fill', 'green')
+        .attr('stroke', 'green')
+        .attr('id', (d,i) => `${d.name + i}`)
+        .attr('d', `M0,0 C-10,40 10,100 0,120`)
+        .attr('transform', (d,i) => `rotate(${280 + i * d.rotationFactor})`)
 
-  //   console.log('STEMS', stem)
-  //
-  //   //DRAW ROOTS
-  //   //one root for each branch
-  //   //text path w branch name
+    }
 
 
   useEffect(() => {
