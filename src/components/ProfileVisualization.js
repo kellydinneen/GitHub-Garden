@@ -44,7 +44,8 @@ const ProfileVisualization = (props) => {
         } catch(err) {
           setError(err)
         }
-    }));
+      })
+    );
     const filteredUserRepos = userRepos.filter((repo, index) => repoContainsUser[index]);
     return filteredUserRepos
   }
@@ -67,7 +68,6 @@ const ProfileVisualization = (props) => {
           const languagesData = await languagesPromise.json();
           const languagesList = [];
           let languageLines = 0;
-
           for (let language in languagesData) {
             languagesList.push(language)
             languageLines += languagesData[language]
@@ -76,7 +76,9 @@ const ProfileVisualization = (props) => {
         } catch(err) {
           setError(err)
         }
-    }));
+      }
+    )
+  );
     return languages
   }
 
@@ -90,7 +92,8 @@ const ProfileVisualization = (props) => {
         } catch(err) {
           setError(err)
         }
-    }));
+      })
+    );
     const namesOfBranches = repoBranches.map(repo => {
       const names = repo.map(branch => branch.name);
       return names

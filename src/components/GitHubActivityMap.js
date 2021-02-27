@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './GitHubActivityMap.css';
-import { MapContainer, TileLayer, Circle } from 'react-leaflet'
+import { MapContainer, TileLayer, Circle, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.js'
 import 'leaflet/dist/leaflet.css'
-import Legend from './Legend.js'
+import Legend from './Legend'
 require('dotenv').config();
 
 
 const GitHubActivityMap = (props) => {
   const [map, setMap] = useState(null);
+  const [clicked, setClicked] = useState(false);
   const [error, setError] = useState('');
   const [currentMarker, setCurrentMarker] = useState('');
 
@@ -95,7 +96,6 @@ const GitHubActivityMap = (props) => {
   useEffect(() => {
     let timer = '';
     const startMap = async () => {
-      console.log('ran')
       const fetchedEvents = await fetchEvents();
       const fetchedUserProfiles = await fetchUserProfiles(fetchedEvents);
       const coordsAndTypes = await fetchUserLocations(fetchedUserProfiles);
@@ -116,28 +116,18 @@ const GitHubActivityMap = (props) => {
     }
   }, [])
 
-  //test data
-  // COMMENT THIS OUT WHEN USING FOR REAL
-  // useEffect(() => {
-  //   setLocations([
-  //     {lat: 40.745255, lng: -74.034775},
-  //     {lat: 41.676388, lng: -86.250275},
-  //     {lat: 33.038334, lng: -97.006111},
-  //     {lat: 38.257778, lng: -122.054169},
-  //     {lat: 34.257778, lng: 69.054169},
-  //     {lat: -14.257778, lng: -70.054169},
-  //     {lat: 55.257778, lng: 12.054169},
-  //     {lat: 30.257778, lng: 31.054169},
-  //   ])
-  // }, [])
+  const handleMapClick = () => {
+    console.log('clicked')
+    setClicked(true);
+  }
 
   return (
     <div className='github-activity-map-container'>
       { error && <p>Oops we had an error</p> }
       {!props.error &&
         <MapContainer
-          center={[51.505, -0.09]}
-          zoom={1.5}
+          center={[0, 0]}
+          zoom={1.6}
           scrollWheelZoom={false}
           style={{height : '100%'}}
           whenCreated={setMap}>

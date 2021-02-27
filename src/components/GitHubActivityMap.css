@@ -24,3 +24,7 @@
     opacity: 0;
   }
 }
+
+.my-button {
+  z-index: 9999;
+}
