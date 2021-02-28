@@ -4,6 +4,8 @@ import GitHubActivityMap from './GitHubActivityMap';
 import './Home.css';
 
 const Home = (props) => {
+  const [user, setUser] = useState(props.userNameToSearch)
+  const [clicked, setClicked] = useState(false);
 
 
   return (
@@ -13,14 +15,15 @@ const Home = (props) => {
         className="search-bar"
         placeholder="Search by GitHub username"
         value={props.userNameToSearch}
-        onChange={event => props.setUserNameToSearch(event.target.value)}>
+        onChange={event => setUser(event.target.value)}>
       </input>
       <Link to={{
-        pathname:`/visualizations/${props.userNameToSearch}`
+        pathname:`/visualizations/${user}`
       }}>
         <button>Search</button>
       </Link>
-      <GitHubActivityMap globalGitHubData={props.globalGitHubData} error={props.error}/>
+      {!clicked && <button onClick={() => setClicked(true)}>Start demo!</button>}
+      {clicked &&<GitHubActivityMap globalGitHubData={props.globalGitHubData} error={props.error}/>}
     </main>
   )
 }

@@ -1,0 +1,40 @@
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: #222222;
+  border-radius: 5px;
+}
+
+.legend {
+  text-align: left;
+  line-height: 18px;
+  color: white;
+}
+
+.red {
+  color: red;
+}
+
+.white {
+  color: white;
+}
+
+.orange {
+  color: orange;
+}
+
+.blue {
+  color: blue;
+}
+
+.green {
+  color: green;
+}
+
+.purple {
+  color: purple;
+}
+
+.cornflowerblue {
+  color: cornflowerblue;
+}

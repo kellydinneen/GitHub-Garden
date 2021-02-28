@@ -1,129 +1,142 @@
 import React, { useEffect, useState } from 'react';
 import './GitHubActivityMap.css';
-import { MapContainer, TileLayer, Circle, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Circle, Marker, Popup } from 'react-leaflet'
+import 'leaflet/dist/leaflet.js'
 import 'leaflet/dist/leaflet.css'
-const dotEnv = require('dotenv').config();
+import Legend from './Legend'
+require('dotenv').config();
 
 
 const GitHubActivityMap = (props) => {
-
-  const [events, setEvents] = useState([]);
-  const [locations, setLocations] = useState([]);
-  const [markers, setMarkers] = useState([]);
-  const [ghError, setGhError] = useState('');
-  const [individualError, setIndividualError] = useState('');
-  const [geoErrors, setGeoErrors] = useState([]);
+  const [map, setMap] = useState(null);
+  const [error, setError] = useState('');
   const [currentMarker, setCurrentMarker] = useState('');
 
-  // useEffect(() => {
-  //   const fetchEvents = async () => {
-  //     try {
-  //       const result = await fetch('https://api.github.com/events?per_page=100', {
-  //         headers: {
-  //           authorization: `token ${process.env.REACT_APP_GH_KEY}`
-  //         }
-  //       })
-  //       const data = await result.json()
-  //       setEvents(data)
-  //     } catch (err) {
-  //       setGhError(err)
-  //     }
-  //   }
-  //   fetchEvents()
-  // }, [])
-  //
-  // useEffect(() => {
-  //   //fetch user data
-  //   const fetchLocations = async () => {
-  //     const userLocations = await Promise.all(
-  //       events.map(async (item) => {
-  //         try {
-  //           const result = await fetch(item.actor.url, {
-  //             headers: {
-  //               authorization: `token ${process.env.REACT_APP_GH_KEY}`
-  //             }
-  //           })
-  //           const data = await result.json();
-  //           return data
-  //         } catch (err) {
-  //           setIndividualError(err)
-  //         }
-  //     }))
-  //
-  //   //get locations from geosearch
-  //     const places = userLocations.filter(loc => loc.location).map(loc => loc.location);
-  //     const coords = await Promise.all(
-  //       places.map(async place => {
-  //         try {
-  //           const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place}&key=${process.env.REACT_APP_GEO_KEY}`)
-  //           const data = await result.json();
-  //           return {
-  //             ...data.results[0].geometry,
-  //           }
-  //         } catch(err) {
-  //           setGeoErrors([...geoErrors, `No coordinates for ${place}` ])
-  //         }
-  //       })
-  //     )
-  //     setLocations(coords)
-  //   }
-  //   fetchLocations();
-  // }, [events])
 
-  //test data
-  // COMMENT THIS OUT WHEN USING FOR REAL
-  useEffect(() => {
-    setLocations([
-      {lat: 40.745255, lng: -74.034775},
-      {lat: 41.676388, lng: -86.250275},
-      {lat: 33.038334, lng: -97.006111},
-      {lat: 38.257778, lng: -122.054169},
-      {lat: 34.257778, lng: 69.054169},
-      {lat: -14.257778, lng: -70.054169},
-      {lat: 55.257778, lng: 12.054169},
-      {lat: 30.257778, lng: 31.054169},
-    ])
-  }, [])
+  const colorKey = {
+    PushEvent: 'red',
+    CreateEvent: 'orange',
+    PublicEvent: 'blue',
+    WatchEvent: 'green',
+    IssueCommentEvent: 'purple',
+    PullRequestEvent: 'cornflowerblue'
+  }
 
-  useEffect(() => {
-    const markers = locations.filter(location => location !== undefined).map((location, index) => {
+  const fetchEvents = async () => {
+    try {
+      //?per_page=100
+      const result = await fetch('https://api.github.com/events', {
+        headers: {
+          authorization: `token ${process.env.REACT_APP_GH_KEY}`
+        }
+      })
+      const events = await result.json()
+      return events
+    } catch (err) {
+      setError(err)
+    }
+  }
+
+  const fetchUserProfiles = async (events) => {
+    const userProfiles = await Promise.all(
+      events.map(async (item) => {
+        try {
+          const result = await fetch(item.actor.url, {
+            headers: {
+              authorization: `token ${process.env.REACT_APP_GH_KEY}`
+            }
+          })
+          const data = await result.json();
+          return { userData: data, eventType: item.type }
+        } catch (err) {
+          setError(err)
+        }
+    }))
+    return userProfiles
+  }
+
+  const fetchUserLocations = async (users) => {
+    const places = users.filter(profile => profile.userData.location)
+      .map(profile => ({ location: profile.userData.location, eventType: profile.eventType }));
+
+    const coordsAndTypes = await Promise.all(
+      places.map(async place => {
+        try {
+          console.log('fetched')
+          const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place.location}&key=${process.env.REACT_APP_GEO_KEY}`)
+          const data = await result.json();
+          const newPlace = {
+            coordinates: {...data.results[0].geometry},
+            eventType: place.eventType
+          }
+          return newPlace
+        } catch(err) {
+          setError(err)
+        }
+      })
+    )
+    return coordsAndTypes
+  }
+
+  const createMarkers = (coordsAndTypes) => {
+    const circlePings = coordsAndTypes.filter(location => location !== undefined).map((location, index) => {
       return (
       <Circle
         className="circle-marker"
         key={index}
-        center={[location.lat, location.lng]}
+        center={[location.coordinates.lat, location.coordinates.lng]}
+        color={colorKey[location.eventType] || 'white'}
       >
       </Circle>
     )
     })
-    setMarkers(markers)
-  }, [locations])
+    return circlePings
+  }
 
   useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index < markers.length) {
-        setCurrentMarker(markers[index]);
-        index++
-      } else {
-        clearInterval(timer)
-      }
-    }, 1300)
-  }, [markers])
+    let timer;
+    const startMap = async () => {
+      const fetchedEvents = await fetchEvents();
+      const fetchedUserProfiles = await fetchUserProfiles(fetchedEvents);
+      const coordsAndTypes = await fetchUserLocations(fetchedUserProfiles);
+      const markers = createMarkers(coordsAndTypes)
+      let index = 0;
+      timer = window.setInterval(() => {
+        if (index < markers.length) {
+          setCurrentMarker(markers[index]);
+          index++
+        } else {
+          clearInterval(timer)
+        }
+      }, 1300)
+    }
+    startMap();
+    return () => {
+      window.clearInterval(timer)
+    }
+  }, [])
 
   return (
+    <>
     <div className='github-activity-map-container'>
-      { props.error && props.error }
+      { error && <p>Oops we had an error</p> }
       {!props.error &&
-        <MapContainer center={[51.505, -0.09]} zoom={1.5} scrollWheelZoom={false} style={{height : '100%'}}>
+        <MapContainer
+          center={[0, 0]}
+          zoom={1.6}
+          scrollWheelZoom={false}
+          style={{height : '100%'}}
+          whenCreated={setMap}>
           <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='© <a href="https://stadiamaps.com/">Stadia Maps</a>, © <a href="https://openmaptiles.org/">OpenMapTiles</a> © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
           />
           {currentMarker && currentMarker}
+          {map && <Legend map={map}/>}
         </MapContainer>
       }
     </div>
+    </>
   )
 }
 export default GitHubActivityMap;

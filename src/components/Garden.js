@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import * as d3 from "d3";
 import './Garden.css';
 
@@ -103,7 +103,7 @@ const Garden = (props) => {
       .attr('d', d => d.path)
       .attr('transform', (d,i) => `rotate(${d.petalRotationStart + i * 120 || 0})scale(${d.scale})`)
 
-    const flowerCenter = flowerBed.selectAll('circle')
+    flowerBed.selectAll('circle')
       .data(repositories).enter().append('circle')
       .attr('r', 15)
       .attr('cx', (d, i) => 100 + i * 200)
