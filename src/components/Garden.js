@@ -1,12 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from "d3";
 import './Garden.css';
-const _ = require('lodash');
 
 const Garden = (props) => {
 
   const repositories = props.data;
-  console.log(repositories);
 
   const gardenWidth = 200 * repositories.length;
   const gardenHeight = 800;
@@ -19,7 +17,7 @@ const Garden = (props) => {
 
     const yStemScale = d3.scaleQuantize()
       .domain([minLifespan, maxLifespan])
-      .range([gardenHeight - 300, gardenHeight - 350, gardenHeight - 400, gardenHeight - 450, gardenHeight/2, gardenHeight/3, gardenHeight/4])
+      .range([gardenHeight - 300, gardenHeight - 350, gardenHeight - 400, gardenHeight - 450, gardenHeight - 500, gardenHeight - 550])
 
       const stem = flowerBed.selectAll('.stem')
         .data(repositories).enter()
@@ -73,9 +71,7 @@ const Garden = (props) => {
       .attr('y', d => yStemScale(d.lifespan) - 175)
 
     const petalLayer = flowerPositionBox.selectAll('.petal-layer')
-      .data((d) => {
-        console.log('data from flower:', d);
-        return [
+      .data((d) => [
           {
             color: colorsByLanguage[d.languages[2]] || 'none',
             path: petalPaths[2],
@@ -94,8 +90,8 @@ const Garden = (props) => {
             petalRotationStart: petalRotationStarts[0],
             scale: flowerSizeScale(d.lifespan)
           },
-        ];
-      })
+        ]
+      )
       .enter().append('g')
       .attr('class', 'petal-layer')
 
@@ -138,7 +134,7 @@ const Garden = (props) => {
           return {
             repo: d.name,
             name: branch,
-            rotationFactor: d.branches.length === 1 ? -280 : 160 / d.branches.length
+            rotationFactor: d.branches.length === 1 ? -260 : 160 / d.branches.length
           }
         }))
         .enter().append('path')
@@ -147,15 +143,14 @@ const Garden = (props) => {
         .attr('stroke', 'green')
         .attr('id', (d,i) => `${d.name + i}`)
         .attr('d', () => {
-          const arrayOfLengths = [0, 110, 130, 150, 170, 180, 190, 210, 250];
+          const arrayOfLengths = [110, 130, 150, 170, 180, 190, 210, 250];
           const arrayOfCurves = [-20, -5, 5, 10, 15, 20, 25];
           const index = (array) => [Math.floor(Math.random() * array.length)];
           return `M0,0 C-10,40 ${arrayOfCurves[index(arrayOfCurves)]},100 0,${arrayOfLengths[index(arrayOfLengths)]}`;
         })
-        .attr('transform', (d,i) => `rotate(${260 + (i + 1) * d.rotationFactor})`)
+        .attr('transform', (d,i) => `rotate(${260 + (i+1) * d.rotationFactor})`)
 
     }
-
 
   useEffect(() => {
       drawGarden()
