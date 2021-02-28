@@ -5,6 +5,9 @@ import './Home.css';
 
 const Home = (props) => {
   const [user, setUser] = useState(props.userNameToSearch)
+  const [clicked, setClicked] = useState(false);
+
+
   return (
     <main>
       <input
@@ -19,7 +22,8 @@ const Home = (props) => {
       }}>
         <button>Search</button>
       </Link>
-      <GitHubActivityMap globalGitHubData={props.globalGitHubData} error={props.error}/>
+      {!clicked && <button onClick={() => setClicked(true)}>Start demo!</button>}
+      {clicked &&<GitHubActivityMap globalGitHubData={props.globalGitHubData} error={props.error}/>}
     </main>
   )
 }

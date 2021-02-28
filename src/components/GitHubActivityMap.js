@@ -9,9 +9,9 @@ require('dotenv').config();
 
 const GitHubActivityMap = (props) => {
   const [map, setMap] = useState(null);
-  const [clicked, setClicked] = useState(false);
   const [error, setError] = useState('');
   const [currentMarker, setCurrentMarker] = useState('');
+
 
   const colorKey = {
     PushEvent: 'red',
@@ -94,7 +94,7 @@ const GitHubActivityMap = (props) => {
   }
 
   useEffect(() => {
-    let timer = '';
+    let timer;
     const startMap = async () => {
       const fetchedEvents = await fetchEvents();
       const fetchedUserProfiles = await fetchUserProfiles(fetchedEvents);
@@ -116,14 +116,8 @@ const GitHubActivityMap = (props) => {
     }
   }, [])
 
-  const handleMapClick = () => {
-    console.log('clicked')
-    setClicked(true);
-  }
-
   return (
     <>
-    {!clicked && <button onClick={handleMapClick}>Start demo!</button>}
     <div className='github-activity-map-container'>
       { error && <p>Oops we had an error</p> }
       {!props.error &&
