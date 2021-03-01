@@ -138,8 +138,8 @@ const ProfileVisualization = (props) => {
 
   return (
     <main>
-      {!isLoaded && <ProfileLoader user={props.userNameToSearch} />}
-      {error && <ErrorPage />}
+      {!isLoaded && <ProfileLoader />}
+      {error && <ErrorPage user={props.userNameToSearch} message={"We couldn't find a profile for"}/>}
       {isLoaded && !error &&
       <>
         <section className='gardener-info'>
