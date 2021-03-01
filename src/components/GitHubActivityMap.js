@@ -57,6 +57,7 @@ const GitHubActivityMap = (props) => {
     return userProfiles
   }
 
+
   const fetchUserLocations = async (users) => {
     const places = users.filter(profile => profile.userData.location)
       .map(profile => ({ location: profile.userData.location, eventType: profile.eventType }));
@@ -98,21 +99,23 @@ const GitHubActivityMap = (props) => {
     let timer;
     const startMap = async () => {
       const fetchedEvents = await fetchEvents();
-      const fetchedUserProfiles = await fetchUserProfiles(fetchedEvents);
-      const coordsAndTypes = await fetchUserLocations(fetchedUserProfiles);
-      const markers = createMarkers(coordsAndTypes);
-      setIsLoaded(true);
-      let index = 0;
-      timer = window.setInterval(() => {
-        if (index < markers.length) {
-          setCurrentMarker(markers[index]);
-          index++
-        } else {
-          clearInterval(timer)
-        }
-      }, 1300)
+      if (fetchedEvents) {
+        const fetchedUserProfiles = await fetchUserProfiles(fetchedEvents);
+        const coordsAndTypes = await fetchUserLocations(fetchedUserProfiles);
+        const markers = createMarkers(coordsAndTypes);
+        setIsLoaded(true);
+        let index = 0;
+        timer = window.setInterval(() => {
+          if (index < markers.length) {
+            setCurrentMarker(markers[index]);
+            index++
+          } else {
+            clearInterval(timer)
+          }
+        }, 1300)
+      }
     }
-    startMap();
+    // startMap();
     return () => {
       window.clearInterval(timer)
     }
@@ -120,10 +123,10 @@ const GitHubActivityMap = (props) => {
 
   return (
     <>
-    {!isLoaded && <div className="map-loader"></div>}
+    {!isLoaded && !error && <div className="map-loader"></div>}
     {isLoaded && <p> Real Time GitHub Events happening across the globe!</p>}
     <div className='github-activity-map-container'>
-      {error && <p>Oops we had an error</p> }
+      {error && <p className="error-text">Oops! Something went wrong.</p> }
       {!props.error &&
         <MapContainer
           center={[0, 0]}
@@ -143,4 +146,5 @@ const GitHubActivityMap = (props) => {
     </>
   )
 }
+
 export default GitHubActivityMap;

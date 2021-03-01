@@ -1,7 +1,6 @@
 .github-activity-map-container {
   height: 70vh;
   width: 95vw;
-  border: 2px solid black;
   margin-bottom: 50px;
 }
 
@@ -23,6 +22,9 @@
     stroke-width: 100;
     opacity: 0;
   }
+}
+.error-text {
+  text-align: center;
 }
 
 .map-loader {
