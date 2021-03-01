@@ -1,0 +1,29 @@
+{
+  "user":{
+      "login": "testuser",
+      "name": "Test User",
+      "avatar_url": "https://image.tmdb.org/t/p/original//t22fWbzdnThPseipsdpwgdPOPCR.jpg",
+    },
+  "repos": [
+      {
+        "name": "testrepo",
+        "contributors_url": "https://api.github.com/repos/testuser/testrepo/contributors",
+        "url": "https://api.github.com/repos/testuser/testrepo",
+        "created_at": "2020-09-14T22:46:04Z",
+        "updated_at": "2020-09-20T22:46:06Z"
+      }
+    ],
+  "languages": {
+    "JavaScript": 3039
+  },
+  "branches":[
+    {"name": "one"},
+    {"name": "two"},
+    {"name": "three"}
+  ],
+  "contributors": [
+    {"login": "testuser"},
+    {"login": "anotherperson"},
+    {"login": "adifferentperson"}
+  ]
+}
