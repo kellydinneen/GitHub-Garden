@@ -39,7 +39,7 @@ main {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding-bottom: 10px;
+  padding-bottom: 6px;
   background-color: #3F6422;
   color: #EFEFEF;
   font-size: 1.2rem;
