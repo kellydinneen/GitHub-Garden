@@ -133,9 +133,9 @@ const ProfileVisualization = (props) => {
       <a href={userGitHubData.html_url}>
         <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
       </a>
-      <div className="user-visualizations-box">
+      <section className="user-visualizations-box">
         {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
-      </div>
+      </section>
       <input
         aria-label="Search bar for GitHub users"
         className="search-bar"

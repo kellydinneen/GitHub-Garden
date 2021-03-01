@@ -7,7 +7,6 @@ const Garden = (props) => {
   const repositories = props.data;
 
   const gardenWidth = 200 * repositories.length;
-  const gardenHeight = 800;
 
   const drawGarden = () => {
     const flowerBed = d3.select('.flowerbed');
@@ -17,7 +16,7 @@ const Garden = (props) => {
 
     const yStemScale = d3.scaleQuantize()
       .domain([minLifespan, maxLifespan])
-      .range([gardenHeight - 300, gardenHeight - 350, gardenHeight - 400, gardenHeight - 450, gardenHeight - 500, gardenHeight - 550])
+      .range([550, 500, 450, 400, 350, 300, 250, 200])
 
       const stem = flowerBed.selectAll('.stem')
         .data(repositories).enter()
@@ -157,7 +156,7 @@ const Garden = (props) => {
   }, [])
 
   return (
-    <svg className='flowerbed' width={gardenWidth} height={gardenHeight}></svg>
+    <svg className='flowerbed' viewBox='0 0 2000 800' width={gardenWidth}></svg>
   )
 }
 
