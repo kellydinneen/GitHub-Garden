@@ -8,9 +8,9 @@ const Header = (props) => {
     <header>
       {props.home && <h1 className='title'>GitHub Garden</h1>}
       {!props.home &&
-        <Link to='/'>
-        <img onClick={() => props.setHome(true)} className='home-icon' src={home}/>
-        </Link>
+          <Link className='home-button' to='/'>
+          <img onClick={() => props.setHome(true)} className='home-icon' src={home}/>
+          </Link>
       }
     </header>
   )

@@ -6,3 +6,7 @@ header {
   display: flex;
   justify-content: flex-start;
 }
+.home-button {
+  margin-left: 2vw;
+  margin-top: 1vh;
+}

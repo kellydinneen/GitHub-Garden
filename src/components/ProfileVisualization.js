@@ -133,7 +133,7 @@ const ProfileVisualization = (props) => {
         <a href={userGitHubData.html_url}>
           <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
         </a>
-        <h1>The Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
+        <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
       </section>
       <section className="user-visualizations-box">
         {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
@@ -215,18 +215,6 @@ const ProfileVisualization = (props) => {
         </section>
       </article>
     </div>
-      <input
-        aria-label="Search bar for GitHub users"
-        className="search-bar"
-        placeholder="Search another user"
-        value={newUserNameToSearch}
-        onChange={event => setNewUserNameToSearch(event.target.value)}>
-      </input>
-      <Link to={{
-        pathname:`/visualizations/${newUserNameToSearch}`,
-      }}>
-        <button className='search-button'>Search</button>
-      </Link>
     </main>
   )
 }
