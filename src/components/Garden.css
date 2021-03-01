@@ -1,8 +1,7 @@
 .flowerbed {
-  border: dashed 2px black;
-  height: 50vh;
+  height: 55vh;
   position: absolute;
-  left: -100vw;
+  left: -1450px;
 }
 
 .flower-head {
