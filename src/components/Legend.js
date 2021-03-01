@@ -10,8 +10,9 @@ const Legend = ({ map }) => {
         const div = L.DomUtil.create("div", "info legend");
         div.innerHTML =`
           <h2>GitHub Activity</h2>
-          <p class="red">Push</p>
-          <p class="orange">Create</p>
+          <hr>
+          <p class="red">Push Event</p>
+          <p class="orange">Create Event</p>
           <p class="blue">Public Event</p>
           <p class="green">Watch Event</p>
           <p class="purple">Issue Comment</p>

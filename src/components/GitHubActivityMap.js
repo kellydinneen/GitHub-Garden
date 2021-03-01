@@ -64,7 +64,6 @@ const GitHubActivityMap = (props) => {
     const coordsAndTypes = await Promise.all(
       places.map(async place => {
         try {
-          console.log('fetched')
           const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place.location}&key=${process.env.REACT_APP_GEO_KEY}`)
           const data = await result.json();
           const newPlace = {
@@ -122,6 +121,7 @@ const GitHubActivityMap = (props) => {
   return (
     <>
     {!isLoaded && <div className="map-loader"></div>}
+    {isLoaded && <p> Real Time GitHub Events happening across the globe!</p>}
     <div className='github-activity-map-container'>
       {error && <p>Oops we had an error</p> }
       {!props.error &&

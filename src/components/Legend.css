@@ -6,9 +6,15 @@
 }
 
 .legend {
+  border: 1px solid white;
   text-align: left;
   line-height: 18px;
   color: white;
+  border-radius: 5px;
+}
+
+p {
+  font-size: 1.2rem;
 }
 
 .red {
