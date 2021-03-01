@@ -10,14 +10,15 @@
   overflow: scroll;
 }
 
-/* .gardener-info {
-  /* display: flex;
+.gardener-info {
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center; */
-  /* align-content: center;
+  align-items: center;
+  align-content: center;
   text-align: center;
-} */
+  margin-top: 20px;
+}
 
 .slideout-color-key-toggler {
   position: fixed;
