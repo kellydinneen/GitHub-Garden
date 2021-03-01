@@ -1,33 +1,13 @@
 .watering-can {
   margin-top: 30px;
+  margin-bottom: 10px;
   width: 300px;
   height: 300px;
   background-image: url('./watering-can.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  animation: water 4s linear infinite;
-}
-
-.rain {
-  display: flex;
-  flex-direction: row;
-  margin-left: 20px;
-  width: 80px;
-  height: 200px;
-  border: 1px solid red;
-}
-
-.droplet {
-  background-color: cornflowerblue;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  animation: rain 4s linear infinite;
-}
-
-@keyframes rain {
-  
+  animation: water 4.2s linear infinite;
 }
 
 @keyframes water {
@@ -39,5 +19,330 @@
   }
   100% {
     transform: rotate(120deg);
+  }
+}
+
+.rain {
+  position: relative;
+  margin-left: 20px;
+  width: 120px;
+  height: 400px;
+}
+
+.droplet {
+  background-color: #222323;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  animation: rain 4s linear infinite;
+  position: absolute;
+}
+
+
+.d1,
+.d2 {
+  left: 0;
+}
+
+.d3,
+.d4 {
+  left: 20px;
+}
+
+.d5,
+.d6 {
+  left: 40px;
+}
+
+.d7,
+.d8 {
+  left: 60px;
+}
+
+.d9,
+.d10 {
+  left: 80px;
+}
+
+.d11,
+.d12 {
+  left: 100px;
+}
+
+.d1 {
+  animation: rain1 linear 4s infinite;
+}
+
+.d2 {
+  animation: rain2 linear 4s infinite;
+}
+
+.d3 {
+  animation: rain3 linear 4s infinite;
+}
+
+.d4 {
+  animation: rain4 linear 4s infinite;
+}
+
+.d5 {
+  animation: rain5 linear 4s infinite;
+}
+
+.d6 {
+  animation: rain6 linear 4s infinite;
+}
+
+.d7 {
+  animation: rain7 linear 4s infinite;
+}
+
+.d8 {
+  animation: rain8 linear 4s infinite;
+}
+
+.d9 {
+  animation: rain9 linear 4s infinite;
+}
+
+.d10 {
+  animation: rain10 linear 4s infinite;
+}
+
+.d11 {
+  animation: rain11 linear 4s infinite;
+}
+
+.d12 {
+  animation: rain12 linear 4s infinite;
+}
+
+
+@keyframes rain1 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  75% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+
+@keyframes rain2 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  75% {
+    background-color: #64daed;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+@keyframes rain3 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  60% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+@keyframes rain4 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  90% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+@keyframes rain5 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  57% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+@keyframes rain6 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  68% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+@keyframes rain7 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  93% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+@keyframes rain8 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  59% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+@keyframes rain9 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  93% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+@keyframes rain10 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  86% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+@keyframes rain11 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  80% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
+  }
+}
+@keyframes rain12 {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    background-color: #222323;
+    margin-top: 0;
+  }
+  50% {
+  }
+  67% {
+    background-color: #64daed;
+    margin-top: 350px;
+  }
+  100% {
+    margin-top: 350px;
+    background-color: #222323;
   }
 }
