@@ -135,6 +135,7 @@ const Garden = (props) => {
         .append('textPath')
         .attr('xlink:href', (d, i) => `#myStem${i}`)
         .text(d => d.name)
+        .attr('fill', 'white')
         .attr('font-size', '1.5rem')
 
       const rootBox = flowerBed.selectAll('.root-box')
