@@ -10,20 +10,25 @@ const Home = (props) => {
 
   return (
     <main>
+    <div className="search-wrapper">
       <input
         aria-label="Search bar for GitHub users"
         className="search-bar"
-        placeholder="Search by GitHub username"
+        placeholder="Enter a GitHub username"
         value={props.userNameToSearch}
         onChange={event => setUser(event.target.value)}>
       </input>
       <Link to={{
         pathname:`/visualizations/${user}`
       }}>
-        <button onClick={() => props.setHome(false)}>Search</button>
+        <button className="search-btn" onClick={() => props.setHome(false)}>Grow</button>
       </Link>
-      {!clicked && <button onClick={() => setClicked(true)}>Start demo!</button>}
-      {clicked &&<GitHubActivityMap globalGitHubData={props.globalGitHubData} error={props.error}/>}
+    </div>
+      {!clicked && <h2 className="or">OR</h2>}
+      {!clicked && <button className="map-btn" onClick={() => setClicked(true)}>
+        Watch seeds get planted across the world.
+      </button>}
+      {clicked && <GitHubActivityMap className="map" globalGitHubData={props.globalGitHubData} error={props.error}/>}
     </main>
   )
 }

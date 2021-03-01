@@ -10,3 +10,8 @@ header {
   margin-left: 2vw;
   margin-top: 1vh;
 }
+
+.title {
+  margin-left: 50vw;
+  transform: translateX(-50%);
+}

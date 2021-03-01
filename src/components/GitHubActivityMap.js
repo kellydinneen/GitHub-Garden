@@ -10,7 +10,9 @@ require('dotenv').config();
 const GitHubActivityMap = (props) => {
   const [map, setMap] = useState(null);
   const [error, setError] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false)
   const [currentMarker, setCurrentMarker] = useState('');
+  const [geoError, setGeoError] = useState('')
 
 
   const colorKey = {
@@ -25,7 +27,7 @@ const GitHubActivityMap = (props) => {
   const fetchEvents = async () => {
     try {
       //?per_page=100
-      const result = await fetch('https://api.github.com/events', {
+      const result = await fetch('https://api.ithub.com/events', {
         headers: {
           authorization: `token ${process.env.REACT_APP_GH_KEY}`
         }
@@ -55,6 +57,7 @@ const GitHubActivityMap = (props) => {
     return userProfiles
   }
 
+
   const fetchUserLocations = async (users) => {
     const places = users.filter(profile => profile.userData.location)
       .map(profile => ({ location: profile.userData.location, eventType: profile.eventType }));
@@ -62,7 +65,6 @@ const GitHubActivityMap = (props) => {
     const coordsAndTypes = await Promise.all(
       places.map(async place => {
         try {
-          console.log('fetched')
           const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place.location}&key=${process.env.REACT_APP_GEO_KEY}`)
           const data = await result.json();
           const newPlace = {
@@ -71,7 +73,7 @@ const GitHubActivityMap = (props) => {
           }
           return newPlace
         } catch(err) {
-          setError(err)
+          setGeoError(err)
         }
       })
     )
@@ -97,18 +99,21 @@ const GitHubActivityMap = (props) => {
     let timer;
     const startMap = async () => {
       const fetchedEvents = await fetchEvents();
-      const fetchedUserProfiles = await fetchUserProfiles(fetchedEvents);
-      const coordsAndTypes = await fetchUserLocations(fetchedUserProfiles);
-      const markers = createMarkers(coordsAndTypes)
-      let index = 0;
-      timer = window.setInterval(() => {
-        if (index < markers.length) {
-          setCurrentMarker(markers[index]);
-          index++
-        } else {
-          clearInterval(timer)
-        }
-      }, 1300)
+      if (fetchedEvents) {
+        const fetchedUserProfiles = await fetchUserProfiles(fetchedEvents);
+        const coordsAndTypes = await fetchUserLocations(fetchedUserProfiles);
+        const markers = createMarkers(coordsAndTypes);
+        setIsLoaded(true);
+        let index = 0;
+        timer = window.setInterval(() => {
+          if (index < markers.length) {
+            setCurrentMarker(markers[index]);
+            index++
+          } else {
+            clearInterval(timer)
+          }
+        }, 1300)
+      }
     }
     startMap();
     return () => {
@@ -118,8 +123,10 @@ const GitHubActivityMap = (props) => {
 
   return (
     <>
+    {!isLoaded && !error && <div className="map-loader"></div>}
+    {isLoaded && <p> Real Time GitHub Events happening across the globe!</p>}
     <div className='github-activity-map-container'>
-      { error && <p>Oops we had an error</p> }
+      {error && <p className="error-text">Oops! Something went wrong.</p> }
       {!props.error &&
         <MapContainer
           center={[0, 0]}
@@ -135,8 +142,11 @@ const GitHubActivityMap = (props) => {
           {map && <Legend map={map}/>}
         </MapContainer>
       }
+      <div className="bottom-buffer">
+      </div>
     </div>
     </>
   )
 }
+
 export default GitHubActivityMap;
