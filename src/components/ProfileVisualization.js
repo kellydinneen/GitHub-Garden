@@ -11,7 +11,7 @@ const ProfileVisualization = (props) => {
   const [cleanUserData, setCleanUserData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
 
   const loadUser = async () => {
     try {
@@ -119,21 +119,26 @@ const ProfileVisualization = (props) => {
   useEffect(() => {
     const loadUserInformation = async () => {
       const userGitHub = await loadUser();
-      const usersRepos = await loadRepos();
-      const filteredByContributorUserRepos = await fetchRepoContributor(userGitHub, usersRepos);
-      const branchNames = await getBranchNames(filteredByContributorUserRepos)
-      const languages = await getLanguages(filteredByContributorUserRepos);
-      const lifespans = getLifespans(filteredByContributorUserRepos);
-      const consolidatedData = consolidateData(filteredByContributorUserRepos, branchNames, lifespans, languages);
-      setCleanUserData(consolidatedData);
-      setTimeout(() => {setIsLoaded(true)}, 4000);
+      if (!userGitHub.message) {
+        const usersRepos = await loadRepos();
+        const filteredByContributorUserRepos = await fetchRepoContributor(userGitHub, usersRepos);
+        const branchNames = await getBranchNames(filteredByContributorUserRepos)
+        const languages = await getLanguages(filteredByContributorUserRepos);
+        const lifespans = getLifespans(filteredByContributorUserRepos);
+        const consolidatedData = consolidateData(filteredByContributorUserRepos, branchNames, lifespans, languages);
+        setCleanUserData(consolidatedData);
+        setTimeout(() => {setIsLoaded(true)}, 4000);
+      } else {
+        await setError(true)
+        setIsLoaded(true)
+      }
     }
     loadUserInformation();
   }, [])
 
   return (
     <main>
-      {!isLoaded && <ProfileLoader />}
+      {!isLoaded && <ProfileLoader user={props.userNameToSearch} />}
       {error && <ErrorPage />}
       {isLoaded && !error &&
       <>
@@ -147,9 +152,9 @@ const ProfileVisualization = (props) => {
           {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
         </section>
       </>}
-      <div class="slideout-color-key-toggler">
-      <h3 class="slideout-key_heading">Color Key</h3>
-      <article class="slideout-color-key_inner">
+      <div className="slideout-color-key-toggler">
+      <h3 className="slideout-key_heading">Color Key</h3>
+      <article className="slideout-color-key_inner">
         <section className="color-key-set">
           <svg className="color-key-seed" viewBox="-150 -150 300 150">
             <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#DE2016" />

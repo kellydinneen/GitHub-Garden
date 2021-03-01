@@ -1,9 +1,14 @@
 import React from 'react';
 import './ErrorPage.css'
+import deadPlants from './deadplants.png'
 
-const ErrorPage = () => {
+const ErrorPage = (props) => {
+  console.log(props)
   return(
-    <p>Uh oh, this user doesn't exist</p>
+    <>
+      <p className="error-message">We couldn't find a profile for {props.user}.</p>
+      <img className="dead-garden" src={deadPlants} alt="A sad wilting flower"></img>
+    </>
   )
 }
 

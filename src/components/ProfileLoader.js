@@ -1,10 +1,11 @@
 import React from 'react';
-import './ProfileLoader.css'
+import './ProfileLoader.css';
+import wateringCan from './watering-can.png';
 
 const ProfileLoader = () => {
   return (
     <>
-      <img src="./watering-can.png" alt="A lovely little watering can." className="watering-can"></img>
+      <img src={wateringCan} alt="A lovely little watering can." className="watering-can"></img>
       <div className="rain">
         <div className="droplet d1"></div>
         <div className="droplet d2"></div>
