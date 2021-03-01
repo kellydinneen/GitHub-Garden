@@ -25,6 +25,46 @@
   }
 }
 
-.my-button {
-  z-index: 9999;
+.map-loader {
+  min-height: 10px;
+  width: 95vw;
+  background: rgb(112,255,0);
+  background: linear-gradient(90deg, lightgrey 0%, #3F6422 100%);
+  animation: slide 1.5s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    background: linear-gradient(90deg, lightgrey 0%, #3F6422 100%);
+  }
+  10% {
+    background: linear-gradient(90deg, #3F6422 0%, lightgrey 10%, #3F6422 100%);
+  }
+  20% {
+    background: linear-gradient(90deg, #3F6422 0%, lightgrey 20%, #3F6422 100%);
+  }
+  30% {
+    background: linear-gradient(90deg, #3F6422 0%, lightgrey 30%, #3F6422 100%);
+  }
+  40% {
+    background: linear-gradient(90deg, #3F6422 0%, lightgrey 40%, #3F6422 100%);
+  }
+  50% {
+    background: linear-gradient(90deg, #3F6422 0%, lightgrey 50%, #3F6422 100%);
+  }
+  60% {
+    background: linear-gradient(90deg, #3F6422 0%, lightgrey 60%, #3F6422 100%);
+  }
+  70% {
+    background: linear-gradient(90deg, #3F6422 0%, lightgrey 70%, #3F6422 100%);
+  }
+  80% {
+    background: linear-gradient(90deg, #3F6422 0%, lightgrey 90%, #3F6422 100%);
+  }
+  90% {
+    background: linear-gradient(90deg, #3F6422 0%, lightgrey 90%, #3F6422 100%);
+  }
+  100% {
+    background: linear-gradient(90deg, #3F6422 0%, #3F6422 100%);
+  }
 }

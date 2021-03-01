@@ -10,7 +10,9 @@ require('dotenv').config();
 const GitHubActivityMap = (props) => {
   const [map, setMap] = useState(null);
   const [error, setError] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false)
   const [currentMarker, setCurrentMarker] = useState('');
+  const [geoError, setGeoError] = useState('')
 
 
   const colorKey = {
@@ -71,7 +73,7 @@ const GitHubActivityMap = (props) => {
           }
           return newPlace
         } catch(err) {
-          setError(err)
+          setGeoError(err)
         }
       })
     )
@@ -99,7 +101,8 @@ const GitHubActivityMap = (props) => {
       const fetchedEvents = await fetchEvents();
       const fetchedUserProfiles = await fetchUserProfiles(fetchedEvents);
       const coordsAndTypes = await fetchUserLocations(fetchedUserProfiles);
-      const markers = createMarkers(coordsAndTypes)
+      const markers = createMarkers(coordsAndTypes);
+      setIsLoaded(true);
       let index = 0;
       timer = window.setInterval(() => {
         if (index < markers.length) {
@@ -118,8 +121,9 @@ const GitHubActivityMap = (props) => {
 
   return (
     <>
+    {!isLoaded && <div className="map-loader"></div>}
     <div className='github-activity-map-container'>
-      { error && <p>Oops we had an error</p> }
+      {error && <p>Oops we had an error</p> }
       {!props.error &&
         <MapContainer
           center={[0, 0]}
