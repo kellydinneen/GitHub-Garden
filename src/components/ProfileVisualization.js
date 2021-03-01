@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Garden from './Garden.js';
+import ProfileLoader from './ProfileLoader'
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
 
 const ProfileVisualization = (props) => {
   const [userGitHubData, setUserGitHubData] = useState('')
   const [cleanUserData, setCleanUserData] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
   const [error, setError] = useState('');
 
@@ -122,22 +124,27 @@ const ProfileVisualization = (props) => {
       const languages = await getLanguages(filteredByContributorUserRepos);
       const lifespans = getLifespans(filteredByContributorUserRepos);
       const consolidatedData = consolidateData(filteredByContributorUserRepos, branchNames, lifespans, languages);
-      setCleanUserData(consolidatedData)
+      setCleanUserData(consolidatedData);
+      setTimeout(() => {setIsLoaded(true)}, 5000);
     }
     loadUserInformation();
   }, [])
 
   return (
     <main>
-      <section className='gardener-info'>
-        <a href={userGitHubData.html_url}>
-          <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
-        </a>
-        <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
-      </section>
-      <section className="user-visualizations-box">
-        {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
-      </section>
+      {!isLoaded && <ProfileLoader />}
+      {isLoaded &&
+      <>
+        <section className='gardener-info'>
+          <a href={userGitHubData.html_url}>
+            <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
+          </a>
+          <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
+        </section>
+        <section className="user-visualizations-box">
+          {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
+        </section>
+      </>}
       <div class="slideout-color-key-toggler">
       <h3 class="slideout-key_heading">Color Key</h3>
       <article class="slideout-color-key_inner">
