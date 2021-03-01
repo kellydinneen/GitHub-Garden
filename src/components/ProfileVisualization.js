@@ -127,25 +127,94 @@ const ProfileVisualization = (props) => {
     loadUserInformation();
   }, [])
 
-  // <svg className="soil-line-one" viewBox="0 0 2000 500">
-  //   <path d='M0,400 C100,300 150,450 200,410 C250,370 270,420 370,410 C450,370 470,420 480,360 C500,370 520,420 560,400 C600,370 620,420 660,400 C700,370 720,420 760,400 C800,300 850,450 900,410 C950,370 970,420 980,360 C1050,370 1070,420 1080,360 C1200,370 1220,420 1260,400 C1300,300 1350,450 1400,410 C1450,370 1470,420 1570,410 C1650,370 1670,420 1680,360 C1750,370 1770,420 1780,360 C1800,370 1820,420 1860,400 C1900,300 1950,450 2000,410'  stroke='grey' fill='none' stroke-width='3px'/>
-  // </svg>
-  // <svg className="soil-line-two" viewBox="0 0 2000 500">
-  //   <path d='M0,400 C100,300 150,450 200,410 C250,370 270,420 370,410 C450,370 470,420 480,360 C500,370 520,420 560,400 C600,370 620,420 660,400 C700,370 720,420 760,400 C800,300 850,450 900,410 C950,370 970,420 980,360 C1050,370 1070,420 1080,360 C1200,370 1220,420 1260,400 C1300,300 1350,450 1400,410 C1450,370 1470,420 1570,410 C1650,370 1670,420 1680,360 C1750,370 1770,420 1780,360 C1800,370 1820,420 1860,400 C1900,300 1950,450 2000,410'  stroke='grey' fill='none' stroke-width='3px'/>
-  // </svg>
-  // <svg className="soil-line-three" viewBox="0 0 2000 500">
-  //   <path d='M0,400 C100,300 150,450 200,410 C250,370 270,420 370,410 C450,370 470,420 480,360 C500,370 520,420 560,400 C600,370 620,420 660,400 C700,370 720,420 760,400 C800,300 850,450 900,410 C950,370 970,420 980,360 C1050,370 1070,420 1080,360 C1200,370 1220,420 1260,400 C1300,300 1350,450 1400,410 C1450,370 1470,420 1570,410 C1650,370 1670,420 1680,360 C1750,370 1770,420 1780,360 C1800,370 1820,420 1860,400 C1900,300 1950,450 2000,410'  stroke='grey' fill='none' stroke-width='3px'/>
-  // </svg>
-
   return (
     <main>
-      <h1>{userGitHubData.name || `@${userGitHubData.login}`}</h1>
-      <a href={userGitHubData.html_url}>
-        <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
-      </a>
+      <section className='gardener-info'>
+        <a href={userGitHubData.html_url}>
+          <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
+        </a>
+        <h1>The Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
+      </section>
       <section className="user-visualizations-box">
         {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
       </section>
+      <div class="slideout-color-key-toggler">
+      <h3 class="slideout-key_heading">Color Key</h3>
+      <article class="slideout-color-key_inner">
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#DE2016" />
+          </svg>
+          <p className="color-key-language">Javascript</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#FF3EAA" />
+          </svg>
+          <p className="color-key-language">HTML</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#FCD732" />
+          </svg>
+          <p className="color-key-language">CSS</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#26369E" />
+          </svg>
+          <p className="color-key-language">SCSS</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#F19233" />
+          </svg>
+          <p className="color-key-language">Java</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
+          </svg>
+          <p className="color-key-language">Objective-C</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
+          </svg>
+          <p className="color-key-language">C++</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#76678C" />
+          </svg>
+          <p className="color-key-language">Python</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
+          </svg>
+          <p className="color-key-language">Java</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
+          </svg>
+          <p className="color-key-language">Objective-C</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
+          </svg>
+          <p className="color-key-language">C++</p>
+        </section>
+        <section className="color-key-set">
+          <svg className="color-key-seed" viewBox="-150 -150 300 150">
+            <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
+          </svg>
+          <p className="color-key-language">Python</p>
+        </section>
+      </article>
+    </div>
       <input
         aria-label="Search bar for GitHub users"
         className="search-bar"
