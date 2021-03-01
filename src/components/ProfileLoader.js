@@ -4,7 +4,7 @@ import './ProfileLoader.css'
 const ProfileLoader = () => {
   return (
     <>
-      <div className="watering-can"></div>
+      <img src="./watering-can.png" alt="A lovely little watering can." className="watering-can"></img>
       <div className="rain">
         <div className="droplet d1"></div>
         <div className="droplet d2"></div>

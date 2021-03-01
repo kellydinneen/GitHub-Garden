@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Garden from './Garden.js';
+import ErrorPage from './ErrorPage'
 import ProfileLoader from './ProfileLoader'
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
@@ -133,7 +134,8 @@ const ProfileVisualization = (props) => {
   return (
     <main>
       {!isLoaded && <ProfileLoader />}
-      {isLoaded &&
+      {error && <ErrorPage />}
+      {isLoaded && !error &&
       <>
         <section className='gardener-info'>
           <a href={userGitHubData.html_url}>
