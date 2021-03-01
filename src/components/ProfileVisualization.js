@@ -14,6 +14,7 @@ const ProfileVisualization = (props) => {
     try {
       const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}`);
       const userData = await userPromise.json();
+      console.log(userData)
       setUserGitHubData(userData);
       return userData;
     } catch (err) {
@@ -39,6 +40,7 @@ const ProfileVisualization = (props) => {
         try {
           const contributorsPromise = await pvAPI.fetchGitHubData(`${repo.contributors_url}`);
           const contributorsList = await contributorsPromise.json();
+          console.log('CONTRIBUT',contributorsList);
           const contributorNames = contributorsList.map(person => person.login);
           return contributorNames.includes(userName);
         } catch(err) {
@@ -66,6 +68,7 @@ const ProfileVisualization = (props) => {
         try {
           const languagesPromise = await pvAPI.fetchGitHubData(`${repo.url}/languages`);
           const languagesData = await languagesPromise.json();
+          console.log('LANG',languagesData);
           const languagesList = [];
           let languageLines = 0;
           for (let language in languagesData) {
@@ -88,6 +91,7 @@ const ProfileVisualization = (props) => {
         try {
           const branchesPromise = await pvAPI.fetchGitHubData(`https://api.github.com/repos/${props.userNameToSearch}/${repo.name}/branches`);
           const branches = await branchesPromise.json();
+          console.log('BRANCH',branches);
           return branches
         } catch(err) {
           setError(err)
@@ -130,10 +134,10 @@ const ProfileVisualization = (props) => {
   return (
     <main>
       <section className='gardener-info'>
-        <a href={userGitHubData.html_url}>
+        <a className="user-profile-pic" href={userGitHubData.html_url}>
           <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
         </a>
-        <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
+        <h1 className='gh-user-name'>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
       </section>
       <section className="user-visualizations-box">
         {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
