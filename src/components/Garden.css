@@ -1,8 +1,8 @@
 .flowerbed {
-  border: dashed 2px black;
-  overflow: scroll;
+  height: 55vh;
+  position: absolute;
+  left: -1450px;
 }
 
 .flower-head {
-  border: dashed 2px black;
 }

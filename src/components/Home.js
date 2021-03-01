@@ -20,7 +20,7 @@ const Home = (props) => {
       <Link to={{
         pathname:`/visualizations/${user}`
       }}>
-        <button>Search</button>
+        <button onClick={() => props.setHome(false)}>Search</button>
       </Link>
       {!clicked && <button onClick={() => setClicked(true)}>Start demo!</button>}
       {clicked &&<GitHubActivityMap globalGitHubData={props.globalGitHubData} error={props.error}/>}
