@@ -12,6 +12,11 @@
   animation-fill-mode: forwards;
 }
 
+.bottom-buffer {
+  width: 100%;
+  height: 200px;
+}
+
 @keyframes circle {
   0% {
     stroke-width: 0;

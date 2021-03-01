@@ -27,7 +27,7 @@ const GitHubActivityMap = (props) => {
   const fetchEvents = async () => {
     try {
       //?per_page=100
-      const result = await fetch('https://api.github.com/events', {
+      const result = await fetch('https://api.ithub.com/events', {
         headers: {
           authorization: `token ${process.env.REACT_APP_GH_KEY}`
         }
@@ -115,7 +115,7 @@ const GitHubActivityMap = (props) => {
         }, 1300)
       }
     }
-    // startMap();
+    startMap();
     return () => {
       window.clearInterval(timer)
     }
@@ -142,6 +142,8 @@ const GitHubActivityMap = (props) => {
           {map && <Legend map={map}/>}
         </MapContainer>
       }
+      <div className="bottom-buffer">
+      </div>
     </div>
     </>
   )
