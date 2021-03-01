@@ -6,22 +6,38 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  animation: water 3s linear infinite;
+  animation: water 4s linear infinite;
 }
 
 .rain {
-  width: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  width: 80px;
+  height: 200px;
+  border: 1px solid red;
+}
+
+.droplet {
   background-color: cornflowerblue;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  animation: rain 4s linear infinite;
+}
+
+@keyframes rain {
+  
 }
 
 @keyframes water {
   0% {
     transform: rotate(0deg);
   }
-  50% {
-    transform: rotate(110deg);
+  25% {
+    transform: rotate(120deg);
   }
   100% {
-    transform: rotate(110deg);
+    transform: rotate(120deg);
   }
 }
