@@ -1,10 +1,17 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import './Header.css';
+import home from './greenhouse-outline.png'
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header>
-      <h1 className='title'>GitHub Garden</h1>
+      {props.home && <h1 className='title'>GitHub Garden</h1>}
+      {!props.home &&
+        <Link to='/'>
+        <img onClick={() => props.setHome(true)} className='home-icon' src={home}/>
+        </Link>
+      }
     </header>
   )
 }
