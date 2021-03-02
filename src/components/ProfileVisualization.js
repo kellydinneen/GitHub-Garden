@@ -133,7 +133,7 @@ const ProfileVisualization = (props) => {
         setCleanUserData(consolidatedData);
         setTimeout(() => {setIsLoaded(true)}, 4000);
       } else {
-        await setGitHubError(true)
+        setGitHubError(true)
         setIsLoaded(true)
       }
     }
