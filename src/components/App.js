@@ -18,8 +18,8 @@ const App = () => {
             path="/"
             render={() => (
               <>
-                <Header home={true} setHome={setHome}/>
-                <Home />
+                <Header />
+                <Home home={true} setHome={setHome}/>
               </>
             )}
           />
