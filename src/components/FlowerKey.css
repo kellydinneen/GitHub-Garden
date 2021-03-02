@@ -1,0 +1,23 @@
+.flower-key-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.key-annotations {
+  width: 35vw;
+  height: 40vh;
+  margin-right: 50px;
+}
+
+p {
+  font-size: 1rem;
+}
+
+.flower-key {
+  width: 550px;
+  height: 550px;
+}
+
+.svg-clicker {
+  cursor: pointer;
+}

@@ -4,6 +4,7 @@ import Garden from './Garden.js';
 import ErrorPage from './ErrorPage'
 import ProfileLoader from './ProfileLoader'
 import ColorKey from './ColorKey'
+import FlowerKey from './FlowerKey'
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
 import gardenHat from './hat.png'
@@ -155,9 +156,9 @@ const ProfileVisualization = (props) => {
         </section>
       </>}
       <div className="slideout-color-key-toggler">
-      <h3 className="slideout-key_heading">Color Key</h3>
-      <ColorKey />
-    </div>
+        <h3 className="slideout-key_heading">Color Key</h3>
+        <ColorKey />
+      </div>
     </main>
   )
 }
