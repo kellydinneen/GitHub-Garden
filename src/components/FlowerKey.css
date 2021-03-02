@@ -14,11 +14,10 @@ p {
 }
 
 .flower-key {
-  /* margin-left: 30px; */
   width: 550px;
   height: 550px;
 }
 
-.flower-head-key {
-  filter: brightness(150%);
+.svg-clicker {
+  cursor: pointer;
 }

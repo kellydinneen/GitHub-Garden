@@ -83,7 +83,7 @@
 
   .slideout-color-key-toggler:hover {
     bottom: 60vh;
-    cursor: pointer;
+    cursor: crosshair;
   }
   .slideout-color-key-toggler:hover .slideout-color-key_inner {
     bottom: 0;
