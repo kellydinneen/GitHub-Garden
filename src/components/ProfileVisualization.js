@@ -128,7 +128,7 @@ const ProfileVisualization = (props) => {
         const lifespans = getLifespans(filteredByContributorUserRepos);
         const consolidatedData = consolidateData(filteredByContributorUserRepos, branchNames, lifespans, languages);
         setCleanUserData(consolidatedData);
-        setTimeout(() => {setIsLoaded(true)}, 4000);
+        setTimeout(() => {setIsLoaded(true)}, 40000);
       } else {
         await setError(true)
         setIsLoaded(true)

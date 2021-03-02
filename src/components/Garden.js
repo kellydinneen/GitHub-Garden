@@ -69,6 +69,13 @@ const Garden = (props) => {
       "SCSS":'#26369E',
       "Python":'#76678C',
       "Java":'#F19233',
+      "TypeScript": '#40E0D0',
+      "C#":'#6495ED',
+      "PHP":'#DFFF00',
+      "C++": '#FFBF00',
+      "C": '#DE3163',
+      "Shell": '#FF00FF',
+      "Ruby": '#800080',
       "none": 'none'
       }
 
