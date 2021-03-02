@@ -1,0 +1,14 @@
+.flower-key-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.key-annotations {
+  width: 30vw;
+  height: 40vh;
+}
+
+.flower-key {
+  width: 50vw;
+  height: 50vh;
+}
