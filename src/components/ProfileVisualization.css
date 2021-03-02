@@ -104,9 +104,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 75px;
+    width: 85px;
     margin-top: 0;
-    margin-right: 5px;
+    margin-right: 2px;
+    margin-left: 2px;
   }
 
   .color-key-language {

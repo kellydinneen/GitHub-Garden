@@ -87,6 +87,15 @@ const Garden = (props) => {
       .attr('x', (d, i) => i * 200 - 50)
       .attr('y', d => yStemScale(d.lifespan) - 175)
 
+      flowerBed.selectAll('circle')
+        .data(repositories).enter().append('circle')
+        .attr('r', 15)
+        .attr('cx', (d, i) => 100 + i * 200)
+        .attr('cy', d => yStemScale(d.lifespan) - 20)
+        .attr('stroke-width', 1)
+        .attr('stroke', 'blue')
+        .attr('fill', 'blue')
+
     const petalLayer = flowerPositionBox.selectAll('.petal-layer')
       .data((d) => [
           {
@@ -119,15 +128,6 @@ const Garden = (props) => {
       .attr('fill', d => d.color)
       .attr('d', d => d.path)
       .attr('transform', (d,i) => `rotate(${d.petalRotationStart + i * 120 || 0})scale(${d.scale})`)
-
-    flowerBed.selectAll('circle')
-      .data(repositories).enter().append('circle')
-      .attr('r', 15)
-      .attr('cx', (d, i) => 100 + i * 200)
-      .attr('cy', d => yStemScale(d.lifespan) - 20)
-      .attr('stroke-width', 1)
-      .attr('stroke', 'blue')
-      .attr('fill', 'blue')
 
       flowerBed.selectAll('.repoName')
         .data(repositories).enter()
