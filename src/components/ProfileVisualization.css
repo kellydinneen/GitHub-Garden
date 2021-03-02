@@ -46,9 +46,6 @@
   border-right: 3vh solid transparent;
   border-bottom: 3vh solid black;
   padding: 50px 0px 20px 10px;
-  /* background: grey; */
-  /* border-radius: 0% 50% 50% 0%;
-  border-right: 2px solid #ffdbbc; */
   text-align: left;
   font-size: 10px;
   color: #ffdbbc;
@@ -61,13 +58,14 @@
 }
 
   .slideout-color-key_inner {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    /* display: flex;
+     */
+    /* justify-content: center;
+    align-items: flex-start; */
     position: fixed;
-    bottom: -8vh;
+    bottom: -57vh;
     left: 0;
-    height: 2vh;
+    height: 60vh;
     width: 100vw;
     background: black;
     padding: 25px;
@@ -84,11 +82,17 @@
   }
 
   .slideout-color-key-toggler:hover {
-    bottom: 7vh;
-    cursor: pointer;
+    bottom: 60vh;
+    cursor: crosshair;
   }
   .slideout-color-key-toggler:hover .slideout-color-key_inner {
     bottom: 0;
+  }
+
+  .color-keys {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
   }
 
   .color-key-seed {
@@ -100,9 +104,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 75px;
+    width: 85px;
     margin-top: 0;
-    margin-right: 5px;
+    margin-right: 2px;
+    margin-left: 2px;
   }
 
   .color-key-language {
