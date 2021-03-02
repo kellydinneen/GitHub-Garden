@@ -3,7 +3,7 @@ import './ColorKey.css';
 
 const ColorKey = () => {
   return (
-    <article className="slideout-color-key_inner">
+    <div className='color-pairs'>
       <section className="color-key-set">
         <svg className="color-key-seed" viewBox="-150 -150 300 150">
           <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#DE2016" />
@@ -88,7 +88,7 @@ const ColorKey = () => {
         </svg>
         <p className="color-key-language">C</p>
       </section>
-    </article>
+    </div>
   )
 }
 

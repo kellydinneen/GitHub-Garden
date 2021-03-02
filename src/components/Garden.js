@@ -6,7 +6,8 @@ const Garden = (props) => {
 
   const repositories = props.data;
 
-  const gardenWidth = 200 * repositories.length;
+  const gardenWidth = 100 * repositories.length;
+  const view = `0 0 ${200 * repositories.length + 100} 800`
 
   const drawGarden = () => {
     const flowerBed = d3.select('.flowerbed');
@@ -138,8 +139,8 @@ const Garden = (props) => {
         .attr('cx', (d, i) => 100 + i * 200)
         .attr('cy', d => yStemScale(d.lifespan) - 25)
         .attr('stroke-width', 1)
-        .attr('stroke', 'blue')
-        .attr('fill', 'blue')
+        .attr('stroke', '#DF83BA')
+        .attr('fill', '#DF83BA')
 
       flowerBed.selectAll('.repoName')
         .data(repositories).enter()
@@ -186,7 +187,7 @@ const Garden = (props) => {
   }, [])
 
   return (
-      <svg className='flowerbed' viewBox='0 0 2000 800' width={gardenWidth}></svg>
+      <svg className='flowerbed' viewBox={view} width={gardenWidth}></svg>
   )
 }
 

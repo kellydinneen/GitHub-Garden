@@ -24,12 +24,13 @@
 
   .slideout-color-key_inner {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     position: fixed;
-    bottom: -8vh;
+    bottom: -68vh;
     left: 0;
-    height: 2vh;
+    height: 70vh;
     width: 100vw;
     background: black;
     padding: 25px;
@@ -51,6 +52,10 @@
   }
   .slideout-color-key-toggler:hover .slideout-color-key_inner {
     bottom: 0;
+  }
+
+  .color-pairs {
+    display: flex;
   }
 
   .color-key-seed {
