@@ -13,23 +13,6 @@ const Header = (props) => {
           <Link className='home-button' to='/'>
           <img className='home-icon' src={home}/>
           </Link>
-          <div className="search-wrapper">
-            <input
-              aria-label="Search bar for GitHub users"
-              className="search-bar"
-              placeholder="Enter a GitHub username"
-              value={props.userNameToSearch}
-              onChange={event => setUser(event.target.value)}>
-            </input>
-            <Link to={{
-              pathname:`/visualizations/${user}`
-            }}>
-              <button
-                className="search-btn"
-                onClick={() => props.setUserChanged(true)}>Grow
-              </button>
-            </Link>
-          </div>
         </>
       }
     </header>
