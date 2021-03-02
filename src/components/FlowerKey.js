@@ -82,12 +82,12 @@ const FlowerKey = (props) => {
           <path d='M0,250 L-5,310' stroke="white" fill="none"/>
           <path d='M0,250 L100,300' stroke="white" fill="none"/>
         </svg>
-          <path  d='M130,120 L170,120 L170,250 L130,250' stroke="green" stroke-dasharray="4 2" fill="none"/>
-          <path  id="primary-lang" d='M31,-73 L310,-73' stroke="green" stroke-dasharray="4 2" fill="none"/>
-          <path  id="secondary-lang" d='M95,-30 L310,-30' stroke="green" stroke-dasharray="4 2" fill="none"/>
-          <path  id="tertiary-lang" d='M97,30 L310,30' stroke="green" stroke-dasharray="4 2" fill="none"/>
-          <path  d='M-100,320 L-100,350 L100,350 L100,320' stroke="green" stroke-dasharray="4 2" fill="none"/>
-          <path  d='M-125,-150 L-150,-150 L-150,120 L-125,120' stroke="green" stroke-dasharray="4 2" fill="none"/>
+          <path  d='M130,120 L170,120 L170,250 L130,250' stroke="green" strokeDasharray="4 2" fill="none"/>
+          <path  id="primary-lang" d='M31,-73 L310,-73' stroke="green" strokeDasharray="4 2" fill="none"/>
+          <path  id="secondary-lang" d='M95,-30 L310,-30' stroke="green" strokeDasharray="4 2" fill="none"/>
+          <path  id="tertiary-lang" d='M97,30 L310,30' stroke="green" strokeDasharray="4 2" fill="none"/>
+          <path  d='M-100,320 L-100,350 L100,350 L100,320' stroke="green" strokeDasharray="4 2" fill="none"/>
+          <path  d='M-125,-150 L-150,-150 L-150,120 L-125,120' stroke="green" strokeDasharray="4 2" fill="none"/>
           <path  id="active" d='M180,175 L240,175'/>
           <path  id="life" d='M180,190 L240,190'/>
           <path  id="branches" d='M-30,370 L50,370'/>
