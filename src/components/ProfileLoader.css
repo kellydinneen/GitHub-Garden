@@ -22,7 +22,11 @@
   position: relative;
   margin-left: 20px;
   width: 120px;
-  height: 400px;
+  min-height: 400px;
+  background-image: url('./sprout.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 0 90%;
 }
 
 .droplet {

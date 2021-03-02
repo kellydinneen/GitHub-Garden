@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Garden from './Garden.js';
 import ErrorPage from './ErrorPage'
 import ProfileLoader from './ProfileLoader'
+import ColorKey from './ColorKey'
 import FlowerKey from './FlowerKey'
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
@@ -144,13 +145,10 @@ const ProfileVisualization = (props) => {
       {error && <ErrorPage user={props.userNameToSearch} message={"We couldn't find a profile for"}/>}
       {isLoaded && !error &&
       <>
-        <section className="gardener-info">
-          <div className="gardener-wrapper">
-            <a href={userGitHubData.html_url}>
-              <img className="user-profile-pic" src={userGitHubData.avatar_url}></img>
-              <img className="user-hat" src={gardenHat} alt="A gardener's hat"></img>
-            </a>
-          </div>
+        <section className='gardener-info'>
+          <a href={userGitHubData.html_url} target="_blank">
+            <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
+          </a>
           <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
         </section>
         <section className="user-visualizations-box">
@@ -158,85 +156,9 @@ const ProfileVisualization = (props) => {
         </section>
       </>}
       <div className="slideout-color-key-toggler">
-      <h3 className="slideout-key_heading">Color Key</h3>
-      <article className="slideout-color-key_inner">
-        <div className='color-keys'>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#DE2016" />
-            </svg>
-            <p className="color-key-language">Javascript</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#FF3EAA" />
-            </svg>
-            <p className="color-key-language">HTML</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#FCD732" />
-            </svg>
-            <p className="color-key-language">CSS</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#26369E" />
-            </svg>
-            <p className="color-key-language">SCSS</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#F19233" />
-            </svg>
-            <p className="color-key-language">Java</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
-            </svg>
-            <p className="color-key-language">Objective-C</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
-            </svg>
-            <p className="color-key-language">C++</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="#76678C" />
-            </svg>
-            <p className="color-key-language">Python</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
-            </svg>
-            <p className="color-key-language">Java</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
-            </svg>
-            <p className="color-key-language">Objective-C</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
-            </svg>
-            <p className="color-key-language">C++</p>
-          </section>
-          <section className="color-key-set">
-            <svg className="color-key-seed" viewBox="-150 -150 300 150">
-              <path d='M0,-150 C30,-110 40,-80 0,0 C-40,-80 -30,-110 0,-150' fill="white" />
-            </svg>
-            <p className="color-key-language">Python</p>
-          </section>
-        </div>
-        <FlowerKey user={props.userNameToSearch}/>
-      </article>
-    </div>
+        <h3 className="slideout-key_heading">Color Key</h3>
+        <ColorKey />
+      </div>
     </main>
   )
 }

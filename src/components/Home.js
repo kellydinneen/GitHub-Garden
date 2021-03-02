@@ -10,20 +10,20 @@ const Home = (props) => {
 
   return (
     <main>
-    <div className="search-wrapper">
-      <input
-        aria-label="Search bar for GitHub users"
-        className="search-bar"
-        placeholder="Enter a GitHub username"
-        value={props.userNameToSearch}
-        onChange={event => setUser(event.target.value)}>
-      </input>
-      <Link to={{
-        pathname:`/visualizations/${user}`
-      }}>
-        <button className="search-btn" onClick={() => props.setHome(false)}>Grow</button>
-      </Link>
-    </div>
+      <div className="search-wrapper">
+        <input
+          aria-label="Search bar for GitHub users"
+          className="search-bar"
+          placeholder="Enter a GitHub username"
+          value={props.userNameToSearch}
+          onChange={event => setUser(event.target.value)}>
+        </input>
+        <Link to={{
+          pathname:`/visualizations/${user}`
+        }}>
+          <button className="search-btn" onClick={() => props.setHome(false)}>Grow</button>
+        </Link>
+      </div>
       {!clicked && <h2 className="or">OR</h2>}
       {!clicked && <button className="map-btn" onClick={() => setClicked(true)}>
         Watch seeds get planted across the world.
