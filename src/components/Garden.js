@@ -41,7 +41,7 @@ const Garden = (props) => {
         .append('path')
         .attr('class','stem')
         .attr('id', (d, i) => `myStem${i}`)
-        .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
+        .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
         .attr('transform', (d, i) => `translate(${100 + i * 200},0)`)
         .attr('stroke-width', 5)
         .attr('stroke', 'green')
@@ -50,10 +50,10 @@ const Garden = (props) => {
       const animate = () => {
         flowerBed.selectAll('.stem')
           .transition().duration(2000)
-          .attr('d', d => `M0,600 C -20 ${yStemScale(d.lifespan)}, 20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
+          .attr('d', d => `M0,600 C -20 ${yStemScale(d.lifespan)}, 20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
             .attr('stroke', 'green')
           .transition().duration(2000)
-          .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
+          .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
           .on("end", animate)
       }
       animate();
