@@ -16,13 +16,14 @@ const GitHubActivityMap = (props) => {
 
 
   const colorKey = {
-    PushEvent: 'red',
-    CreateEvent: 'orange',
-    PublicEvent: 'blue',
-    WatchEvent: 'green',
-    IssueCommentEvent: 'purple',
-    PullRequestEvent: 'cornflowerblue'
+    PushEvent: '#FF8C00',
+    CreateEvent: '#00BFFF',
+    PublicEvent: '#00FF00',
+    WatchEvent: '#FF00FF',
+    IssueCommentEvent: '#6495ED',
+    PullRequestEvent: '#FFFF54'
   }
+
 
   const fetchEvents = async () => {
     try {

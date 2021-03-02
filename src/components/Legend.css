@@ -17,30 +17,30 @@ p {
   font-size: 1.2rem;
 }
 
-.red {
-  color: red;
+.push {
+  color: #FF8C00;
 }
 
-.white {
+.other {
   color: white;
 }
 
-.orange {
-  color: orange;
+.public {
+  color: #00FF00;
 }
 
-.blue {
-  color: blue;
+.watch {
+  color: #FF00FF;
 }
 
-.green {
-  color: green;
+.issue {
+  color: #6495ED;
 }
 
-.purple {
-  color: purple;
+.pull {
+  color: #FFFF54;
 }
 
-.cornflowerblue {
-  color: cornflowerblue;
+.create {
+  color: #00BFFF;
 }

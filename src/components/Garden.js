@@ -11,19 +11,19 @@ const Garden = (props) => {
 
   const drawGarden = () => {
     const colorsByLanguage = {
-      "JavaScript": '#DE2016',
-      "HTML": '#FF3EAA',
-      "CSS": '#FCD732',
-      "SCSS":'#26369E',
-      "Python":'#76678C',
-      "Java":'#F19233',
-      "Swift": '#DF83BA',
-      "TypeScript": '#40E0D0',
-      "C#":'#6495ED',
-      "PHP":'#DFFF00',
-      "C++": '#FFBF00',
-      "C": '#DE3163',
-      "Shell": '#FF00FF',
+      "JavaScript": '#FF8C00',
+      "HTML": '#FF1493',
+      "CSS": '#A62A2A',
+      "SCSS": '#FFFF54',
+      "Python": '#FF00FF',
+      "Java": '#00BFFF',
+      "Swift": '#00FF00',
+      "TypeScript": '#7FFFD4',
+      "C#": '#D2B48C',
+      "PHP": '#000080',
+      "C++": '#800000',
+      "C": '#228B22',
+      "Shell": '#2F4F4F',
       "Ruby": '#800080',
       "none": 'none'
     }
@@ -147,8 +147,8 @@ const Garden = (props) => {
         .attr('cx', (d, i) => 100 + i * 200)
         .attr('cy', d => yStemScale(d.lifespan) - 25)
         .attr('stroke-width', 1)
-        .attr('stroke', '#DF83BA')
-        .attr('fill', '#DF83BA')
+        .attr('stroke', '#0000FF')
+        .attr('fill', '#0000FF')
 
       const rootBox = flowerBed.selectAll('.root-box')
         .data(repositories).enter().append('svg')
