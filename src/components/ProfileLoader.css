@@ -1,8 +1,8 @@
 .watering-can {
   margin-top: 30px;
   margin-bottom: 10px;
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 600px;
   animation: water 4s linear infinite;
 }
 
@@ -11,10 +11,10 @@
     transform: rotate(0deg);
   }
   25% {
-    transform: rotate(120deg);
+    transform: rotate(100deg);
   }
   100% {
-    transform: rotate(120deg);
+    transform: rotate(100deg);
   }
 }
 
@@ -23,10 +23,15 @@
   margin-left: 20px;
   width: 120px;
   min-height: 400px;
-  background-image: url('./sprout.png');
-  background-size: 100%;
+  /* background-image: url('./sprout_2.png'); */
+  /* background-size: 100%;
   background-repeat: no-repeat;
-  background-position: 0 90%;
+  background-position: 0 90%; */
+}
+
+.sprout{
+  height: 250px;
+  margin-top: -350px;
 }
 
 .droplet {
