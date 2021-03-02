@@ -39,14 +39,14 @@ main {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding-bottom: 6px;
+  padding-bottom: 20px;
   background-color: #3F6422;
   color: #EFEFEF;
   font-size: 1.2rem;
   margin-top: 5vh;
   width: 90vw;
   max-width: 500px;
-  min-height: 30vh;
+  min-height: 31vh;
   background-image: url('./farming.svg');
   background-position: center;
   background-size: 50%;
