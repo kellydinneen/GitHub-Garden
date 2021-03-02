@@ -2,13 +2,13 @@ header {
   display: flex;
   justify-content: space-between;
   height: 7vh;
-  width: 100%;
+  width: 98vw;
   margin: 0;
   text-align: center;
   margin-bottom: 20px;
-  padding-right: 2vw;
+  padding-right: 1vw;
   padding-top: 1vh;
-  padding-left: 2vw;
+  padding-left: 1vw;
 }
 .home-button {
   margin-left: 2vw;

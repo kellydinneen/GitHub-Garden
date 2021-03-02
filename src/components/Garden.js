@@ -136,7 +136,7 @@ const Garden = (props) => {
         .data(repositories).enter().append('circle')
         .attr('r', d => 15 * flowerCenterScale(d.languages[d.languages.length - 1]))
         .attr('cx', (d, i) => 100 + i * 200)
-        .attr('cy', d => yStemScale(d.lifespan) - 20)
+        .attr('cy', d => yStemScale(d.lifespan) - 25)
         .attr('stroke-width', 1)
         .attr('stroke', 'blue')
         .attr('fill', 'blue')
