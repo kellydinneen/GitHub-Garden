@@ -1,10 +1,6 @@
 .user-profile-pic {
-  position: absolute;
-  top: 90px;
-  left: 100px;
   height: 100px;
   border-radius: 50%;
-  z-index: -1;
 }
 .user-visualizations-box {
   width: 100%;
@@ -21,17 +17,4 @@
   align-items: center;
   align-content: center;
   text-align: center;
-  margin-top: 20px;
-}
-
-.gardener-wrapper {
-  margin-top: -50px;
-  position: relative;
-  width: 300px;
-  height: 200px;
-}
-
-.user-hat {
-  width: 150px;
-  height: 150px;
 }

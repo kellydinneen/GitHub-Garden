@@ -144,13 +144,10 @@ const ProfileVisualization = (props) => {
       {error && <ErrorPage user={props.userNameToSearch} message={"We couldn't find a profile for"}/>}
       {isLoaded && !error &&
       <>
-        <section className="gardener-info">
-          <div className="gardener-wrapper">
-            <a href={userGitHubData.html_url}>
-              <img className="user-profile-pic" src={userGitHubData.avatar_url}></img>
-              <img className="user-hat" src={gardenHat} alt="A gardener's hat"></img>
-            </a>
-          </div>
+        <section className='gardener-info'>
+          <a href={userGitHubData.html_url}>
+            <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
+          </a>
           <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
         </section>
         <section className="user-visualizations-box">
