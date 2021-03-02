@@ -1,14 +1,18 @@
 header {
+  display: flex;
+  justify-content: space-between;
   height: 7vh;
   width: 100%;
   margin: 0;
   text-align: center;
-  display: flex;
-  justify-content: flex-start;
 }
 .home-button {
   margin-left: 2vw;
   margin-top: 1vh;
+}
+
+.search-wrapper {
+  margin-right: 2vw;
 }
 
 .title {

@@ -29,12 +29,12 @@ const Garden = (props) => {
       .attr('stroke-width', '3px')
       .attr('fill', 'none')
 
-    const maxLifespan = d3.max(repositories, d => d.lifespan)
-    const minLifespan = d3.min(repositories, d => d.lifespan)
+      const maxLifespan = d3.max(repositories, d => d.lifespan)
+      const minLifespan = d3.min(repositories, d => d.lifespan)
 
-    const yStemScale = d3.scaleQuantize()
-      .domain([minLifespan, maxLifespan])
-      .range([550, 500, 450, 400, 350, 300, 250, 200])
+      const yStemScale = d3.scaleQuantize()
+        .domain([minLifespan, maxLifespan])
+        .range([550, 500, 450, 400, 350, 300, 250, 200])
 
       const stem = flowerBed.selectAll('.stem')
         .data(repositories).enter()
@@ -47,95 +47,99 @@ const Garden = (props) => {
         .attr('stroke', 'green')
         .attr('fill', 'none')
 
-        const animate = () => {
-          flowerBed.selectAll('.stem')
-            .transition().duration(2000)
-            .attr('d', d => `M0,600 C -20 ${yStemScale(d.lifespan)}, 20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
-              .attr('stroke', 'green')
-            .transition().duration(2000)
-            .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
-            .on("end", animate)
-        }
+      const animate = () => {
+        flowerBed.selectAll('.stem')
+          .transition().duration(2000)
+          .attr('d', d => `M0,600 C -20 ${yStemScale(d.lifespan)}, 20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
+            .attr('stroke', 'green')
+          .transition().duration(2000)
+          .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan)}`)
+          .on("end", animate)
+      }
       animate();
 
-    const flowerSizeScale = d3.scaleQuantize()
-      .domain([minLifespan, maxLifespan])
-      .range([0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85])
+      const linesOfCode = repositories.map(repo => repo.languages[repo.languages.length - 1]);
+      const flowerSizeScale = d3.scaleQuantize()
+        .domain([0, 100000])
+        .range([0.2, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85])
+      const flowerCenterScale = d3.scaleQuantize()
+        .domain([0, 100000])
+        .range([0.5, 0.6, 0.7, 0.8, 0.9, 1])
 
-    const colorsByLanguage = {
-      "JavaScript": '#DE2016',
-      "HTML": '#FF3EAA',
-      "CSS": '#FCD732',
-      "SCSS":'#26369E',
-      "Python":'#76678C',
-      "Java":'#F19233',
-      "Objective-C": '#DF83BA',
-      "TypeScript": '#40E0D0',
-      "C#":'#6495ED',
-      "PHP":'#DFFF00',
-      "C++": '#FFBF00',
-      "C": '#DE3163',
-      "Shell": '#FF00FF',
-      "Ruby": '#800080',
-      "none": 'none'
-      }
+      const colorsByLanguage = {
+        "JavaScript": '#DE2016',
+        "HTML": '#FF3EAA',
+        "CSS": '#FCD732',
+        "SCSS":'#26369E',
+        "Python":'#76678C',
+        "Java":'#F19233',
+        "Objective-C": '#DF83BA',
+        "TypeScript": '#40E0D0',
+        "C#":'#6495ED',
+        "PHP":'#DFFF00',
+        "C++": '#FFBF00',
+        "C": '#DE3163',
+        "Shell": '#FF00FF',
+        "Ruby": '#800080',
+        "none": 'none'
+        }
 
-    const petalPathThree = 'M0,-150 C20,-110 30,-80 20,0 L0,-15 L-20,0 M0,-150 C-20,-110 -30,-80 -20,0';
-    const petalPathTwo = 'M0,-120 C40,-80 30,-50 20,0 L0,-15 L-20,0 M0,-120 C-40,-80 -30,-50 -20,0';
-    const petalPathOne = 'M0,-100 C50,-60 50,-30 20,0 L0,-15 L-20,0 M0,-100 C-50,-60 -50,-30 -20,0';
-    const petalPaths = [petalPathOne, petalPathTwo, petalPathThree];
-    const petalRotationStarts = [0,60,0];
+      const petalPathThree = 'M0,-150 C20,-110 30,-80 20,0 L0,-15 L-20,0 M0,-150 C-20,-110 -30,-80 -20,0';
+      const petalPathTwo = 'M0,-120 C40,-80 30,-50 20,0 L0,-15 L-20,0 M0,-120 C-40,-80 -30,-50 -20,0';
+      const petalPathOne = 'M0,-100 C50,-60 50,-30 20,0 L0,-15 L-20,0 M0,-100 C-50,-60 -50,-30 -20,0';
+      const petalPaths = [petalPathOne, petalPathTwo, petalPathThree];
+      const petalRotationStarts = [0,60,0];
 
-    const flowerPositionBox = flowerBed.selectAll('.flower-box')
-      .data(repositories).enter().append('svg')
-      .attr('class', '.flower-box')
-      .attr('height', '300')
-      .attr('width', '300')
-      .attr('viewBox','-150 -150 300 300')
-      .attr('x', (d, i) => i * 200 - 50)
-      .attr('y', d => yStemScale(d.lifespan) - 175)
+      const flowerPositionBox = flowerBed.selectAll('.flower-box')
+        .data(repositories).enter().append('svg')
+        .attr('class', '.flower-box')
+        .attr('height', '300')
+        .attr('width', '300')
+        .attr('viewBox','-150 -150 300 300')
+        .attr('x', (d, i) => i * 200 - 50)
+        .attr('y', d => yStemScale(d.lifespan) - 175)
 
-    const petalLayer = flowerPositionBox.selectAll('.petal-layer')
-      .data((d) => [
-          {
-            color: colorsByLanguage[d.languages[2]] || 'none',
-            path: petalPaths[2],
-            petalRotationStart: petalRotationStarts[2],
-            scale: flowerSizeScale(d.lifespan)
-          },
-          {
-            color: colorsByLanguage[d.languages[1]] || 'none',
-            path: petalPaths[1],
-            petalRotationStart: petalRotationStarts[1],
-            scale: flowerSizeScale(d.lifespan)
-          },
-          {
-            color: colorsByLanguage[d.languages[0]] || 'none',
-            path: petalPaths[0],
-            petalRotationStart: petalRotationStarts[0],
-            scale: flowerSizeScale(d.lifespan)
-          },
-        ]
-      )
-      .enter().append('g')
-      .attr('class', 'petal-layer')
+      const petalLayer = flowerPositionBox.selectAll('.petal-layer')
+        .data((d) => [
+            {
+              color: colorsByLanguage[d.languages[2]] || 'none',
+              path: petalPaths[2],
+              petalRotationStart: petalRotationStarts[2],
+              scale: flowerSizeScale(d.languages[d.languages.length - 1])
+            },
+            {
+              color: colorsByLanguage[d.languages[1]] || 'none',
+              path: petalPaths[1],
+              petalRotationStart: petalRotationStarts[1],
+              scale: flowerSizeScale(d.languages[d.languages.length - 1])
+            },
+            {
+              color: colorsByLanguage[d.languages[0]] || 'none',
+              path: petalPaths[0],
+              petalRotationStart: petalRotationStarts[0],
+              scale: flowerSizeScale(d.languages[d.languages.length - 1])
+            },
+          ]
+        )
+        .enter().append('g')
+        .attr('class', 'petal-layer')
 
-    const petal = petalLayer.selectAll('.petal')
-      .data(d => [d,d,d])
-      .enter().append('path')
-      .attr('class', 'petal')
-      .attr('fill', d => d.color)
-      .attr('d', d => d.path)
-      .attr('transform', (d,i) => `rotate(${d.petalRotationStart + i * 120 || 0})scale(${d.scale})`)
+      const petal = petalLayer.selectAll('.petal')
+        .data(d => [d,d,d])
+        .enter().append('path')
+        .attr('class', 'petal')
+        .attr('fill', d => d.color)
+        .attr('d', d => d.path)
+        .attr('transform', (d,i) => `rotate(${d.petalRotationStart + i * 120 || 0})scale(${d.scale})`)
 
-    flowerBed.selectAll('circle')
-      .data(repositories).enter().append('circle')
-      .attr('r', 15)
-      .attr('cx', (d, i) => 100 + i * 200)
-      .attr('cy', d => yStemScale(d.lifespan) - 20)
-      .attr('stroke-width', 1)
-      .attr('stroke', 'blue')
-      .attr('fill', 'blue')
+      flowerBed.selectAll('circle')
+        .data(repositories).enter().append('circle')
+        .attr('r', d => 15 * flowerCenterScale(d.languages[d.languages.length - 1]))
+        .attr('cx', (d, i) => 100 + i * 200)
+        .attr('cy', d => yStemScale(d.lifespan) - 20)
+        .attr('stroke-width', 1)
+        .attr('stroke', 'blue')
+        .attr('fill', 'blue')
 
       flowerBed.selectAll('.repoName')
         .data(repositories).enter()
@@ -175,7 +179,6 @@ const Garden = (props) => {
           return `M0,0 C-10,40 ${arrayOfCurves[index(arrayOfCurves)]},100 0,${arrayOfLengths[index(arrayOfLengths)]}`;
         })
         .attr('transform', (d,i) => `rotate(${260 + (i+1) * d.rotationFactor})`)
-
     }
 
   useEffect(() => {

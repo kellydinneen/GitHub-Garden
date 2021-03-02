@@ -7,6 +7,8 @@ import ErrorPage from './ErrorPage'
 import './App.css';
 
 const App = () => {
+  const [home, setHome] = useState(true);
+  const [userChanged, setUserChanged] = useState(false);
 
   return (
       <>
@@ -16,7 +18,7 @@ const App = () => {
             path="/"
             render={() => (
               <>
-                <Header home={true} />
+                <Header home={true} setHome={setHome}/>
                 <Home />
               </>
             )}
@@ -25,7 +27,7 @@ const App = () => {
             path="/visualizations/:user"
             render={({ match }) => (
               <>
-                <Header home={false} />
+                <Header home={false} setUserChanged={setUserChanged} />
                 <ProfileVisualization
                   userNameToSearch={match.params.user}
                 />
