@@ -48,6 +48,15 @@ const Garden = (props) => {
         .attr('stroke', 'green')
         .attr('fill', 'none')
 
+      flowerBed.selectAll('.repoName')
+        .data(repositories).enter()
+        .append('text')
+        .append('textPath')
+        .attr('xlink:href', (d, i) => `#myStem${i}`)
+        .text(d => d.name)
+        .attr('fill', 'white')
+        .attr('font-size', '1.5rem')
+
       const animate = () => {
         flowerBed.selectAll('.stem')
           .transition().duration(2000)
@@ -141,15 +150,6 @@ const Garden = (props) => {
         .attr('stroke-width', 1)
         .attr('stroke', '#DF83BA')
         .attr('fill', '#DF83BA')
-
-      flowerBed.selectAll('.repoName')
-        .data(repositories).enter()
-        .append('text')
-        .append('textPath')
-        .attr('xlink:href', (d, i) => `#myStem${i}`)
-        .text(d => d.name)
-        .attr('fill', 'white')
-        .attr('font-size', '1.5rem')
 
       const rootBox = flowerBed.selectAll('.root-box')
         .data(repositories).enter().append('svg')
