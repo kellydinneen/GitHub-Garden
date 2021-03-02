@@ -129,7 +129,7 @@ const ProfileVisualization = (props) => {
         const lifespans = getLifespans(filteredByContributorUserRepos);
         const consolidatedData = consolidateData(filteredByContributorUserRepos, branchNames, lifespans, languages);
         setCleanUserData(consolidatedData);
-        setTimeout(() => {setIsLoaded(true)}, 4000);
+        setTimeout(() => {setIsLoaded(true)}, 40000);
       } else {
         await setError(true)
         setIsLoaded(true)
@@ -145,7 +145,7 @@ const ProfileVisualization = (props) => {
       {isLoaded && !error &&
       <>
         <section className='gardener-info'>
-          <a href={userGitHubData.html_url}>
+          <a href={userGitHubData.html_url} target="_blank">
             <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
           </a>
           <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
