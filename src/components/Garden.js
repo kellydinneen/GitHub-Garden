@@ -54,6 +54,36 @@ const Garden = (props) => {
         .domain([minLifespan, maxLifespan])
         .range([550, 500, 450, 400, 350, 300, 250, 200])
 
+      const rootBox = flowerBed.selectAll('.root-box')
+        .data(repositories).enter().append('svg')
+        .attr('class', '.root-box')
+        .attr('height', '200')
+        .attr('width', '200')
+        .attr('viewBox','-150 -150 300 300')
+        .attr('x', (d, i) => i * 200)
+        .attr('y', 500)
+
+      const root = rootBox.selectAll('.root')
+        .data(d => d.branches.map(branch => {
+          return {
+            repo: d.name,
+            name: branch,
+            rotationFactor: d.branches.length === 1 ? -260 : 160 / d.branches.length
+          }
+        }))
+        .enter().append('path')
+        .attr('class', 'root')
+        .attr('fill', 'green')
+        .attr('stroke', 'green')
+        .attr('id', (d,i) => `${d.name + i}`)
+        .attr('d', () => {
+          const arrayOfLengths = [110, 130, 150, 170, 180, 190, 210, 250];
+          const arrayOfCurves = [-20, -5, 5, 10, 15, 20, 25];
+          const index = (array) => [Math.floor(Math.random() * array.length)];
+          return `M0,0 C-10,40 ${arrayOfCurves[index(arrayOfCurves)]},100 0,${arrayOfLengths[index(arrayOfLengths)]}`;
+        })
+        .attr('transform', (d,i) => `rotate(${260 + (i+1) * d.rotationFactor})`)
+
       const stem = flowerBed.selectAll('.stem')
         .data(repositories).enter()
         .append('path')
@@ -149,36 +179,6 @@ const Garden = (props) => {
         .attr('stroke-width', 1)
         .attr('stroke', '#0000FF')
         .attr('fill', '#0000FF')
-
-      const rootBox = flowerBed.selectAll('.root-box')
-        .data(repositories).enter().append('svg')
-        .attr('class', '.root-box')
-        .attr('height', '200')
-        .attr('width', '200')
-        .attr('viewBox','-150 -150 300 300')
-        .attr('x', (d, i) => i * 200)
-        .attr('y', 500)
-
-      const root = rootBox.selectAll('.root')
-        .data(d => d.branches.map(branch => {
-          return {
-            repo: d.name,
-            name: branch,
-            rotationFactor: d.branches.length === 1 ? -260 : 160 / d.branches.length
-          }
-        }))
-        .enter().append('path')
-        .attr('class', 'root')
-        .attr('fill', 'green')
-        .attr('stroke', 'green')
-        .attr('id', (d,i) => `${d.name + i}`)
-        .attr('d', () => {
-          const arrayOfLengths = [110, 130, 150, 170, 180, 190, 210, 250];
-          const arrayOfCurves = [-20, -5, 5, 10, 15, 20, 25];
-          const index = (array) => [Math.floor(Math.random() * array.length)];
-          return `M0,0 C-10,40 ${arrayOfCurves[index(arrayOfCurves)]},100 0,${arrayOfLengths[index(arrayOfLengths)]}`;
-        })
-        .attr('transform', (d,i) => `rotate(${260 + (i+1) * d.rotationFactor})`)
     }
 
   useEffect(() => {
