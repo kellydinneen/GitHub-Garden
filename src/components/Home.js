@@ -25,9 +25,8 @@ const Home = (props) => {
         </Link>
       </div>
       {!clicked && <h2 className="or">OR</h2>}
-      {!clicked && <button className="map-btn" onClick={() => setClicked(true)}>
-        Watch seeds get planted across the world.
-      </button>}
+      {!clicked && <><button className="map-btn" onClick={() => setClicked(true)}>
+      </button><h3>Click the globe to watch seeds get planted across the world.</h3></>}
       {clicked && <GitHubActivityMap className="map" globalGitHubData={props.globalGitHubData} error={props.error}/>}
     </main>
   )

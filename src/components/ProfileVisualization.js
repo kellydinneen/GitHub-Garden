@@ -15,6 +15,7 @@ const ProfileVisualization = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
   const [error, setError] = useState(false);
+  const [gitHubError, setGitHubError] = useState("");
 
   const loadUser = async () => {
     try {
@@ -23,7 +24,7 @@ const ProfileVisualization = (props) => {
       setUserGitHubData(userData);
       return userData;
     } catch (err) {
-      setError(err)
+      setGitHubError(err)
     }
   }
 
@@ -58,7 +59,7 @@ const ProfileVisualization = (props) => {
 
   const loadRepos = async () => {
     try {
-      const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}/repos`);
+      const userPromise = await pvAPI.fetchGitHubData(`https://api.github.com/users/${props.userNameToSearch}/repos?per_page=100`);
       const repoData = await userPromise.json();
       return repoData
     } catch (err) {
@@ -142,8 +143,8 @@ const ProfileVisualization = (props) => {
   return (
     <main>
       {!isLoaded && <ProfileLoader />}
-      {error && <ErrorPage user={props.userNameToSearch} message={"We couldn't find a profile for"}/>}
-      {isLoaded && !error &&
+      {gitHubError && <ErrorPage user={props.userNameToSearch} message={"We couldn't find a profile for"}/>}
+      {isLoaded && !gitHubError &&
       <>
         <section className='gardener-info'>
           <a href={userGitHubData.html_url} target="_blank">
@@ -157,7 +158,10 @@ const ProfileVisualization = (props) => {
       </>}
       <div className="slideout-color-key-toggler">
         <h3 className="slideout-key_heading">Color Key</h3>
-        <ColorKey />
+        <article className="slideout-color-key_inner">
+          <ColorKey />
+          <FlowerKey user={props.userNameToSearch}/>
+        </article>
       </div>
     </main>
   )

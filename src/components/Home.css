@@ -40,16 +40,18 @@ main {
   justify-content: flex-end;
   align-items: center;
   padding-bottom: 20px;
-  background-color: #3F6422;
+  background-color: #222323;
   color: #EFEFEF;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-family: monospace;
   margin-top: 5vh;
   width: 90vw;
   max-width: 500px;
-  min-height: 31vh;
-  background-image: url('./farming.svg');
+  min-height: 35vh;
+  background-image: url('./shoveling_earth.png');
   background-position: center;
-  background-size: 50%;
+  background-size: 100%;
   background-repeat: no-repeat;
-  border-radius: 10px;
+  border: none;
+
 }

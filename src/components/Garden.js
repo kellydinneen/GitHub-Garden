@@ -138,8 +138,8 @@ const Garden = (props) => {
         .attr('cx', (d, i) => 100 + i * 200)
         .attr('cy', d => yStemScale(d.lifespan) - 25)
         .attr('stroke-width', 1)
-        .attr('stroke', 'blue')
-        .attr('fill', 'blue')
+        .attr('stroke', '#DF83BA')
+        .attr('fill', '#DF83BA')
 
       flowerBed.selectAll('.repoName')
         .data(repositories).enter()
