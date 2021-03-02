@@ -7,7 +7,7 @@ const Header = (props) => {
   const [user, setUser] = useState(props.userNameToSearch)
   return (
     <header>
-      {props.home &&<h1 className='title'>GitHub Garden</h1>}
+      {props.home && <h1 className='title'>GitHub Garden</h1>}
       {!props.home &&
         <>
           <Link className='home-button' to='/'>
