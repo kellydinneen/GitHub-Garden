@@ -6,7 +6,8 @@ const Garden = (props) => {
 
   const repositories = props.data;
 
-  const gardenWidth = 200 * repositories.length;
+  const gardenWidth = 100 * repositories.length;
+  const view = `0 0 ${200 * repositories.length + 100} 800`
 
   const drawGarden = () => {
     const flowerBed = d3.select('.flowerbed');
@@ -186,7 +187,7 @@ const Garden = (props) => {
   }, [])
 
   return (
-      <svg className='flowerbed' viewBox='0 0 2000 800' width={gardenWidth}></svg>
+      <svg className='flowerbed' viewBox={view} width={gardenWidth}></svg>
   )
 }
 
