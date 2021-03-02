@@ -10,6 +10,23 @@ const Garden = (props) => {
   const view = `0 0 ${200 * repositories.length + 100} 800`
 
   const drawGarden = () => {
+    const colorsByLanguage = {
+      "JavaScript": '#DE2016',
+      "HTML": '#FF3EAA',
+      "CSS": '#FCD732',
+      "SCSS":'#26369E',
+      "Python":'#76678C',
+      "Java":'#F19233',
+      "Swift": '#DF83BA',
+      "TypeScript": '#40E0D0',
+      "C#":'#6495ED',
+      "PHP":'#DFFF00',
+      "C++": '#FFBF00',
+      "C": '#DE3163',
+      "Shell": '#FF00FF',
+      "Ruby": '#800080',
+      "none": 'none'
+    }
     const flowerBed = d3.select('.flowerbed');
 
     const soilLine = flowerBed.selectAll('.soil-line')
@@ -75,24 +92,6 @@ const Garden = (props) => {
       const flowerCenterScale = d3.scaleQuantize()
         .domain([0, 100000])
         .range([0.5, 0.6, 0.7, 0.8, 0.9, 1])
-
-      const colorsByLanguage = {
-        "JavaScript": '#DE2016',
-        "HTML": '#FF3EAA',
-        "CSS": '#FCD732',
-        "SCSS":'#26369E',
-        "Python":'#76678C',
-        "Java":'#F19233',
-        "Objective-C": '#DF83BA',
-        "TypeScript": '#40E0D0',
-        "C#":'#6495ED',
-        "PHP":'#DFFF00',
-        "C++": '#FFBF00',
-        "C": '#DE3163',
-        "Shell": '#FF00FF',
-        "Ruby": '#800080',
-        "none": 'none'
-        }
 
       const petalPathThree = 'M0,-150 C20,-110 30,-80 20,0 L0,-15 L-20,0 M0,-150 C-20,-110 -30,-80 -20,0';
       const petalPathTwo = 'M0,-120 C40,-80 30,-50 20,0 L0,-15 L-20,0 M0,-120 C-40,-80 -30,-50 -20,0';
