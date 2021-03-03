@@ -158,7 +158,7 @@ const ProfileVisualization = (props) => {
           {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
         </section>
         <div className="slideout-color-key-toggler">
-          <h3 className="slideout-key_heading">Color Key</h3>
+          <h3 className="slideout-key_heading">Hover for key</h3>
           <article className="slideout-color-key_inner">
             <ColorKey />
             <FlowerKey user={props.userNameToSearch}/>

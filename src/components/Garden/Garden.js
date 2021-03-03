@@ -6,7 +6,7 @@ const Garden = (props) => {
 
   const repositories = props.data;
 
-  const gardenWidth = 120 * repositories.length;
+  const gardenWidth = 110 * repositories.length;
   const view = `0 0 ${200 * repositories.length} 800`
 
   const drawGarden = () => {
