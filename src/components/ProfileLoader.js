@@ -1,7 +1,6 @@
 import React from 'react';
 import './ProfileLoader.css';
-import wateringCan from './watering-can_5.png';
-import sprout from './sprout_2.png';
+import wateringCan from './watering-can.png';
 
 const ProfileLoader = () => {
   return (
@@ -21,7 +20,6 @@ const ProfileLoader = () => {
         <div className="droplet d11"></div>
         <div className="droplet d12"></div>
       </div>
-      <img src={sprout} alt="A little sprout in the dirt." className="sprout"></img>
     </>
   )
 }

@@ -7,7 +7,6 @@ import ColorKey from './ColorKey'
 import FlowerKey from './FlowerKey'
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
-import gardenHat from './hat.png'
 
 const ProfileVisualization = (props) => {
   const [userGitHubData, setUserGitHubData] = useState('')
