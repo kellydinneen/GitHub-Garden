@@ -28,9 +28,9 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: -68vh;
+  bottom: -470px;
   left: 0;
-  height: 70vh;
+  height: 500px;
   width: 100vw;
   background: black;
   padding: 25px;
@@ -80,4 +80,26 @@
   position: relative;
   width: 300px;
   height: 200px;
+}
+
+@media screen and (max-width: 1100px) {
+  .slideout-color-key_inner {
+    height: 570px;
+    bottom: -490px;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .slideout-color-key_inner {
+    height: 550px;
+    bottom: -470px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .slideout-color-key_inner {
+    height: 500px;
+    bottom: -420px;
+  }
 }

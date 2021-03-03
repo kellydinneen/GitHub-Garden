@@ -2,11 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: -50px;
 }
 
 .key-annotations {
   width: 35vw;
-  height: 40vh;
+  height: 250px;
   margin-right: 50px;
 }
 
@@ -21,4 +22,63 @@ p {
 
 .svg-clicker {
   cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+  .key-annotations {
+    width: 25vw;
+    height: 100px;
+    margin-left: 20px;
+    margin-top: -300px;
+  }
+  p {
+    font-size: 0.8rem;
+  }
+  .flower-key-box {
+    margin-bottom: -70px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .flower-key-box {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flower-key {
+    margin-bottom: -50px;
+    width: 375px;
+    height: 375px;
+  }
+
+  .key-annotations {
+    margin-top: -200px;
+    width: 90vw;
+    margin: 0;
+    text-align: center;
+    margin-left: -50px;
+  }
+
+  p {
+    font-size: 0.7rem;
+  }
+}
+
+
+@media screen and (max-width: 450px) {
+
+  .flower-key {
+    width: 320px;
+    height: 320px;
+  }
+
+  .key-annotations {
+    width: 95vw;
+  }
+
+  p {
+    font-size: 0.6rem;
+  }
 }

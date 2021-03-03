@@ -1,5 +1,6 @@
   .color-pairs {
     display: flex;
+    margin-top: 10px;
   }
 
   .color-key-seed {
@@ -19,4 +20,55 @@
   .color-key-language {
     margin-top: 0;
     font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 1100px) {
+    .color-pairs {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    }
+    .color-key-set {
+      width: 70px;
+      margin-top: 0px;
+      margin-right: 5px;
+    }
+    .color-key-seed {
+      width: 50px;
+    }
+    .color-key-language {
+      margin-top: 0;
+      font-size: 0.7rem;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .color-pairs {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      margin-top: 200px;
+    }
+    .color-key-seed {
+      width: 45px;
+    }
+    .color-key-language {
+      font-size: 0.6rem;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    .color-pairs {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      margin-right: 40px;
+      margin-top: -130px;
+    }
+    .color-key-set {
+      width: 50px;
+      height: 35px;
+    }
+    .color-key-seed {
+      width: 40px;
+    }
+    .color-key-language {
+      font-size: 0.55rem;
+    }
   }
