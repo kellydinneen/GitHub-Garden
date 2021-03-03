@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import './Header.css';
 import home from '../assets/greenhouse-outline.png'
 
 const Header = (props) => {
-  const [user, setUser] = useState(props.userNameToSearch)
   return (
     <header>
       {props.home && <h1 className='title'>GitHub Garden</h1>}

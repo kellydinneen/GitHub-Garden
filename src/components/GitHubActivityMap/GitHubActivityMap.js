@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './GitHubActivityMap.css';
-import { MapContainer, TileLayer, Circle, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Circle } from 'react-leaflet'
 import 'leaflet/dist/leaflet.js'
 import 'leaflet/dist/leaflet.css'
 import Legend from '../Legend/Legend'
@@ -120,7 +120,7 @@ const GitHubActivityMap = (props) => {
     return () => {
       window.clearInterval(timer)
     }
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

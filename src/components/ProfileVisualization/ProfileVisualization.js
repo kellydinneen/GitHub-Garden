@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import Garden from '../Garden/Garden.js';
 import ErrorPage from '../ErrorPage/ErrorPage'
 import ProfileLoader from '../ProfileLoader/ProfileLoader'
@@ -12,7 +11,6 @@ const ProfileVisualization = (props) => {
   const [userGitHubData, setUserGitHubData] = useState('')
   const [cleanUserData, setCleanUserData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
   const [error, setError] = useState(false);
   const [gitHubError, setGitHubError] = useState("");
 
@@ -119,25 +117,26 @@ const ProfileVisualization = (props) => {
     return cleanedUserData;
   }
 
-  useEffect(() => {
-    const loadUserInformation = async () => {
-      const userGitHub = await loadUser();
-      if (!userGitHub.message) {
-        const usersRepos = await loadRepos();
-        const filteredByContributorUserRepos = await fetchRepoContributor(userGitHub, usersRepos);
-        const branchNames = await getBranchNames(filteredByContributorUserRepos)
-        const languages = await getLanguages(filteredByContributorUserRepos);
-        const lifespans = getLifespans(filteredByContributorUserRepos);
-        const consolidatedData = consolidateData(filteredByContributorUserRepos, branchNames, lifespans, languages);
-        setCleanUserData(consolidatedData);
-        setTimeout(() => {setIsLoaded(true)}, 4000);
-      } else {
-        setGitHubError(true)
-        setIsLoaded(true)
-      }
+  const loadUserInformation = async () => {
+    const userGitHub = await loadUser();
+    if (!userGitHub.message) {
+      const usersRepos = await loadRepos();
+      const filteredByContributorUserRepos = await fetchRepoContributor(userGitHub, usersRepos);
+      const branchNames = await getBranchNames(filteredByContributorUserRepos)
+      const languages = await getLanguages(filteredByContributorUserRepos);
+      const lifespans = getLifespans(filteredByContributorUserRepos);
+      const consolidatedData = consolidateData(filteredByContributorUserRepos, branchNames, lifespans, languages);
+      setCleanUserData(consolidatedData);
+      setTimeout(() => {setIsLoaded(true)}, 4000);
+    } else {
+      setGitHubError(true)
+      setIsLoaded(true)
     }
+  }
+
+  useEffect(() => {
     loadUserInformation();
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <main>
@@ -146,8 +145,12 @@ const ProfileVisualization = (props) => {
       {isLoaded && !gitHubError &&
       <>
         <section className='gardener-info'>
-          <a href={userGitHubData.html_url} target="_blank">
-            <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
+          <a href={userGitHubData.html_url} target="_blank" rel="noreferrer">
+            <img
+              alt={`The profile from GitHub for ${props.userNameToSearch}`}
+              className="user-profile-pic"
+              src={userGitHubData.avatar_url}
+            />
           </a>
           <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
         </section>

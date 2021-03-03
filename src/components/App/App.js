@@ -8,7 +8,6 @@ import './App.css';
 
 const App = () => {
   const [home, setHome] = useState(true);
-  const [userChanged, setUserChanged] = useState(false);
 
   return (
       <>
@@ -18,7 +17,7 @@ const App = () => {
             path="/"
             render={() => (
               <>
-                <Header home={true}/>
+                <Header home={home}/>
                 <Home home={true} setHome={setHome}/>
               </>
             )}
@@ -27,7 +26,7 @@ const App = () => {
             path="/visualizations/:user"
             render={({ match }) => (
               <>
-                <Header home={false} setUserChanged={setUserChanged} />
+                <Header home={false} />
                 <ProfileVisualization
                   userNameToSearch={match.params.user}
                 />
