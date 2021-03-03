@@ -43,7 +43,8 @@ To run the project locally:
 - [obtain a personal API key for OpenCage data](https://opencagedata.com/api)
 - `git clone` this repo
 - `cd` into the github-garden repo
-- add these keys to a .env file in the repo following [these instructions](https://dev.to/ivana_croxcatto/hiding-api-keys-in-your-code-1h0a) and add the .env file to your .gitignore file so that your keys are never made publicly accessible
+- run `npm install`
+- add your keys to a .env file in the root folder of the repo following [these instructions](https://dev.to/ivana_croxcatto/hiding-api-keys-in-your-code-1h0a) and add the .env file to your .gitignore file so that your keys are never made publicly accessible. The GitHub key should be stored in the .env file as `REACT_APP_GH_KEY` and the OpenCage key should be stored in the file as `REACT_APP_GEO_KEY`. e.g. `REACT_APP_GEO_KEY=key`
 - run `npm start` to run the React App in your browser
 
 OR
