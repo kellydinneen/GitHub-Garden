@@ -53,5 +53,8 @@ main {
   background-size: 100%;
   background-repeat: no-repeat;
   border: none;
+}
 
+.map-btn:hover {
+  cursor: pointer;
 }

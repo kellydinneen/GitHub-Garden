@@ -133,7 +133,7 @@ const ProfileVisualization = (props) => {
         setCleanUserData(consolidatedData);
         setTimeout(() => {setIsLoaded(true)}, 4000);
       } else {
-        await setError(true)
+        setGitHubError(true)
         setIsLoaded(true)
       }
     }
@@ -155,14 +155,14 @@ const ProfileVisualization = (props) => {
         <section className="user-visualizations-box">
           {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
         </section>
+        <div className="slideout-color-key-toggler">
+          <h3 className="slideout-key_heading">Color Key</h3>
+          <article className="slideout-color-key_inner">
+            <ColorKey />
+            <FlowerKey user={props.userNameToSearch}/>
+          </article>
+        </div>
       </>}
-      <div className="slideout-color-key-toggler">
-        <h3 className="slideout-key_heading">Color Key</h3>
-        <article className="slideout-color-key_inner">
-          <ColorKey />
-          <FlowerKey user={props.userNameToSearch}/>
-        </article>
-      </div>
     </main>
   )
 }
