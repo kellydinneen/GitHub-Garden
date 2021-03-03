@@ -91,7 +91,7 @@ If GitHub has public data for the user, a scrollable garden of flowers will appe
 ![flowerbox](https://user-images.githubusercontent.com/69563078/109746873-587e1900-7b93-11eb-8f01-966754954d99.gif)
 
 ### Understanding the Visualization
-The garden visualization of a user displays one flower for every public repository that the user owns and has contributes to. 
+The garden visualization of a user displays one flower for every public repository that the user owns and has contributed to. 
 
 **Flower petals** are scaled according to the total volume of code in a repository and each layer of petals represents a top language in the repository (up to three). The layers are colored according to the languages that they represent.
 
