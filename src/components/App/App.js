@@ -7,7 +7,6 @@ import ErrorPage from '../ErrorPage/ErrorPage'
 import './App.css';
 
 const App = () => {
-  const [home, setHome] = useState(true);
 
   return (
       <>
@@ -17,8 +16,8 @@ const App = () => {
             path="/"
             render={() => (
               <>
-                <Header home={home}/>
-                <Home home={true} setHome={setHome}/>
+                <Header home={true}/>
+                <Home home={true} />
               </>
             )}
           />
