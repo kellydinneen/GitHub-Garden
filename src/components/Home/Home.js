@@ -21,7 +21,7 @@ const Home = (props) => {
         <Link to={{
           pathname:`/visualizations/${user}`
         }}>
-          <button aria-label="Search for user" className="search-btn" onClick={() => props.setHome(false)}>grow</button>
+          <button aria-label="Search for user" className="search-btn">grow</button>
         </Link>
       </div>
       {!clicked && <h2 className="or">OR</h2>}
