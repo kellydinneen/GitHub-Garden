@@ -23,7 +23,7 @@ const Garden = (props) => {
         return soilLines;
       })
       .enter().append('path')
-      .attr('class', '.soil-line')
+      .attr('class', 'soil-line')
       .attr('d', 'M0,400 C100,300 150,450 200,410 C250,370 270,420 370,410 C450,370 470,420 480,360 C500,370 520,420 560,400 C600,370 620,420 660,400 C700,370 720,420 760,400 C800,300 850,450 900,410 C950,370 970,420 980,360 C1050,370 1070,420 1080,360 C1200,370 1220,420 1260,400 C1300,300 1350,450 1400,410 C1450,370 1470,420 1570,410 C1650,370 1670,420 1680,360 C1750,370 1770,420 1780,360 C1800,370 1820,420 1860,400 C1900,300 1950,450 2000,410')
       .attr('transform', (d, i) => `translate(${i*1000}, 395)scale(0.5)`)
       .attr('stroke', 'grey')
@@ -93,7 +93,7 @@ const Garden = (props) => {
 
       const flowerPositionBox = flowerBed.selectAll('.flower-box')
         .data(repositories).enter().append('svg')
-        .attr('class', '.flower-box')
+        .attr('class', 'flower-box')
         .attr('height', '300')
         .attr('width', '300')
         .attr('viewBox','-150 -150 300 300')
@@ -153,7 +153,7 @@ const Garden = (props) => {
 
       const rootBox = flowerBed.selectAll('.root-box')
         .data(repositories).enter().append('svg')
-        .attr('class', '.root-box')
+        .attr('class', 'root-box')
         .attr('height', '200')
         .attr('width', '200')
         .attr('viewBox','-150 -150 300 300')

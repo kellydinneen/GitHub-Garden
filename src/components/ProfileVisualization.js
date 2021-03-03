@@ -150,14 +150,17 @@ const ProfileVisualization = (props) => {
           <a href={userGitHubData.html_url} target="_blank">
             <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
           </a>
-          <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
+          <h1 className='garden-title'>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
         </section>
         <section className="user-visualizations-box">
           {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
         </section>
       </>}
       <div className="slideout-color-key-toggler">
-        <h3 className="slideout-key_heading">Color Key</h3>
+        <article className="slideout-color-key_inner">
+          <ColorKey />
+          <FlowerKey user={props.userNameToSearch}/>
+        </article>
       </div>
     </main>
   )
