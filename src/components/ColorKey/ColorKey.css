@@ -1,59 +1,3 @@
-.slideout-color-key-toggler {
-  position: fixed;
-  bottom: 0;
-  left: 45vw;
-  width: 0;
-  height: 0;
-  border-left: 3vh solid transparent;
-  border-right: 3vh solid transparent;
-  border-bottom: 3vh solid black;
-  padding: 50px 0px 20px 10px;
-  /* background: grey; */
-  /* border-radius: 0% 50% 50% 0%;
-  border-right: 2px solid #ffdbbc; */
-  text-align: left;
-  font-size: 10px;
-  color: #ffdbbc;
-  -webkit-transition-duration: 0.4s;
-  -moz-transition-duration: 0.4s;
-  -o-transition-duration: 0.4s;
-  transition-duration: 0.4s;
-  -webkit-border-radius: 0 5px 5px 0;
-  -moz-border-radius: 0 5px 5px 0;
-}
-
-  .slideout-color-key_inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    bottom: -68vh;
-    left: 0;
-    height: 70vh;
-    width: 100vw;
-    background: black;
-    padding: 25px;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-transition-duration: 0.4s;
-    -moz-transition-duration: 0.4s;
-    -o-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    text-align: left;
-    -webkit-border-radius: 0 0 5px 0;
-    -moz-border-radius: 0 0 5px 0;
-    border-radius: 0 0 5px 0;
-  }
-
-  .slideout-color-key-toggler:hover {
-    bottom: 7vh;
-    cursor: pointer;
-  }
-  .slideout-color-key-toggler:hover .slideout-color-key_inner {
-    bottom: 0;
-  }
-
   .color-pairs {
     display: flex;
   }
@@ -68,7 +12,7 @@
     justify-content: flex-start;
     align-items: center;
     width: 75px;
-    margin-top: 0;
+    margin-top: 40px;
     margin-right: 5px;
   }
 

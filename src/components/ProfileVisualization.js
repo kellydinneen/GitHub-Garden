@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import Garden from '../Garden/Garden.js';
-import ErrorPage from '../ErrorPage/ErrorPage'
-import ProfileLoader from '../ProfileLoader/ProfileLoader'
-import ColorKey from '../ColorKey/ColorKey'
-import FlowerKey from '../FlowerKey/FlowerKey'
+import { Link } from "react-router-dom";
+import Garden from './Garden.js';
+import ErrorPage from './ErrorPage'
+import ProfileLoader from './ProfileLoader'
+import ColorKey from './ColorKey'
+import FlowerKey from './FlowerKey'
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
+import gardenHat from './hat.png'
 
 const ProfileVisualization = (props) => {
   const [userGitHubData, setUserGitHubData] = useState('')
   const [cleanUserData, setCleanUserData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [newUserNameToSearch, setNewUserNameToSearch] = useState('');
   const [error, setError] = useState(false);
   const [gitHubError, setGitHubError] = useState("");
 
@@ -117,26 +120,25 @@ const ProfileVisualization = (props) => {
     return cleanedUserData;
   }
 
-  const loadUserInformation = async () => {
-    const userGitHub = await loadUser();
-    if (!userGitHub.message) {
-      const usersRepos = await loadRepos();
-      const filteredByContributorUserRepos = await fetchRepoContributor(userGitHub, usersRepos);
-      const branchNames = await getBranchNames(filteredByContributorUserRepos)
-      const languages = await getLanguages(filteredByContributorUserRepos);
-      const lifespans = getLifespans(filteredByContributorUserRepos);
-      const consolidatedData = consolidateData(filteredByContributorUserRepos, branchNames, lifespans, languages);
-      setCleanUserData(consolidatedData);
-      setTimeout(() => {setIsLoaded(true)}, 4000);
-    } else {
-      setGitHubError(true)
-      setIsLoaded(true)
-    }
-  }
-
   useEffect(() => {
+    const loadUserInformation = async () => {
+      const userGitHub = await loadUser();
+      if (!userGitHub.message) {
+        const usersRepos = await loadRepos();
+        const filteredByContributorUserRepos = await fetchRepoContributor(userGitHub, usersRepos);
+        const branchNames = await getBranchNames(filteredByContributorUserRepos)
+        const languages = await getLanguages(filteredByContributorUserRepos);
+        const lifespans = getLifespans(filteredByContributorUserRepos);
+        const consolidatedData = consolidateData(filteredByContributorUserRepos, branchNames, lifespans, languages);
+        setCleanUserData(consolidatedData);
+        setTimeout(() => {setIsLoaded(true)}, 4000);
+      } else {
+        await setError(true)
+        setIsLoaded(true)
+      }
+    }
     loadUserInformation();
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <main>
@@ -145,26 +147,22 @@ const ProfileVisualization = (props) => {
       {isLoaded && !gitHubError &&
       <>
         <section className='gardener-info'>
-          <a href={userGitHubData.html_url} target="_blank" rel="noreferrer">
-            <img
-              alt={`The profile from GitHub for ${props.userNameToSearch}`}
-              className="user-profile-pic"
-              src={userGitHubData.avatar_url}
-            />
+          <a href={userGitHubData.html_url} target="_blank">
+            <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
           </a>
           <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
         </section>
         <section className="user-visualizations-box">
           {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
         </section>
-        <div className="slideout-color-key-toggler">
-          <h3 className="slideout-key_heading">Hover for key</h3>
-          <article className="slideout-color-key_inner">
-            <ColorKey />
-            <FlowerKey user={props.userNameToSearch}/>
-          </article>
-        </div>
       </>}
+      <div className="slideout-color-key-toggler">
+        <h3 className="slideout-key_heading">Color Key</h3>
+        <article className="slideout-color-key_inner">
+          <ColorKey />
+          <FlowerKey user={props.userNameToSearch}/>
+        </article>
+      </div>
     </main>
   )
 }
