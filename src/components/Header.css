@@ -6,9 +6,7 @@ header {
   margin: 0;
   text-align: center;
   margin-bottom: 20px;
-  padding-right: 1vw;
-  padding-top: 1vh;
-  padding-left: 1vw;
+
 }
 .home-button {
   margin-left: 2vw;
@@ -16,6 +14,6 @@ header {
 }
 
 .title {
-  margin-left: 48vw;
+  margin-left: 50vw;
   transform: translateX(-50%);
 }

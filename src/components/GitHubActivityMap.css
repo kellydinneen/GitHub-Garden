@@ -1,6 +1,6 @@
 .github-activity-map-container {
   height: 60vh;
-  width: 70vw;
+  width: 80vw;
 }
 
 .circle-marker {
@@ -37,7 +37,7 @@
 
 .map-loader {
   min-height: 10px;
-  width: 70vw;
+  width: 80vw;
   background: rgb(112,255,0);
   background: linear-gradient(90deg, lightgrey 0%, #3F6422 100%);
   animation: slide 1.5s linear infinite;

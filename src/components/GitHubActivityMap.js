@@ -131,7 +131,7 @@ const GitHubActivityMap = (props) => {
       {!props.error &&
         <MapContainer
           center={[0, 0]}
-          zoom={1.6}
+          zoom={1.5}
           scrollWheelZoom={false}
           style={{height : '100%'}}
           whenCreated={setMap}>

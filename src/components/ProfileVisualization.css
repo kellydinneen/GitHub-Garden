@@ -7,7 +7,7 @@
   height: 55vh;
   position: absolute;
   bottom: 10vh;
-  overflow: scroll;
+  overflow-x: scroll;
 }
 
 .gardener-info {
