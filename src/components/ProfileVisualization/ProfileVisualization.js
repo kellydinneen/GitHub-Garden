@@ -143,7 +143,6 @@ const ProfileVisualization = (props) => {
       {!isLoaded && <ProfileLoader />}
       {gitHubError && <ErrorPage user={props.userNameToSearch} message={"We couldn't find a profile for"}/>}
       {isLoaded && !gitHubError &&
-<<<<<<< HEAD:src/components/ProfileVisualization/ProfileVisualization.js
       <>
         <section className='gardener-info'>
           <a href={userGitHubData.html_url} target="_blank" rel="noreferrer">
@@ -166,26 +165,6 @@ const ProfileVisualization = (props) => {
           </article>
         </div>
       </>}
-=======
-        <>
-          <section className='gardener-info'>
-            <a href={userGitHubData.html_url} target="_blank">
-              <img className="user-profile-pic" src={userGitHubData.avatar_url}/>
-            </a>
-            <h1 className='garden-title'>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
-          </section>
-          <section className="user-visualizations-box">
-            {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
-          </section>
-          <div className="slideout-color-key-toggler">
-            <article className="slideout-color-key_inner">
-              <ColorKey />
-              <FlowerKey user={props.userNameToSearch}/>
-            </article>
-          </div>
-        </>
-      }
->>>>>>> main:src/components/ProfileVisualization.js
     </main>
   )
 }
