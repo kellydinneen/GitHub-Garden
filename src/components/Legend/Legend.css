@@ -17,6 +17,11 @@ p {
   font-size: 1.2rem;
 }
 
+h2,
+p {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
 .push {
   color: #FF8C00;
 }
