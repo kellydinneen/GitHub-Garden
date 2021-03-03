@@ -6,8 +6,8 @@ const Garden = (props) => {
 
   const repositories = props.data;
 
-  const gardenWidth = 100 * repositories.length;
-  const view = `0 0 ${200 * repositories.length + 100} 800`
+  const gardenWidth = 120 * repositories.length;
+  const view = `0 0 ${200 * repositories.length} 800`
 
   const drawGarden = () => {
     const colorsByLanguage = {
@@ -183,7 +183,7 @@ const Garden = (props) => {
 
   useEffect(() => {
       drawGarden()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
       <svg className='flowerbed' viewBox={view} width={gardenWidth}></svg>
