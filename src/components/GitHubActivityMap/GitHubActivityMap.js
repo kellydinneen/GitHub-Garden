@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './GitHubActivityMap.css';
-import { MapContainer, TileLayer, Circle, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Circle } from 'react-leaflet'
 import 'leaflet/dist/leaflet.js'
 import 'leaflet/dist/leaflet.css'
-import Legend from './Legend'
+import Legend from '../Legend/Legend'
 require('dotenv').config();
 
 
@@ -120,18 +120,18 @@ const GitHubActivityMap = (props) => {
     return () => {
       window.clearInterval(timer)
     }
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
     {!isLoaded && !error && <div className="map-loader"></div>}
-    {isLoaded && <p> Real Time GitHub Events happening across the globe!</p>}
+    {isLoaded && <p className="map-description"> Real Time GitHub Events happening across the globe!</p>}
     <div className='github-activity-map-container'>
       {error && <p className="error-text">Oops! Something went wrong.</p> }
       {!props.error &&
         <MapContainer
           center={[0, 0]}
-          zoom={1.6}
+          zoom={1.5}
           scrollWheelZoom={false}
           style={{height : '100%'}}
           whenCreated={setMap}>

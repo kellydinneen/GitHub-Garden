@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import GitHubActivityMap from './GitHubActivityMap';
+import GitHubActivityMap from '../GitHubActivityMap/GitHubActivityMap';
 import './Home.css';
 
 const Home = (props) => {
@@ -21,13 +21,13 @@ const Home = (props) => {
         <Link to={{
           pathname:`/visualizations/${user}`
         }}>
-          <button name="search-user-button" className="search-btn" onClick={() => props.setHome(false)}>grow</button>
+          <button aria-label="Search for user" className="search-btn" onClick={() => props.setHome(false)}>grow</button>
         </Link>
       </div>
       {!clicked && <h2 className="or">OR</h2>}
       {!clicked &&
         <>
-          <button name="start-map-button" className="map-btn" onClick={() => setClicked(true)}>
+          <button aria-label="Start the map visualizations" className="map-btn" onClick={() => setClicked(true)}>
           </button>
           <h3>Click the globe to watch seeds get planted across the world.</h3>
         </>

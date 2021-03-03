@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Switch, Route } from "react-router-dom";
-import Home from './Home';
-import Header from './Header';
-import ProfileVisualization from './ProfileVisualization';
-import ErrorPage from './ErrorPage'
+import Home from '../Home/Home';
+import Header from '../Header/Header';
+import ProfileVisualization from '../ProfileVisualization/ProfileVisualization';
+import ErrorPage from '../ErrorPage/ErrorPage'
 import './App.css';
 
 const App = () => {
   const [home, setHome] = useState(true);
-  const [userChanged, setUserChanged] = useState(false);
 
   return (
       <>
@@ -18,7 +17,7 @@ const App = () => {
             path="/"
             render={() => (
               <>
-                <Header home={true}/>
+                <Header home={home}/>
                 <Home home={true} setHome={setHome}/>
               </>
             )}
@@ -27,7 +26,7 @@ const App = () => {
             path="/visualizations/:user"
             render={({ match }) => (
               <>
-                <Header home={false} setUserChanged={setUserChanged} />
+                <Header home={false} />
                 <ProfileVisualization
                   userNameToSearch={match.params.user}
                 />

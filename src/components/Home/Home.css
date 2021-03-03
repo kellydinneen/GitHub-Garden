@@ -2,7 +2,9 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   height: 45vh;
+  margin: 0;
 }
 
 .search-wrapper {
@@ -58,7 +60,7 @@ main {
   width: 90vw;
   max-width: 500px;
   min-height: 35vh;
-  background-image: url('./shoveling_earth.png');
+  background-image: url('../assets/shoveling_earth.png');
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;

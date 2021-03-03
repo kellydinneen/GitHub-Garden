@@ -1,6 +1,6 @@
 import React from 'react';
 import './ProfileLoader.css';
-import wateringCan from './watering-can.png';
+import wateringCan from '../assets/watering-can.png';
 
 const ProfileLoader = () => {
   return (
