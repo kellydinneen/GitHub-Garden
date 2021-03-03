@@ -21,7 +21,7 @@ const Home = (props) => {
         <Link to={{
           pathname:`/visualizations/${user}`
         }}>
-          <button name="search-user-button" className="search-btn" onClick={() => props.setHome(false)}>Grow</button>
+          <button name="search-user-button" className="search-btn" onClick={() => props.setHome(false)}>grow</button>
         </Link>
       </div>
       {!clicked && <h2 className="or">OR</h2>}
