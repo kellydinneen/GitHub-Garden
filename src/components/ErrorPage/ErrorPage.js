@@ -1,6 +1,7 @@
 import React from 'react';
 import './ErrorPage.css'
-import deadPlants from './deadplants.png'
+import deadPlants from '../assets/deadplants.png';
+
 
 const ErrorPage = (props) => {
   return(

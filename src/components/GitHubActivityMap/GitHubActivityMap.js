@@ -3,7 +3,7 @@ import './GitHubActivityMap.css';
 import { MapContainer, TileLayer, Circle, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.js'
 import 'leaflet/dist/leaflet.css'
-import Legend from './Legend'
+import Legend from '../Legend/Legend'
 require('dotenv').config();
 
 

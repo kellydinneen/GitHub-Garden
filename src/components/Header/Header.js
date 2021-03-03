@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import './Header.css';
-import home from './greenhouse-outline.png'
+import home from '../assets/greenhouse-outline.png'
 
 const Header = (props) => {
   const [user, setUser] = useState(props.userNameToSearch)

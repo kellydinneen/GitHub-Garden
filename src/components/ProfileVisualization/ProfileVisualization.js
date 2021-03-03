@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import Garden from './Garden.js';
-import ErrorPage from './ErrorPage'
-import ProfileLoader from './ProfileLoader'
-import ColorKey from './ColorKey'
-import FlowerKey from './FlowerKey'
+import Garden from '../Garden/Garden.js';
+import ErrorPage from '../ErrorPage/ErrorPage'
+import ProfileLoader from '../ProfileLoader/ProfileLoader'
+import ColorKey from '../ColorKey/ColorKey'
+import FlowerKey from '../FlowerKey/FlowerKey'
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
-import gardenHat from './hat.png'
 
 const ProfileVisualization = (props) => {
   const [userGitHubData, setUserGitHubData] = useState('')
