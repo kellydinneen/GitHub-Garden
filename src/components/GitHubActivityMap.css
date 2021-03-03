@@ -1,7 +1,6 @@
 .github-activity-map-container {
-  height: 70vh;
-  width: 95vw;
-  margin-bottom: 50px;
+  height: 60vh;
+  width: 70vw;
 }
 
 .circle-marker {
@@ -15,6 +14,10 @@
 .bottom-buffer {
   width: 100%;
   height: 200px;
+}
+
+.map-description {
+  margin-top: 0;
 }
 
 @keyframes circle {
@@ -34,10 +37,11 @@
 
 .map-loader {
   min-height: 10px;
-  width: 95vw;
+  width: 70vw;
   background: rgb(112,255,0);
   background: linear-gradient(90deg, lightgrey 0%, #3F6422 100%);
   animation: slide 1.5s linear infinite;
+  border-radius: 20px;
 }
 
 @keyframes slide {

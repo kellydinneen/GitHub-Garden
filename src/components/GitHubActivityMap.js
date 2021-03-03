@@ -125,7 +125,7 @@ const GitHubActivityMap = (props) => {
   return (
     <>
     {!isLoaded && !error && <div className="map-loader"></div>}
-    {isLoaded && <p> Real Time GitHub Events happening across the globe!</p>}
+    {isLoaded && <p className="map-description"> Real Time GitHub Events happening across the globe!</p>}
     <div className='github-activity-map-container'>
       {error && <p className="error-text">Oops! Something went wrong.</p> }
       {!props.error &&
