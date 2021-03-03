@@ -125,12 +125,4 @@ describe('Key', () => {
       cy.get('@annotations')
         .contains('The roots of a flower represent the remote branches of a repository. E.g. a repository with 12 branches will produce a flower with 12 roots.')
   })
-
-  it('Should toggle root annotation on click', () => {
-    cy.get('@flowerKey')
-    .find('.root-key-box')
-    .children().first().click({force: true})
-    cy.get('@annotations')
-    .contains('The roots of a flower represent the remote branches of a repository. E.g. a repository with 12 branches will produce a flower with 12 roots.')
-  });
 });
