@@ -21,13 +21,13 @@ const Home = (props) => {
         <Link to={{
           pathname:`/visualizations/${user}`
         }}>
-          <button name="search-user-button" className="search-btn" onClick={() => props.setHome(false)}>Grow</button>
+          <button aria-label="Search for user" className="search-btn" onClick={() => props.setHome(false)}>Grow</button>
         </Link>
       </div>
       {!clicked && <h2 className="or">OR</h2>}
       {!clicked &&
         <>
-          <button name="start-map-button" className="map-btn" onClick={() => setClicked(true)}>
+          <button aria-label="Start the map visualizations" className="map-btn" onClick={() => setClicked(true)}>
           </button>
           <h3>Click the globe to watch seeds get planted across the world.</h3>
         </>

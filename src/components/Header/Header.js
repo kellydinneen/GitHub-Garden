@@ -11,7 +11,7 @@ const Header = (props) => {
       {!props.home &&
         <>
           <Link className='home-button' to='/'>
-          <img className='home-icon' src={home}/>
+            <img alt="A little greenhouse" className='home-icon' src={home}/>
           </Link>
         </>
       }
