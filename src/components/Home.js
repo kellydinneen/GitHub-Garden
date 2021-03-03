@@ -21,12 +21,17 @@ const Home = (props) => {
         <Link to={{
           pathname:`/visualizations/${user}`
         }}>
-          <button className="search-btn" onClick={() => props.setHome(false)}>grow</button>
+          <button name="search-user-button" className="search-btn" onClick={() => props.setHome(false)}>grow</button>
         </Link>
       </div>
       {!clicked && <h2 className="or">OR</h2>}
-      {!clicked && <><button className="map-btn" onClick={() => setClicked(true)}>
-      </button><h3>Click the globe to watch seeds get planted across the world.</h3></>}
+      {!clicked &&
+        <>
+          <button name="start-map-button" className="map-btn" onClick={() => setClicked(true)}>
+          </button>
+          <h3>Click the globe to watch seeds get planted across the world.</h3>
+        </>
+      }
       {clicked && <GitHubActivityMap className="map" globalGitHubData={props.globalGitHubData} error={props.error}/>}
     </main>
   )

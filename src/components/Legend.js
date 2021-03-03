@@ -11,13 +11,13 @@ const Legend = ({ map }) => {
         div.innerHTML =`
           <h2>GitHub Activity</h2>
           <hr>
-          <p class="red">Push Event</p>
-          <p class="orange">Create Event</p>
-          <p class="blue">Public Event</p>
-          <p class="green">Watch Event</p>
-          <p class="purple">Issue Comment</p>
-          <p class="cornflowerblue">Pull Request</p>
-          <p class="white">Other</p>
+          <p class="push">Push Event</p>
+          <p class="public">Create Event</p>
+          <p class="watch">Public Event</p>
+          <p class="issue">Watch Event</p>
+          <p class="pull">Issue Comment</p>
+          <p class="create">Pull Request</p>
+          <p class="other">Other</p>
         `
         return div;
       };

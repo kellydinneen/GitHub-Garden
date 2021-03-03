@@ -10,6 +10,23 @@ const Garden = (props) => {
   const view = `0 0 ${200 * repositories.length + 100} 800`
 
   const drawGarden = () => {
+    const colorsByLanguage = {
+      "JavaScript": '#FF8C00',
+      "HTML": '#FF1493',
+      "CSS": '#A62A2A',
+      "SCSS": '#FFFF54',
+      "Python": '#FF00FF',
+      "Java": '#00BFFF',
+      "Swift": '#00FF00',
+      "TypeScript": '#7FFFD4',
+      "C#": '#D2B48C',
+      "PHP": '#000080',
+      "C++": '#800000',
+      "C": '#228B22',
+      "Shell": '#2F4F4F',
+      "Ruby": '#800080',
+      "none": 'none'
+    }
     const flowerBed = d3.select('.flowerbed');
 
     const soilLine = flowerBed.selectAll('.soil-line')
@@ -37,6 +54,36 @@ const Garden = (props) => {
         .domain([minLifespan, maxLifespan])
         .range([550, 500, 450, 400, 350, 300, 250, 200])
 
+      const rootBox = flowerBed.selectAll('.root-box')
+        .data(repositories).enter().append('svg')
+        .attr('class', 'root-box')
+        .attr('height', '200')
+        .attr('width', '200')
+        .attr('viewBox','-150 -150 300 300')
+        .attr('x', (d, i) => i * 200)
+        .attr('y', 500)
+
+      const root = rootBox.selectAll('.root')
+        .data(d => d.branches.map(branch => {
+          return {
+            repo: d.name,
+            name: branch,
+            rotationFactor: d.branches.length === 1 ? -260 : 160 / d.branches.length
+          }
+        }))
+        .enter().append('path')
+        .attr('class', 'root')
+        .attr('fill', 'green')
+        .attr('stroke', 'green')
+        .attr('id', (d,i) => `${d.name + i}`)
+        .attr('d', () => {
+          const arrayOfLengths = [110, 130, 150, 170, 180, 190, 210, 250];
+          const arrayOfCurves = [-20, -5, 5, 10, 15, 20, 25];
+          const index = (array) => [Math.floor(Math.random() * array.length)];
+          return `M0,0 C-10,40 ${arrayOfCurves[index(arrayOfCurves)]},100 0,${arrayOfLengths[index(arrayOfLengths)]}`;
+        })
+        .attr('transform', (d,i) => `rotate(${260 + (i+1) * d.rotationFactor})`)
+
       const stem = flowerBed.selectAll('.stem')
         .data(repositories).enter()
         .append('path')
@@ -47,6 +94,15 @@ const Garden = (props) => {
         .attr('stroke-width', 5)
         .attr('stroke', 'green')
         .attr('fill', 'none')
+
+      flowerBed.selectAll('.repoName')
+        .data(repositories).enter()
+        .append('text')
+        .append('textPath')
+        .attr('xlink:href', (d, i) => `#myStem${i}`)
+        .text(d => d.name)
+        .attr('fill', 'white')
+        .attr('font-size', '1.5rem')
 
       const animate = () => {
         flowerBed.selectAll('.stem')
@@ -66,24 +122,6 @@ const Garden = (props) => {
       const flowerCenterScale = d3.scaleQuantize()
         .domain([0, 100000])
         .range([0.5, 0.6, 0.7, 0.8, 0.9, 1])
-
-      const colorsByLanguage = {
-        "JavaScript": '#DE2016',
-        "HTML": '#FF3EAA',
-        "CSS": '#FCD732',
-        "SCSS":'#26369E',
-        "Python":'#76678C',
-        "Java":'#F19233',
-        "Objective-C": '#DF83BA',
-        "TypeScript": '#40E0D0',
-        "C#":'#6495ED',
-        "PHP":'#DFFF00',
-        "C++": '#FFBF00',
-        "C": '#DE3163',
-        "Shell": '#FF00FF',
-        "Ruby": '#800080',
-        "none": 'none'
-        }
 
       const petalPathThree = 'M0,-150 C20,-110 30,-80 20,0 L0,-15 L-20,0 M0,-150 C-20,-110 -30,-80 -20,0';
       const petalPathTwo = 'M0,-120 C40,-80 30,-50 20,0 L0,-15 L-20,0 M0,-120 C-40,-80 -30,-50 -20,0';
@@ -139,47 +177,8 @@ const Garden = (props) => {
         .attr('cx', (d, i) => 100 + i * 200)
         .attr('cy', d => yStemScale(d.lifespan) - 25)
         .attr('stroke-width', 1)
-        .attr('stroke', '#DF83BA')
-        .attr('fill', '#DF83BA')
-
-      flowerBed.selectAll('.repoName')
-        .data(repositories).enter()
-        .append('text')
-        .append('textPath')
-        .attr('xlink:href', (d, i) => `#myStem${i}`)
-        .text(d => d.name)
-        .attr('fill', 'white')
-        .attr('font-size', '1.5rem')
-
-      const rootBox = flowerBed.selectAll('.root-box')
-        .data(repositories).enter().append('svg')
-        .attr('class', 'root-box')
-        .attr('height', '200')
-        .attr('width', '200')
-        .attr('viewBox','-150 -150 300 300')
-        .attr('x', (d, i) => i * 200)
-        .attr('y', 500)
-
-      const root = rootBox.selectAll('.root')
-        .data(d => d.branches.map(branch => {
-          return {
-            repo: d.name,
-            name: branch,
-            rotationFactor: d.branches.length === 1 ? -260 : 160 / d.branches.length
-          }
-        }))
-        .enter().append('path')
-        .attr('class', 'root')
-        .attr('fill', 'green')
-        .attr('stroke', 'green')
-        .attr('id', (d,i) => `${d.name + i}`)
-        .attr('d', () => {
-          const arrayOfLengths = [110, 130, 150, 170, 180, 190, 210, 250];
-          const arrayOfCurves = [-20, -5, 5, 10, 15, 20, 25];
-          const index = (array) => [Math.floor(Math.random() * array.length)];
-          return `M0,0 C-10,40 ${arrayOfCurves[index(arrayOfCurves)]},100 0,${arrayOfLengths[index(arrayOfLengths)]}`;
-        })
-        .attr('transform', (d,i) => `rotate(${260 + (i+1) * d.rotationFactor})`)
+        .attr('stroke', '#0000FF')
+        .attr('fill', '#0000FF')
     }
 
   useEffect(() => {
