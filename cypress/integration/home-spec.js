@@ -3,7 +3,7 @@ describe('Homepage and Map', () => {
     cy.visit('http://localhost:3000')
   });
 
-  it('Should have site title', () => {
+  it.only('Should have site title', () => {
       cy.contains('GitHub Garden')
   });
   it('Should have button that activates map', () => {

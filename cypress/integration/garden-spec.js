@@ -5,7 +5,7 @@ describe('Visualization Page', () => {
     cy.get('.search-wrapper').find('.search-btn').click().wait(4000)
   });
 
-  it('Should have home button that takes user home', () => {
+  it.only('Should have home button that takes user home', () => {
       cy.url()
         .should('include','visualizations/kellydinneen')
       cy.get('.home-button')
@@ -98,7 +98,7 @@ describe('Key', () => {
       })
   })
 
-  it.only('Should toggle annotations on click', () => {
+  it('Should toggle annotations on click', () => {
       cy.get('@keyBox').invoke('show')
         .find('.flower-key-box').as('flowerKeyBox')
         .children().first().as('annotations')
