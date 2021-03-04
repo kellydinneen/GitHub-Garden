@@ -1,9 +1,38 @@
 footer {
   display: flex;
   justify-content: space-between;
-  height: 5vh;
+  position: fixed;
+  bottom: 0;
+  height:40px;
   width: 100vw;
   margin: 0;
   text-align: center;
-  background-color: black;
+  background-color: #183B37;
+  /* background-color: #1E3434; */
+  border-top: solid 1px black;
+}
+
+.gh-logo {
+  height: 25px;
+  margin: 5px;
+  margin-bottom: 2px;
+}
+
+.linkedin-logo {
+  height: 20px;
+  margin: 5px;
+  margin-bottom: 3px;
+}
+
+.dev-info {
+  margin-left: 2vw;
+  margin-right: 2vw;
+  display: flex;
+  align-items: center;
+}
+
+.dev-name {
+  font-size: 12px;
+  color: grey;
+  margin-right: 5px;
 }

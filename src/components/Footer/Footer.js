@@ -1,13 +1,12 @@
 import React from 'react';
-// import { Link } from "react-router-dom";
 import './Footer.css';
 import gHLogo from '../assets/GHLogo.png';
 import linkedInLogo from '../assets/linkedin-logo.png';
 
-const Header = (props) => {
+const Footer = (props) => {
   return (
     <footer>
-      <section>
+      <section className='dev-info'>
         <p className='dev-name'>Kelly Dinneen</p>
         <a href='https://github.com/kellydinneen' target="_blank" rel="noreferrer">
           <img className='gh-logo' alt='GitHub Logo' src={gHLogo}/>
@@ -16,7 +15,7 @@ const Header = (props) => {
           <img className='linkedin-logo' alt='LinkedIn Logo' src={linkedInLogo}/>
         </a>
       </section>
-      <section>
+      <section className='dev-info'>
         <p className='dev-name'>Chris Spohn</p>
         <a href='https://github.com/CJSpohn' target="_blank" rel="noreferrer">
           <img className='gh-logo' alt='GitHub Logo' src={gHLogo}/>
@@ -25,8 +24,8 @@ const Header = (props) => {
           <img className='linkedin-logo' alt='LinkedIn Logo' src={linkedInLogo}/>
         </a>
       </section>
-    </header>
+    </footer>
   )
 }
 
-export default Header;
+export default Footer;
