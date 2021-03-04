@@ -130,7 +130,11 @@ const Garden = (props) => {
     const petalRotationStarts = [0,60,0];
 
     const flowerPositionBox = flowerBed.selectAll('.flower-box')
-      .data(repositories).enter().append('svg')
+      .data(repositories).enter()
+      .append('a')
+      .attr('xlink:href', d => d.link)
+      .attr('target', '_blank')
+      .append('svg')
       .attr('class', '.flower-box')
       .attr('height', '300')
       .attr('width', '300')
@@ -160,7 +164,8 @@ const Garden = (props) => {
           },
         ]
       )
-      .enter().append('g')
+      .enter()
+      .append('g')
       .attr('class', 'petal-layer')
 
     const petal = petalLayer.selectAll('.petal')
@@ -172,7 +177,8 @@ const Garden = (props) => {
       .attr('transform', (d,i) => `rotate(${d.petalRotationStart + i * 120 || 0})scale(${d.scale})`)
 
     flowerBed.selectAll('circle')
-      .data(repositories).enter().append('circle')
+      .data(repositories).enter()
+      .append('circle')
       .attr('r', d => 15 * flowerCenterScale(d.languages[d.languages.length - 1]))
       .attr('cx', (d, i) => 100 + i * 200)
       .attr('cy', d => yStemScale(d.lifespan) - 25)
