@@ -71,3 +71,29 @@ main {
 .map-btn:hover {
   filter: brightness(1.2);
 }
+
+.globe-heading {
+  width: 60vw;
+  text-align: center;
+}
+
+@media screen and (max-width: 400px) {
+  .globe-heading {
+    font-size: 15px;
+    margin-top: -20px;
+  }
+
+  .search-bar {
+    width: 60vw;
+    font-size: 13px;
+  }
+
+  .search-btn {
+    width: 60px;
+    height: 40px;
+    font-size: 15px;
+  }
+  .map-btn {
+    margin-top: 0;
+  }
+}

@@ -17,3 +17,15 @@ header {
   margin-left: 50vw;
   transform: translateX(-50%);
 }
+
+@media screen and (max-width: 400px) {
+  header {
+    justify-content: center;
+  }
+  .title {
+    margin-left: 10vw;
+    text-align: center;
+    font-size: 25px;
+    transform: translateX(0%);
+  }
+}
