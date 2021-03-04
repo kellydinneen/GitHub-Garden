@@ -111,7 +111,8 @@ const ProfileVisualization = (props) => {
         name: repo.name,
         branches: branchNames[index],
         lifespan: lifespans[index] === 0 ? 1 : lifespans[index],
-        languages: repoLangs[index]
+        languages: repoLangs[index],
+        link: repo.html_url
       }
     })
     return cleanedUserData;
