@@ -11,7 +11,7 @@ const Footer = (props) => {
         <a href='https://github.com/kellydinneen' target="_blank" rel="noreferrer">
           <img className='gh-logo' alt='GitHub Logo' src={gHLogo}/>
         </a>
-        <a href='www.linkedin.com/in/kellydinneen' target="_blank" rel="noreferrer">
+        <a href='https://www.linkedin.com/in/kellydinneen/' target="_blank" rel="noreferrer">
           <img className='linkedin-logo' alt='LinkedIn Logo' src={linkedInLogo}/>
         </a>
       </section>
