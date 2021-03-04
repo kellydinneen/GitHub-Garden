@@ -5,7 +5,7 @@
 
 .slideout-color-key-toggler {
   position: fixed;
-  bottom: 0;
+  bottom: 10px;;
   left: 2vw;
   width: 100px;
   height: 90px;
@@ -88,6 +88,10 @@
     height: 570px;
     bottom: -490px;
     align-items: center;
+  }
+
+  .slideout-color-key-toggler {
+    bottom: 60px;
   }
 }
 
