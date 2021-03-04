@@ -178,9 +178,10 @@ const Garden = (props) => {
 
     flowerBed.selectAll('circle')
       .data(repositories).enter()
-      .append('circle')
+      .append('a')
       .attr('xlink:href', d => d.link)
       .attr('target', '_blank')
+      .append('circle')
       .attr('r', d => 15 * flowerCenterScale(d.languages[d.languages.length - 1]))
       .attr('cx', (d, i) => 100 + i * 200)
       .attr('cy', d => yStemScale(d.lifespan) - 25)
