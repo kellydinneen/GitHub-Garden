@@ -5,7 +5,6 @@ import './Garden.css';
 const Garden = (props) => {
 
   const repositories = props.data;
-  console.log(repositories)
 
   const gardenWidth = 110 * repositories.length;
   const view = `0 0 ${200 * repositories.length} 800`
