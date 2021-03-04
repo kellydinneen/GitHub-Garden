@@ -31,7 +31,7 @@ const Home = (props) => {
           <>
             <button aria-label="Start the map visualizations" className="map-btn" onClick={() => setClicked(true)}>
             </button>
-            <h3>Click the globe to watch seeds get planted across the world.</h3>
+            <h3 className='globe-heading'>Click the globe to watch seeds get planted across the world.</h3>
           </>
         }
         {clicked && <GitHubActivityMap className="map" globalGitHubData={props.globalGitHubData} error={props.error}/>}
