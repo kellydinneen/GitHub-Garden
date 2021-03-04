@@ -96,6 +96,10 @@
     height: 550px;
     bottom: -470px;
   }
+
+  .gardener-info {
+    margin-top: 0;
+  }
 }
 
 @media screen and (max-width: 500px) {
