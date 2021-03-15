@@ -141,9 +141,7 @@ const Garden = (props) => {
       .attr('viewBox','-150 -150 300 300')
       .attr('x', (d, i) => i * 200 - 50)
       .attr('y', d => yStemScale(d.lifespan) - 175)
-      .on('click', (e, d, i) => {
-        console.log(e, d)
-        setClickedRepo(d)})
+      .on('click', (e, d) => setClickedRepo(d))
 
     const petalLayer = flowerPositionBox.selectAll('.petal-layer')
       .data((d) => [
@@ -181,7 +179,6 @@ const Garden = (props) => {
 
     flowerBed.selectAll('circle')
       .data(repositories).enter()
-      .append('a')
       .append('circle')
       .attr('r', d => 15 * flowerCenterScale(d.languages[d.languages.length - 1]))
       .attr('cx', (d, i) => 100 + i * 200)
@@ -189,6 +186,7 @@ const Garden = (props) => {
       .attr('stroke-width', 1)
       .attr('stroke', '#0000FF')
       .attr('fill', '#0000FF')
+      .on('click', (e, d) => setClickedRepo(d))
 
   }
 
@@ -198,7 +196,7 @@ const Garden = (props) => {
 
   return (
     <>
-    {clickedRepo && <Modal repo={clickedRepo} />}
+    {clickedRepo && <Modal repo={clickedRepo} setClickedRepo={setClickedRepo} />}
     <svg className='flowerbed' viewBox={view} width={gardenWidth}></svg>
     </>
   )
