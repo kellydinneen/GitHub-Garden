@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Garden from '../Garden/Garden.js';
-import ErrorPage from '../ErrorPage/ErrorPage'
-import ProfileLoader from '../ProfileLoader/ProfileLoader'
-import ColorKey from '../ColorKey/ColorKey'
-import FlowerKey from '../FlowerKey/FlowerKey'
+import ErrorPage from '../ErrorPage/ErrorPage';
+import ProfileLoader from '../ProfileLoader/ProfileLoader';
+import ColorKey from '../ColorKey/ColorKey';
+import FlowerKey from '../FlowerKey/FlowerKey';
+import Modal from '../Modal/Modal';
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
 
@@ -13,6 +14,7 @@ const ProfileVisualization = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
   const [gitHubError, setGitHubError] = useState("");
+  const [clickedRepo, setClickedRepo] = useState('');
 
   const loadUser = async () => {
     try {
@@ -155,8 +157,12 @@ const ProfileVisualization = (props) => {
           </a>
           <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
         </section>
+        {clickedRepo && <Modal repo={clickedRepo} setClickedRepo={setClickedRepo} />}
         <section className="user-visualizations-box">
-          {cleanUserData.length > 0 && <Garden data={cleanUserData}/>}
+          {cleanUserData.length > 0 && <Garden
+            setClickedRepo={setClickedRepo}
+            clickedRepo={clickedRepo}
+            data={cleanUserData}/>}
         </section>
         <div className="slideout-color-key-toggler">
           <h3 className="slideout-key_heading">Hover for key</h3>

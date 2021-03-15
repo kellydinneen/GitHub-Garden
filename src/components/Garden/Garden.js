@@ -3,11 +3,9 @@ import Modal from '../Modal/Modal';
 import * as d3 from "d3";
 import './Garden.css';
 
-const Garden = (props) => {
+const Garden = ({ data, setClickedRepo }) => {
 
-  const [clickedRepo, setClickedRepo] = useState('');
-
-  const repositories = props.data;
+  const repositories = data;
 
   const gardenWidth = 110 * repositories.length;
   const view = `0 0 ${200 * repositories.length} 800`
@@ -195,10 +193,7 @@ const Garden = (props) => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <>
-    {clickedRepo && <Modal repo={clickedRepo} setClickedRepo={setClickedRepo} />}
     <svg className='flowerbed' viewBox={view} width={gardenWidth}></svg>
-    </>
   )
 }
 
