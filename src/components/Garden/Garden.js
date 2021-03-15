@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Modal from '../Modal/Modal';
 import * as d3 from "d3";
 import './Garden.css';
 
 const Garden = (props) => {
+
+  const [clickedRepo, setClickedRepo] = useState('');
 
   const repositories = props.data;
 
@@ -131,9 +134,6 @@ const Garden = (props) => {
 
     const flowerPositionBox = flowerBed.selectAll('.flower-box')
       .data(repositories).enter()
-      .append('a')
-      .attr('xlink:href', d => d.link)
-      .attr('target', '_blank')
       .append('svg')
       .attr('class', '.flower-box')
       .attr('height', '300')
@@ -141,6 +141,9 @@ const Garden = (props) => {
       .attr('viewBox','-150 -150 300 300')
       .attr('x', (d, i) => i * 200 - 50)
       .attr('y', d => yStemScale(d.lifespan) - 175)
+      .on('click', (e, d, i) => {
+        console.log(e, d)
+        setClickedRepo(d)})
 
     const petalLayer = flowerPositionBox.selectAll('.petal-layer')
       .data((d) => [
@@ -179,8 +182,6 @@ const Garden = (props) => {
     flowerBed.selectAll('circle')
       .data(repositories).enter()
       .append('a')
-      .attr('xlink:href', d => d.link)
-      .attr('target', '_blank')
       .append('circle')
       .attr('r', d => 15 * flowerCenterScale(d.languages[d.languages.length - 1]))
       .attr('cx', (d, i) => 100 + i * 200)
@@ -196,7 +197,10 @@ const Garden = (props) => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
+    <>
+    {clickedRepo && <Modal repo={clickedRepo} />}
     <svg className='flowerbed' viewBox={view} width={gardenWidth}></svg>
+    </>
   )
 }
 

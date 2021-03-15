@@ -1,4 +1,6 @@
 .flowerbed {
   height: 55vh;
   position: absolute;
+  top: 0;
+  left: 0;
 }
