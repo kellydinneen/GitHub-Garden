@@ -1,8 +1,8 @@
 .watering-can {
   margin-top: 30px;
   margin-bottom: 10px;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   animation: water 4s linear infinite;
 }
 
@@ -22,11 +22,11 @@
   position: relative;
   margin-left: 20px;
   width: 120px;
-  min-height: 300px;
+  min-height: 200px;
   background-image: url('../assets/sprout.png');
-  background-size: 100%;
+  background-size: 80%;
   background-repeat: no-repeat;
-  background-position: 0 90%;
+  background-position: 50% 90%;
 }
 
 .droplet {
@@ -130,10 +130,10 @@
   }
   75% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -152,7 +152,7 @@
     background-color: #64daed;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -168,10 +168,10 @@
   }
   60% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -187,10 +187,10 @@
   }
   90% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -206,10 +206,10 @@
   }
   57% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -225,10 +225,10 @@
   }
   68% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -244,10 +244,10 @@
   }
   93% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -263,10 +263,10 @@
   }
   59% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -282,10 +282,10 @@
   }
   93% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -301,10 +301,10 @@
   }
   86% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -320,10 +320,10 @@
   }
   80% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }
@@ -339,10 +339,10 @@
   }
   67% {
     background-color: #64daed;
-    margin-top: 270px;
+    margin-top: 170px;
   }
   100% {
-    margin-top: 270px;
+    margin-top: 170px;
     background-color: #222323;
   }
 }

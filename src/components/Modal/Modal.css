@@ -25,11 +25,14 @@
   flex-direction: column;
   align-items: center;
   width: 60%;
+  height: 90%;
 }
 
 .all-wrapper {
   display: flex;
   flex-direction: row;
+  width: 95%;
+  height: 100%;
 }
 
 .close {
@@ -42,8 +45,8 @@
 
 .repo-link {
   position: relative;
-  bottom: 25%;
-  left: 33%;
+  bottom: 15%;
+  left: 28%;
   width: 33%;
   height: 40px;
 }
