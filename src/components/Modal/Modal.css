@@ -16,6 +16,11 @@
   background-color: black;
 }
 
+.modal-garden {
+  position: relative;
+  left: 20px;
+}
+
 .close {
   position: relative;
   left: 95%;

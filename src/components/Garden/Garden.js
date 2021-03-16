@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Modal from '../Modal/Modal';
 import * as d3 from "d3";
 import './Garden.css';
 
@@ -21,7 +20,7 @@ const Garden = ({ data, setClickedRepo }) => {
       "Swift": '#00FF00',
       "TypeScript": '#7FFFD4',
       "C#": '#D2B48C',
-      "PHP": '#000080',
+      "PHP": '#6495ed',
       "C++": '#800000',
       "C": '#228B22',
       "Shell": '#2F4F4F',

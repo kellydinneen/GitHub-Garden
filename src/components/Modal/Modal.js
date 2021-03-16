@@ -1,5 +1,6 @@
 import React from 'react';
-import './Modal.css'
+import Garden from '../Garden/Garden';
+import './Modal.css';
 
 const Modal = ({ setClickedRepo, repo}) => {
   console.log(repo)
@@ -10,6 +11,7 @@ const Modal = ({ setClickedRepo, repo}) => {
       <div className="modal-wrapper">
         <article className="modal">
           <button className="close" onClick={() => setClickedRepo('')}>X</button>
+          <Garden className="modal-garden" data={[repo]}/>
           <h1 className="repo-name">{repo.name}</h1>
           <h4 className="repo-lifespan">Active Age: {repo.lifespan} days</h4>
           <h4 className="languages-header">Top Languages Used:</h4>
