@@ -33,4 +33,35 @@
   position: relative;
   left: 90%;
   top: 5%;
+  height: 30px;
+  width: 30px;
+}
+
+.repo-link {
+  position: relative;
+  bottom: 25%;
+  left: 31%;
+  width: 36%;
+  height: 40px;
+  font-size: 1.2rem;
+}
+
+.repo-link,
+.close {
+  color: #EFEFEF;
+  background-color: #189a7e;
+  font-family: menlo;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10%;
+  border: none;
+}
+
+.repo-language {
+  margin: 0px;
+}
+
+.close:hover,
+.repo-link:hover {
+  filter: brightness(1.3);
 }

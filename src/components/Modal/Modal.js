@@ -5,7 +5,7 @@ import './Modal.css';
 const Modal = ({ setClickedRepo, repo}) => {
   console.log(repo)
   const languages = repo.languages.filter(lang => typeof(lang) === 'string')
-    .map((el, index) => <p className="repo-langauge" key={index}>{el}</p>)
+    .map((el, index) => <p className="repo-language" key={index}>{el}</p>)
   return (
     <>
       <div className="modal-wrapper">
@@ -19,11 +19,11 @@ const Modal = ({ setClickedRepo, repo}) => {
               <h4 className="languages-header">Top Languages Used:</h4>
               {languages}
               <h4 className="branches-header">Branches: {repo.branches.length}</h4>
-              <a href={repo.link} target="_blank" rel="noreferrer">
-                <button className="repo-link">Visit on GitHub</button>
-              </a>
             </div>
           </div>
+          <a href={repo.link} target="_blank" rel="noreferrer">
+          <button className="repo-link">View on GitHub</button>
+          </a>
         </article>
       </div>
     </>
