@@ -12,12 +12,12 @@ const Modal = ({ setClickedRepo, repo}) => {
         <article className="modal">
           <button className="close" onClick={() => setClickedRepo('')}>X</button>
           <div className="all-wrapper">
-            <Garden className="modal-garden" animate={false} data={[repo]}/>
+            <Garden animate={false} data={[repo]}/>
             <div className="info-wrapper">
               <h1 className="repo-name">{repo.name}</h1>
               <h4 className="repo-lifespan">Active Age: {repo.lifespan} days</h4>
               <h4 className="languages-header">Top Languages Used:</h4>
-              {languages}
+              {languages.length ? languages : <p>No code found!</p>}
               <h4 className="branches-header">Branches: {repo.branches.length}</h4>
             </div>
           </div>
