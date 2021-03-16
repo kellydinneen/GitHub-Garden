@@ -3,7 +3,6 @@ import Garden from '../Garden/Garden';
 import './Modal.css';
 
 const Modal = ({ setClickedRepo, repo}) => {
-  console.log(repo)
   const languages = repo.languages.filter(lang => typeof(lang) === 'string')
     .map((el, index) => <p className="repo-language" key={index}>{el}</p>)
   return (
