@@ -160,6 +160,7 @@ const ProfileVisualization = (props) => {
         {clickedRepo && <Modal repo={clickedRepo} setClickedRepo={setClickedRepo} />}
         <section className="user-visualizations-box">
           {cleanUserData.length > 0 && <Garden
+            animate={true}
             setClickedRepo={setClickedRepo}
             clickedRepo={clickedRepo}
             data={cleanUserData}/>}

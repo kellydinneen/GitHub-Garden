@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as d3 from "d3";
 import './Garden.css';
 
-const Garden = ({ data, setClickedRepo }) => {
+const Garden = ({ data, setClickedRepo, animate }) => {
 
   const repositories = data;
 
@@ -95,25 +95,27 @@ const Garden = ({ data, setClickedRepo }) => {
       .attr('stroke', 'green')
       .attr('fill', 'none')
 
-    flowerBed.selectAll('.repoName')
-      .data(repositories).enter()
-      .append('text')
-      .append('textPath')
-      .attr('xlink:href', (d, i) => `#myStem${i}`)
-      .text(d => d.name)
-      .attr('fill', 'white')
-      .attr('font-size', '1.5rem')
-
-    const animate = () => {
-      flowerBed.selectAll('.stem')
-        .transition().duration(2000)
-        .attr('d', d => `M0,600 C -20 ${yStemScale(d.lifespan)}, 20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
-          .attr('stroke', 'green')
-        .transition().duration(2000)
-        .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
-        .on("end", animate)
+    if (animate) {
+      flowerBed.selectAll('.repoName')
+        .data(repositories).enter()
+        .append('text')
+        .append('textPath')
+        .attr('xlink:href', (d, i) => `#myStem${i}`)
+        .text(d => d.name)
+        .attr('fill', 'white')
+        .attr('font-size', '1.5rem')
+      
+      const animation = () => {
+        flowerBed.selectAll('.stem')
+          .transition().duration(2000)
+          .attr('d', d => `M0,600 C -20 ${yStemScale(d.lifespan)}, 20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
+            .attr('stroke', 'green')
+          .transition().duration(2000)
+          .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
+          .on("end", animation)
+      }
+        animation();
     }
-    animate();
 
     const linesOfCode = repositories.map(repo => repo.languages[repo.languages.length - 1]);
     const flowerSizeScale = d3.scaleQuantize()
