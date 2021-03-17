@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as d3 from "d3";
 import './Garden.css';
 
-const Garden = (props) => {
+const Garden = ({ data, setClickedRepo, animate }) => {
 
-  const repositories = props.data;
+  const repositories = data;
 
   const gardenWidth = 110 * repositories.length;
   const view = `0 0 ${200 * repositories.length} 800`
@@ -20,7 +20,7 @@ const Garden = (props) => {
       "Swift": '#00FF00',
       "TypeScript": '#7FFFD4',
       "C#": '#D2B48C',
-      "PHP": '#000080',
+      "PHP": '#6495ed',
       "C++": '#800000',
       "C": '#228B22',
       "Shell": '#2F4F4F',
@@ -95,25 +95,27 @@ const Garden = (props) => {
       .attr('stroke', 'green')
       .attr('fill', 'none')
 
-    flowerBed.selectAll('.repoName')
-      .data(repositories).enter()
-      .append('text')
-      .append('textPath')
-      .attr('xlink:href', (d, i) => `#myStem${i}`)
-      .text(d => d.name)
-      .attr('fill', 'white')
-      .attr('font-size', '1.5rem')
-
-    const animate = () => {
-      flowerBed.selectAll('.stem')
-        .transition().duration(2000)
-        .attr('d', d => `M0,600 C -20 ${yStemScale(d.lifespan)}, 20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
-          .attr('stroke', 'green')
-        .transition().duration(2000)
-        .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
-        .on("end", animate)
+    if (animate) {
+      flowerBed.selectAll('.repoName')
+        .data(repositories).enter()
+        .append('text')
+        .append('textPath')
+        .attr('xlink:href', (d, i) => `#myStem${i}`)
+        .text(d => d.name)
+        .attr('fill', 'white')
+        .attr('font-size', '1.5rem')
+      
+      const animation = () => {
+        flowerBed.selectAll('.stem')
+          .transition().duration(2000)
+          .attr('d', d => `M0,600 C -20 ${yStemScale(d.lifespan)}, 20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
+            .attr('stroke', 'green')
+          .transition().duration(2000)
+          .attr('d', d => `M0,600 C 80 ${yStemScale(d.lifespan)}, -20 ${yStemScale(d.lifespan)}, 0 ${yStemScale(d.lifespan) - 20}`)
+          .on("end", animation)
+      }
+        animation();
     }
-    animate();
 
     const linesOfCode = repositories.map(repo => repo.languages[repo.languages.length - 1]);
     const flowerSizeScale = d3.scaleQuantize()
@@ -131,9 +133,6 @@ const Garden = (props) => {
 
     const flowerPositionBox = flowerBed.selectAll('.flower-box')
       .data(repositories).enter()
-      .append('a')
-      .attr('xlink:href', d => d.link)
-      .attr('target', '_blank')
       .append('svg')
       .attr('class', '.flower-box')
       .attr('height', '300')
@@ -141,6 +140,7 @@ const Garden = (props) => {
       .attr('viewBox','-150 -150 300 300')
       .attr('x', (d, i) => i * 200 - 50)
       .attr('y', d => yStemScale(d.lifespan) - 175)
+      .on('click', (e, d) => setClickedRepo(d))
 
     const petalLayer = flowerPositionBox.selectAll('.petal-layer')
       .data((d) => [
@@ -178,9 +178,6 @@ const Garden = (props) => {
 
     flowerBed.selectAll('circle')
       .data(repositories).enter()
-      .append('a')
-      .attr('xlink:href', d => d.link)
-      .attr('target', '_blank')
       .append('circle')
       .attr('r', d => 15 * flowerCenterScale(d.languages[d.languages.length - 1]))
       .attr('cx', (d, i) => 100 + i * 200)
@@ -188,6 +185,7 @@ const Garden = (props) => {
       .attr('stroke-width', 1)
       .attr('stroke', '#0000FF')
       .attr('fill', '#0000FF')
+      .on('click', (e, d) => setClickedRepo(d))
 
   }
 
