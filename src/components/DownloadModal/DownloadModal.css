@@ -1,0 +1,46 @@
+.modal-wrapper {
+  position: absolute;
+  left: 0;
+  top: 26%;
+  width: 100vw;
+  height: 45vh;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.modal {
+  position: relative;
+  left: 25%;
+  width: 45%;
+  height: 90%;
+  padding: 0 0 2% 5%;
+  border-radius: 5%;
+  background-color: black;
+}
+
+.download-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  height: 90%;
+}
+
+.download-options {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5%;
+}
+
+.close {
+  position: relative;
+  left: 90%;
+  top: 5%;
+  height: 30px;
+  width: 30px;
+}
+
+.close:hover {
+  filter: brightness(1.3);
+}
