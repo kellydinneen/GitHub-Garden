@@ -60,9 +60,9 @@
 
 .user-visualizations-box {
   width: 100%;
-  height: 60vh;
+  height: 47vh;
   position: absolute;
-  bottom: 20vh;
+  bottom: 18vh;
   overflow-x: scroll;
 }
 
@@ -81,6 +81,48 @@
   position: relative;
   width: 300px;
   height: 200px;
+}
+
+.gardener-name {
+  font-size: 20px;
+}
+
+.icons {
+  display: flex;
+}
+
+.download-icon {
+  height: 30px;
+  width: 40px;
+  background-color: #222323;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url('../assets/download.png');
+  cursor: pointer;
+  border: none;
+}
+
+.share-icon {
+  height: 23px;
+  width: 40px;
+  background-color: #222323;
+  background-image: url('../assets/share.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-top: 2px;
+  border: none;
+}
+
+.share-icon:hover {
+  background-image: url('../assets/share-active.png');
+}
+
+.download-icon:hover {
+  background-image: url('../assets/download-active.png');
 }
 
 @media screen and (max-width: 1100px) {
