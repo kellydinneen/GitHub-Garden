@@ -12,8 +12,8 @@ const DownloadModal = ({ setClickedDownload, downloadGardenImage, setTextPathCol
 
   return (
     <>
-      <div className="modal-wrapper">
-        <article className="modal">
+      <div className="download-modal-wrapper">
+        <article className="download-modal">
           <button className="close" onClick={() => {
             setClickedDownload(false)
             setTextPathColor('#ffff');
