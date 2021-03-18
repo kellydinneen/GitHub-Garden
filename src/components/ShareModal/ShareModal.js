@@ -14,20 +14,22 @@ const ShareModal = ({setClickedShare, userName}) => {
             <div className='share-icons'>
               <FacebookShareButton
                   url={`https://githubgarden.herokuapp.com/visualizations/${userName}`}
-                  quote={`Garden of ${userName}`}
+                  quote={`Garden of @${userName}`}
                   hashtag="#githubgarden"
                   className='share-button'>
                    <FacebookIcon size={36} round={true} />
               </FacebookShareButton>
               <LinkedinShareButton
-                  title={`Garden of ${userName}`}
+                  url={`https://githubgarden.herokuapp.com/visualizations/${userName}`}
+                  title={`Garden of @${userName}`}
                   summary="A playful visualization of GitHub repositories. Built with D3.js and React"
                   source='GitHub Garden'
                   className='share-button'>
                    <LinkedinIcon size={36} round={true}/>
               </LinkedinShareButton>
               <TwitterShareButton
-                  title={`Garden of ${userName}`}
+                  url={`https://githubgarden.herokuapp.com/visualizations/${userName}`}
+                  title={`Garden of @${userName}`}
                   hashtags={['#githubgarden', '#d3']}
                   className='share-button'>
                    <TwitterIcon size={36} round={true}/>

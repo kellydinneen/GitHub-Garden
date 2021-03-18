@@ -187,7 +187,7 @@ const ProfileVisualization = (props) => {
         </section>
         {clickedRepo && <FlowerModal repo={clickedRepo} setClickedRepo={setClickedRepo} />}
         {clickedDownload && <DownloadModal setClickedDownload={setClickedDownload} downloadGardenImage={downloadGardenImage} setTextPathColor={setTextPathColor} textPathColor={textPathColor}/>}
-        {clickedShare && <ShareModal setClickedShare={setClickedShare} userName={`@${userGitHubData.login}`}/>}
+        {clickedShare && <ShareModal setClickedShare={setClickedShare} userName={userGitHubData.login}/>}
         <section className="user-visualizations-box">
           {cleanUserData.length > 0 && <Garden
             forwardedRef={gardenRef}
