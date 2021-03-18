@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import * as d3 from "d3";
 import './Garden.css';
 
-const Garden = ({ data, setClickedRepo, animate }) => {
+const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) => {
 
   const repositories = data;
 
   const gardenWidth = 110 * repositories.length;
-  const view = `0 0 ${200 * repositories.length} 800`
+  const view = `0 100 ${200 * repositories.length} 650`
 
   const drawGarden = () => {
     const colorsByLanguage = {
@@ -57,11 +57,11 @@ const Garden = ({ data, setClickedRepo, animate }) => {
     const rootBox = flowerBed.selectAll('.root-box')
       .data(repositories).enter().append('svg')
       .attr('class', '.root-box')
-      .attr('height', '200')
-      .attr('width', '200')
-      .attr('viewBox','-150 -150 300 300')
-      .attr('x', (d, i) => i * 200)
-      .attr('y', 500)
+      .attr('height', '400')
+      .attr('width', '300')
+      .attr('viewBox','-150 0 300 450')
+      .attr('x', (d, i) => i * 200 - 50)
+      .attr('y', 600)
 
     const root = rootBox.selectAll('.root')
       .data(d => d.branches.map(branch => {
@@ -77,10 +77,10 @@ const Garden = ({ data, setClickedRepo, animate }) => {
       .attr('stroke', 'green')
       .attr('id', (d,i) => `${d.name + i}`)
       .attr('d', () => {
-        const arrayOfLengths = [110, 130, 150, 170, 180, 190, 210, 250];
-        const arrayOfCurves = [-20, -5, 5, 10, 15, 20, 25];
+        const arrayOfLengths = [65, 70, 90, 95, 100, 110, 130, 135];
+        const arrayOfCurves = [-15, -5, 0, 5, 6, 7, 10];
         const index = (array) => [Math.floor(Math.random() * array.length)];
-        return `M0,0 C-10,40 ${arrayOfCurves[index(arrayOfCurves)]},100 0,${arrayOfLengths[index(arrayOfLengths)]}`;
+        return `M0,0 C-10,30 ${arrayOfCurves[index(arrayOfCurves)]},60 0,${arrayOfLengths[index(arrayOfLengths)]}`;
       })
       .attr('transform', (d,i) => `rotate(${260 + (i+1) * d.rotationFactor})`)
 
@@ -104,7 +104,9 @@ const Garden = ({ data, setClickedRepo, animate }) => {
         .text(d => d.name)
         .attr('fill', 'white')
         .attr('font-size', '1.5rem')
-      
+        .attr('font-family', 'monospace')
+        .attr('fill', textPathColor)
+
       const animation = () => {
         flowerBed.selectAll('.stem')
           .transition().duration(2000)
@@ -193,8 +195,13 @@ const Garden = ({ data, setClickedRepo, animate }) => {
     drawGarden()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    drawGarden()
+  }, [textPathColor]) // eslint-disable-line react-hooks/exhaustive-deps
+
+
   return (
-    <svg className='flowerbed' viewBox={view} width={gardenWidth}></svg>
+    <svg ref={forwardedRef} className='flowerbed' viewBox={view} width={gardenWidth}></svg>
   )
 }
 
