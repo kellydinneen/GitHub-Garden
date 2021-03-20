@@ -17,10 +17,10 @@ const FlowerKey = (props) => {
   return (
     <article className="flower-key-box">
       <section className="key-annotations">
-        {keySelection === 'none'&& <><p>{keyOverview}</p><p>Click on sections of the flower to the right for more detail</p></>}
-        {keySelection === 'flower'&& <><p>{flowerHeadOverview}</p><p>{flowerHeadOverviewPtTwo}</p></>}
-        {keySelection === 'stem'&& <p>{stemOverview}</p>}
-        {keySelection === 'roots'&&<p>{rootsOverview}</p>}
+        {keySelection === 'none'&& <><p className='annotation'>{keyOverview}</p><p className='annotation'>Click on sections of the flower to the right for more detail</p></>}
+        {keySelection === 'flower'&& <><p className='annotation'>{flowerHeadOverview}</p><p className='annotation'>{flowerHeadOverviewPtTwo}</p></>}
+        {keySelection === 'stem'&& <p className='annotation'>{stemOverview}</p>}
+        {keySelection === 'roots'&&<p className='annotation'>{rootsOverview}</p>}
       </section>
       <svg className='flower-key' viewBox="-250 -200 700 700" >
         <svg x='-245' y='-245' className='flower-head-key' height='490' width='490' viewBox="-250 -150 500 300">
