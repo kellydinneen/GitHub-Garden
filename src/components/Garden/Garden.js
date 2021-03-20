@@ -5,6 +5,7 @@ import './Garden.css';
 const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) => {
 
   const repositories = data;
+  const repositoryLives = repositories.map(repo => parseInt(repo.lifespan));
 
   const gardenWidth = 110 * repositories.length;
   const view = `0 100 ${200 * repositories.length} 650`
@@ -47,12 +48,21 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
       .attr('stroke-width', '3px')
       .attr('fill', 'none')
 
-    const maxLifespan = d3.max(repositories, d => d.lifespan)
-    const minLifespan = d3.min(repositories, d => d.lifespan)
+    const maxLifespan = d3.max(repositoryLives)
+    const minLifespan = d3.min(repositoryLives)
+    console.log(repositoryLives, minLifespan, maxLifespan)
 
     const yStemScale = d3.scaleQuantize()
       .domain([minLifespan, maxLifespan])
       .range([550, 500, 450, 400, 350, 300, 250, 200])
+
+    // const yStemScale = d3.scaleThreshold()
+    //   .domain([0.01 * maxLifespan, 0.1 * maxLifespan, 0.2 * maxLifespan, 0.4 * maxLifespan, 0.6 * maxLifespan, 0.8 * maxLifespan])
+    //   .range([500, 450, 400, 350, 300, 250, 200])
+
+    // const yStemScale = d3.scaleQuantile()
+    //   .domain(repositoryLives)
+    //   .range([500, 400, 300, 200])
 
     const rootBox = flowerBed.selectAll('.root-box')
       .data(repositories).enter().append('svg')
