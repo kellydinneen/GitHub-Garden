@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Garden from '../Garden/Garden.js';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import ProfileLoader from '../ProfileLoader/ProfileLoader';
 import ColorKey from '../ColorKey/ColorKey';
 import FlowerKey from '../FlowerKey/FlowerKey';
-import Modal from '../Modal/Modal';
+import FlowerModal from '../FlowerModal/FlowerModal';
+import DownloadModal from '../DownloadModal/DownloadModal';
+import ShareModal from '../ShareModal/ShareModal';
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
+
+const saveImage = require('save-svg-as-png');
 
 const ProfileVisualization = (props) => {
   const [userGitHubData, setUserGitHubData] = useState('')
@@ -15,6 +19,9 @@ const ProfileVisualization = (props) => {
   const [error, setError] = useState(false);
   const [gitHubError, setGitHubError] = useState("");
   const [clickedRepo, setClickedRepo] = useState('');
+  const [clickedDownload, setClickedDownload] = useState(false);
+  const [clickedShare, setClickedShare] = useState(false);
+  const [textPathColor, setTextPathColor] = useState('#ffff');
 
   const loadUser = async () => {
     try {
@@ -137,6 +144,16 @@ const ProfileVisualization = (props) => {
     }
   }
 
+  const gardenRef = useRef(null);
+
+  const downloadGardenImage = (background) => {
+    if(background === 'dark') {
+      saveImage.saveSvgAsPng(gardenRef.current, `garden_${props.userNameToSearch}_${Date.now()}.png`, {backgroundColor: '#222323'});
+    } else if(background === 'transparent') {
+      saveImage.saveSvgAsPng(gardenRef.current, `garden_${props.userNameToSearch}_${Date.now()}.png`);
+    }
+  }
+
   useEffect(() => {
     loadUserInformation();
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -155,14 +172,29 @@ const ProfileVisualization = (props) => {
               src={userGitHubData.avatar_url}
             />
           </a>
-          <h1>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
+          <h1 className='gardener-name'>Garden of {userGitHubData.name || `@${userGitHubData.login}`}</h1>
+          <div className='icons'>
+            <button
+            onClick={() => setClickedShare(true)}
+            alt={`share icon`}
+            className="share-icon">
+            </button>
+            <button onClick={() => setClickedDownload(true)}
+            alt={`download icon`}
+            className="download-icon">
+            </button>
+          </div>
         </section>
-        {clickedRepo && <Modal repo={clickedRepo} setClickedRepo={setClickedRepo} />}
+        {clickedRepo && <FlowerModal repo={clickedRepo} setClickedRepo={setClickedRepo} />}
+        {clickedDownload && <DownloadModal setClickedDownload={setClickedDownload} downloadGardenImage={downloadGardenImage} setTextPathColor={setTextPathColor} textPathColor={textPathColor}/>}
+        {clickedShare && <ShareModal setClickedShare={setClickedShare} userName={userGitHubData.login}/>}
         <section className="user-visualizations-box">
           {cleanUserData.length > 0 && <Garden
+            forwardedRef={gardenRef}
             animate={true}
             setClickedRepo={setClickedRepo}
             clickedRepo={clickedRepo}
+            textPathColor={textPathColor}
             data={cleanUserData}/>}
         </section>
         <div className="slideout-color-key-toggler">

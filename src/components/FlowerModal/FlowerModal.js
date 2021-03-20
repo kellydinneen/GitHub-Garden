@@ -1,14 +1,14 @@
 import React from 'react';
 import Garden from '../Garden/Garden';
-import './Modal.css';
+import './FlowerModal.css';
 
-const Modal = ({ setClickedRepo, repo}) => {
+const FlowerModal = ({ setClickedRepo, repo}) => {
   const languages = repo.languages.filter(lang => typeof(lang) === 'string')
     .map((el, index) => <p className="repo-language" key={index}>{el}</p>)
   return (
     <>
-      <div className="modal-wrapper">
-        <article className="modal">
+      <div className="flower-modal-wrapper">
+        <article className="flower-modal">
           <button className="close" onClick={() => setClickedRepo('')}>X</button>
           <div className="all-wrapper">
             <Garden animate={false} data={[repo]}/>
@@ -29,4 +29,4 @@ const Modal = ({ setClickedRepo, repo}) => {
   )
 }
 
-export default Modal;
+export default FlowerModal;
