@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from '../Home/Home';
 import Header from '../Header/Header';
 import ProfileVisualization from '../ProfileVisualization/ProfileVisualization';
+import Explainer from '../Explainer/Explainer'
 import ErrorPage from '../ErrorPage/ErrorPage'
 import './App.css';
 
@@ -28,6 +29,17 @@ const App = () => {
                 <Header home={false} />
                 <ProfileVisualization
                   userNameToSearch={match.params.user}
+                />
+              </>
+            )}
+            exact
+          />
+          <Route
+            path="/visualizations/explainer"
+            render={() => (
+              <>
+                <Header home={false} />
+                <Explainer
                 />
               </>
             )}
