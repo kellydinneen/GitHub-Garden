@@ -33,14 +33,14 @@
   margin-bottom: 5%;
 }
 
-.close {
-  position: relative;
-  left: 90%;
-  top: 5%;
+.download-button {
+  font-size: 1.2rem;
+  color: #EFEFEF;
+  background-color: #189a7e;
+  font-family: menlo;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5%;
+  border: none;
   height: 30px;
-  width: 30px;
-}
-
-.close:hover {
-  filter: brightness(1.3);
 }
