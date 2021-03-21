@@ -3,7 +3,7 @@
   left: 0;
   top: 23%;
   width: 100vw;
-  height: 45vh;
+  height: 100vh;
   backdrop-filter: blur(10px);
   z-index: 10;
 }
@@ -12,8 +12,9 @@
   position: relative;
   left: 25%;
   width: 45%;
-  height: 90%;
-  padding: 0 0 2% 5%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
   border-radius: 5%;
   background-color: black;
 }
@@ -21,9 +22,10 @@
 .share-modal-content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 90%;
-  margin-top: 15%;
+  margin-top: 5%;
 }
 
 .share-button {

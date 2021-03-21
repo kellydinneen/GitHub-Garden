@@ -5,6 +5,7 @@ import './FlowerModal.css';
 const FlowerModal = ({ setClickedRepo, repo}) => {
   const languages = repo.languages.filter(lang => typeof(lang) === 'string')
     .map((el, index) => <p className="repo-language" key={index}>{el}</p>)
+
   return (
     <>
       <div className="flower-modal-wrapper">

@@ -20,6 +20,7 @@
   .color-key-language {
     margin-top: 0;
     font-size: 0.8rem;
+    color: grey;
   }
 
   @media screen and (max-width: 1100px) {
