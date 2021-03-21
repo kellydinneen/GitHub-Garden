@@ -13,12 +13,12 @@
   border-radius: 5px;
 }
 
-p {
+.legend-category {
   font-size: 1.2rem;
 }
 
 h2,
-p {
+.legend-category {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
