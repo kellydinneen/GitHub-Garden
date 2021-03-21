@@ -11,8 +11,49 @@
   margin-right: 50px;
 }
 
-p {
-  font-size: 1rem;
+.annotation {
+  font-size: 0.9rem;
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  color: #EFEFEF;;
+}
+
+.learn-more {
+  font-size: 14px;
+  color: #EFEFEF;
+  background-color: black;
+  font-family: Menlo;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0.5px solid grey;
+  height: 30px;
+  margin: 5px;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
 }
 
 .flower-key {
@@ -31,7 +72,7 @@ p {
     margin-left: 20px;
     margin-top: -300px;
   }
-  p {
+  .annotation {
     font-size: 0.8rem;
   }
   .flower-key-box {
@@ -61,7 +102,7 @@ p {
     margin-left: -50px;
   }
 
-  p {
+  .annotation {
     font-size: 0.7rem;
   }
 }
@@ -78,7 +119,7 @@ p {
     width: 95vw;
   }
 
-  p {
+.annotation {
     font-size: 0.6rem;
   }
 }
