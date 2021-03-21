@@ -24,7 +24,7 @@ const StemDemo = ({data, scale}) => {
       .attr('d', d => `M0,470 L0,${scale(d)}`)
       .attr('transform', (d, i) => `translate(${100 + i * 200},0)`)
       .attr('stroke-width', 5)
-      .attr('stroke', 'green')
+      .attr('stroke', '#189a7e')
       .attr('fill', 'none')
   }
 

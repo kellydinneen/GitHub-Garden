@@ -43,12 +43,12 @@ const Explainer = (props) => {
       <button onClick={() => props.setShowExplainer(false)} className='back-to-garden-button'>Back to Garden</button>
       <section className='explainer-overview'>
         {overviews[page]}
-        {page === 'intro' && <button onClick={() => setPage('stems')}>Next: Stem Scales</button>}
-        {page === 'stems' && <>
-          <button onClick={() => setPage('intro')}>Back to Overview</button>
-          <button onClick={() => setPage('flowers')}>Next: Flower Scales</button>
-        </>}
-        {page === 'flowers' && <button onClick={() => setPage('stems')}>Back to Stem Scales</button>}
+        {page === 'intro' && <button className='explainer-nav-button' onClick={() => setPage('stems')}>Next: Stem Scales</button>}
+        {page === 'stems' && <div className='two-buttons'>
+          <button className='explainer-nav-button' onClick={() => setPage('intro')}>Back to Overview</button>
+          <button className='explainer-nav-button' onClick={() => setPage('flowers')}>Next: Flower Scales</button>
+        </div>}
+        {page === 'flowers' && <button className='explainer-nav-button' onClick={() => setPage('stems')}>Back to Stem Scales</button>}
       </section>
       <section className='explainer-visual'>
         {page === 'stems' && <StemDemo data={lifespans} scale={scaleSelection(lifespanMinMax, 'stems', stemScale)}/>}

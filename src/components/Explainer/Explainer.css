@@ -1,12 +1,51 @@
 .explainer-visual {
   height: 40vh;
+  margin-bottom: -20px;
+}
+
+.back-to-garden-button {
+  font-size: 1.2rem;
+  height: 30px;
+  color: #EFEFEF;
+  background-color: black;
+  font-family: Menlo;
+  /* font-weight: bold; */
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0.5px solid #EFEFEF;
+}
+
+.back-to-garden-button:hover,
+.explainer-nav-button:hover {
+  color: #189a7e;
+  border: 1px solid #189a7e;
+}
+
+.explainer-nav-button {
+  font-size: 14px;
+  color: #EFEFEF;
+  background-color: black;
+  font-family: Menlo;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0.5px solid #EFEFEF;
+  height: 30px;
+  margin: 5px;
 }
 
 .scale-explainer,
 .explainer-overview {
-  font-size: 16px;
+  font-size: 14px;
   font-family: monospace;
-  width: 80%;
+  width: 95%;
+}
+
+.explainer-overview {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .range-inputs {
@@ -14,17 +53,26 @@
   justify-content: space-around;
   align-items: center;
   width: 90%;
+  margin-top: -20px;
 }
 
 .rangeslider {
   width: 200px;
-  margin: 0px;
 }
+
+.rangeslider-horizontal .rangeslider__fill {
+  background: #189a7e;
+}
+
+.two-buttons {
+  display: flex;
+}
+
 
 .explainer,
 .inputs {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
