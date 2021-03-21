@@ -34,17 +34,6 @@ const App = () => {
             )}
             exact
           />
-          <Route
-            path="/visualizations/explainer"
-            render={() => (
-              <>
-                <Header home={false} />
-                <Explainer
-                />
-              </>
-            )}
-            exact
-          />
           <Route render={() => (
             <>
               <Header home={false} />
