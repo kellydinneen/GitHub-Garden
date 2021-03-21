@@ -13,18 +13,7 @@ const Explainer = (props) => {
   const [lifespanMinMax, setLifespanMinMax] = useState([1, 200]);
   const [codeVolumes, setCodeVolumes] = useState([100, 2500, 3000, 10000]);
   const [codeMinMax, setCodeMinMax] = useState([100, 10000]);
-  const [stemScale, setStemScale] = useState('quantize');
-  const [flowerScale, setFlowerScale] = useState('quantize');
-
-  const setScales = (event) => {
-    console.log('setting scale', event.target.value)
-    if(page === 'stem') {
-      setStemScale(event.target.value)
-    } else if (page === 'flower') {
-      setFlowerScale(event.target.value)
-    }
-    console.log('set', stemScale);
-  }
+  const [scaleChoice, setScaleChoice] = useState('quantize');
 
   useEffect(() => {
     setLifespanMinMax(() => {
@@ -51,8 +40,8 @@ const Explainer = (props) => {
         {page === 'flowers' && <button className='explainer-nav-button' onClick={() => setPage('stems')}>Back to Stem Scales</button>}
       </section>
       <section className='explainer-visual'>
-        {page === 'stems' && <StemDemo data={lifespans} scale={scaleSelection(lifespanMinMax, 'stems', stemScale)}/>}
-        {page === 'flowers' && <FlowerDemo data={codeVolumes} scale={scaleSelection(codeMinMax, 'flowers', stemScale)}/>}
+        {page === 'stems' && <StemDemo data={lifespans} scale={scaleSelection(lifespanMinMax, 'stems', scaleChoice)}/>}
+        {page === 'flowers' && <FlowerDemo data={codeVolumes} scale={scaleSelection(codeMinMax, 'flowers', scaleChoice)}/>}
       </section>
       <section className='inputs'>
         {page === 'stems' && <article className='range-inputs lifespan-inputs'>
@@ -103,7 +92,7 @@ const Explainer = (props) => {
         }
         {page !== 'intro' && <label>
           Select a scale:
-          <select className="scale-input" value={stemScale} onChange={event => setScales(event)}>
+          <select className="scale-input" value={scaleChoice} onChange={(event) => setScaleChoice(event.target.value)}>
             <option value="quantize">Quantize (relative)</option>
             <option value="quantizeAbsolute">Quantize (absolute)</option>
             <option value="threshold">Threshold (relative)</option>
@@ -113,8 +102,8 @@ const Explainer = (props) => {
           </select>
         </label>}
         <article className='scale-explainer'>
-          {page === 'stems' && scaleExplanations.stems[stemScale]}
-          {page === 'flowers' && scaleExplanations.flowers[flowerScale]}
+          {page === 'stems' && scaleExplanations.stems[scaleChoice]}
+          {page === 'flowers' && scaleExplanations.flowers[scaleChoice]}
         </article>
       </section>
     </article>
