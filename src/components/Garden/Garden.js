@@ -50,11 +50,15 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
 
     const maxLifespan = d3.max(repositoryLives)
     const minLifespan = d3.min(repositoryLives)
-    console.log(repositoryLives, minLifespan, maxLifespan)
+    const mean = d3.mean(repositoryLives)
+    const deviation = d3.deviation(repositoryLives)
+    const repoAgeRange = repositoryLives.filter(age => {
+      return age < (mean + 1.5 * deviation) && age > (mean - 1.5 * deviation);
+    })
 
     const yStemScale = d3.scaleQuantize()
-      .domain([minLifespan, maxLifespan])
-      .range([550, 500, 450, 400, 350, 300, 250, 200])
+      .domain(d3.extent(repoAgeRange))
+      .range([550, 525, 500, 475, 450, 425, 400, 375, 350, 325, 300, 275, 250])
 
     // const yStemScale = d3.scaleThreshold()
     //   .domain([0.01 * maxLifespan, 0.1 * maxLifespan, 0.2 * maxLifespan, 0.4 * maxLifespan, 0.6 * maxLifespan, 0.8 * maxLifespan])
@@ -62,7 +66,7 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
 
     // const yStemScale = d3.scaleQuantile()
     //   .domain(repositoryLives)
-    //   .range([500, 400, 300, 200])
+    //   .range([550, 500, 450, 350, 250])
 
     const rootBox = flowerBed.selectAll('.root-box')
       .data(repositories).enter().append('svg')
