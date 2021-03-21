@@ -33,14 +33,40 @@
   margin-bottom: 5%;
 }
 
-.download-button {
-  font-size: 1.2rem;
-  color: #EFEFEF;
-  background-color: #189a7e;
-  font-family: menlo;
+.close {
+  position: relative;
+  left: 90%;
+  top: 5%;
+  height: 30px;
+  width: 30px;
+}
+
+.close:hover {
+  filter: brightness(1.3);
+}
+
+.dark  {
+  font-size: 14px;
+  color: #189a7e;
+  background-color: black;
+  font-family: Menlo;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 5%;
-  border: none;
+  border-radius: 5px;
+  border: 0.5px solid #189a7e;
   height: 30px;
+  margin: 5px;
+}
+
+.light {
+  font-size: 14px;
+  color: #189a7e;
+  background-color: #EFEFEF;
+  font-family: Menlo;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0.5px solid #189a7e;
+  height: 30px;
+  margin: 5px;
 }
