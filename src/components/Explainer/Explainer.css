@@ -11,13 +11,14 @@
 
 .range-inputs {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 90%;
 }
 
 .rangeslider {
-  width: 150px;
+  width: 200px;
+  margin: 0px;
 }
 
 .explainer,

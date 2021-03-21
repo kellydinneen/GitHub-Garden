@@ -9,27 +9,27 @@ import * as d3 from "d3";
         quantize:
           d3.scaleQuantize()
             .domain([min, max])
-            .range([550, 500, 450, 400, 350, 300, 250, 200]),
+            .range([400, 350, 300, 250, 200, 150, 100]),
         quantizeAbsolute:
           d3.scaleQuantize()
             .domain([0, 360])
-            .range([550, 500, 450, 400, 350, 300, 250, 200]),
+            .range([400, 350, 300, 250, 200, 150, 100]),
         threshold:
           d3.scaleThreshold()
             .domain([0.2 * max, 0.4 * max,  0.6 * max, 0.8 * max])
-            .range([600, 500, 400, 300, 200]),
+            .range([450, 350, 300, 200, 100]),
         thresholdAbsolute:
           d3.scaleThreshold()
             .domain([10, 30, 90, 360])
-            .range([600, 500, 400, 300, 200]),
+            .range([450, 350, 300, 200, 100]),
         linear:
           d3.scaleLinear()
             .domain([min, max])
-            .range([550, 200]),
+            .range([400, 100]),
         linearAbsolute:
           d3.scaleLinear()
             .domain([0, 365])
-            .range([550, 200])
+            .range([400, 100])
       },
       flowers:{
         quantize:
