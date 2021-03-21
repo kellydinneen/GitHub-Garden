@@ -73,8 +73,8 @@ const yLinearAbsolute = () => {
   }
 
   export const scales = {
-    stem:{quantize: yQuantizeRelative, quatizeAbsolute: yQuantizeAbsolute, threshold: yThresholdRelative, thresholdAbsolute:yThresholdAbsolute, linear: yLinearRelative, linearAbsolute: yLinearAbsolute},
-    flower:{quantize: fQuantizeRelative, quatizeAbsolute: fQuantizeAbsolute, threshold: fThresholdRelative, thresholdAbsolute:fThresholdAbsolute, linear: fLinearRelative, linearAbsolute: fLinearAbsolute}
+    stems:{quantize: yQuantizeRelative, quantizeAbsolute: yQuantizeAbsolute, threshold: yThresholdRelative, thresholdAbsolute:yThresholdAbsolute, linear: yLinearRelative, linearAbsolute: yLinearAbsolute},
+    flowers:{quantize: fQuantizeRelative, quatizeAbsolute: fQuantizeAbsolute, threshold: fThresholdRelative, thresholdAbsolute:fThresholdAbsolute, linear: fLinearRelative, linearAbsolute: fLinearAbsolute}
   };
 
 export const overviews = {

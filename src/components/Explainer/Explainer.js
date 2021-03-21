@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {scales, overviews} from './explainerData'
+import InputRange from 'react-input-range';
+import {scales, overviews, scaleExplanations} from './explainerData';
 import * as d3 from "d3";
 import './Explainer.css';
 
@@ -25,7 +26,8 @@ const Explainer = () => {
 
     const maxLifespan = d3.max(repoLifespans)
     const minLifespan = d3.min(repoLifespans)
-    const scale = stemScale(minLifespan, maxLifespan);
+    const scaleSelection = scales.stems[stemScale];
+    const scale = scaleSelection(minLifespan, maxLifespan);
 
     const stem = flowerBed.selectAll('.stem')
       .data(defaultData).enter()
@@ -44,7 +46,8 @@ const Explainer = () => {
 
     const maxVolume = d3.max(repoCodeVolumes);
     const minVolume = d3.min(repoCodeVolumes);
-    const scale = flowerScale(minVolume, maxVolume);
+    const scaleSelection = scales.flowers[flowerScale];
+    const scale = scaleSelection(minVolume, maxVolume);
 
     const petalPathThree = 'M0,-150 C20,-110 30,-80 20,0 L0,-15 L-20,0 M0,-150 C-20,-110 -30,-80 -20,0';
     const petalPathTwo = 'M0,-120 C40,-80 30,-50 20,0 L0,-15 L-20,0 M0,-120 C-40,-80 -30,-50 -20,0';
@@ -96,6 +99,14 @@ const Explainer = () => {
         .attr('transform', (d,i) => `rotate(${d.petalRotationStart + i * 120 || 0})scale(${d.scale})`)
   }
 
+  const setScales = (event) => {
+    if(page === 'stem') {
+      setStemScale(event.target.value)
+    } else if (page === 'flower') {
+      setFlowerScale(event.target.value)
+    }
+  }
+
   useEffect(() => {
     drawStems()
   }, [stemScale, repoLifespans]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -138,7 +149,67 @@ const Explainer = () => {
         </svg>}
       </section>
       <section className='inputs'>
-        {}
+        {page === 'stems' && <article className='lifespan-inputs'>
+              <InputRange
+                maxValue={1000}
+                minValue={0}
+                value={repoLifespans[0]}
+                onChange={value => setRepoLifespans([value, repoLifespans[1], repoLifespans[2], repoLifespans[3]])} />
+              <InputRange
+                maxValue={1000}
+                minValue={0}
+                value={repoLifespans[1]}
+                onChange={value => setRepoLifespans([repoLifespans[0], value, repoLifespans[2], repoLifespans[3]])} />
+              <InputRange
+                maxValue={1000}
+                minValue={0}
+                value={repoLifespans[2]}
+                onChange={value => setRepoLifespans([repoLifespans[0], repoLifespans[1], value, repoLifespans[3]])} />
+              <InputRange
+                maxValue={1000}
+                minValue={0}
+                value={repoLifespans[3]}
+                onChange={value => setRepoLifespans([repoLifespans[0], repoLifespans[1], repoLifespans[2], value])} />
+            </article>
+        }
+        {page === 'flowers' && <article className='code-volume-inputs'>
+              <InputRange
+                maxValue={100000}
+                minValue={0}
+                value={codeVolumes[0]}
+                onChange={value => setCodeVolumes([value, codeVolumes[1], codeVolumes[2], codeVolumes[3]])} />
+              <InputRange
+                maxValue={100000}
+                minValue={0}
+                value={codeVolumes[1]}
+                onChange={value => setCodeVolumes([codeVolumes[0], value, codeVolumes[2], codeVolumes[3]])} />
+              <InputRange
+                maxValue={100000}
+                minValue={0}
+                value={codeVolumes[2]}
+                onChange={value => setCodeVolumes([codeVolumes[0], codeVolumes[1], value, codeVolumes[3]])} />
+              <InputRange
+                maxValue={100000}
+                minValue={0}
+                value={codeVolumes[3]}
+                onChange={value => setCodeVolumes([codeVolumes[0], codeVolumes[1], codeVolumes[2], value])} />
+            </article>
+        }
+        {page !== 'intro' && <label>
+          Select a scale:
+          <select className="scale-input" value={stemScale} onChange={event => setScales(event)}>
+            <option value="quantize" selected>Quantize (relative)</option>
+            <option value="quantizeAbsolute">Quantize (absolute)</option>
+            <option value="threshold">Threshold (relative)</option>
+            <option value="thresholdAbsolute">Threshold (absolute)</option>
+            <option value="linear">Linear (relative)</option>
+            <option value="linearAbsolute">Linear (absolute)</option>
+          </select>
+        </label>}
+        <article className='scale-explainer'>
+          {page === 'stems' && scaleExplanations.stems[stemScale]}
+          {page === 'flowers' && scaleExplanations.flowers[flowerScale]}
+        </article>
       </section>
     </>
   )
