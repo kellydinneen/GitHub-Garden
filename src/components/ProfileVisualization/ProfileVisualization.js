@@ -7,6 +7,7 @@ import FlowerKey from '../FlowerKey/FlowerKey';
 import FlowerModal from '../FlowerModal/FlowerModal';
 import DownloadModal from '../DownloadModal/DownloadModal';
 import ShareModal from '../ShareModal/ShareModal';
+import Explainer from '../Explainer/Explainer';
 import './ProfileVisualization.css';
 import pvAPI from './ProfileVisualizationApi';
 
@@ -21,6 +22,7 @@ const ProfileVisualization = (props) => {
   const [clickedRepo, setClickedRepo] = useState('');
   const [clickedDownload, setClickedDownload] = useState(false);
   const [clickedShare, setClickedShare] = useState(false);
+  const [showExplainer, setShowExplainer] = useState(false);
   const [textPathColor, setTextPathColor] = useState('#ffff');
 
   const loadUser = async () => {
@@ -162,7 +164,8 @@ const ProfileVisualization = (props) => {
     <main>
       {!isLoaded && <ProfileLoader />}
       {gitHubError && <ErrorPage user={props.userNameToSearch} message={"We couldn't find a profile for"}/>}
-      {isLoaded && !gitHubError &&
+      {showExplainer && <Explainer setShowExplainer={setShowExplainer}/>}
+      {isLoaded && !gitHubError && !showExplainer &&
       <>
         <section className='gardener-info'>
           <a href={userGitHubData.html_url} target="_blank" rel="noreferrer">
@@ -201,7 +204,7 @@ const ProfileVisualization = (props) => {
           <h3 className="slideout-key_heading">Hover for key</h3>
           <article className="slideout-color-key_inner">
             <ColorKey />
-            <FlowerKey user={props.userNameToSearch}/>
+            <FlowerKey user={props.userNameToSearch} setShowExplainer={setShowExplainer}/>
           </article>
         </div>
       </>}
