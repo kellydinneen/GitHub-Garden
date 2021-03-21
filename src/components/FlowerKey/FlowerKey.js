@@ -122,6 +122,7 @@ const FlowerKey = (props) => {
             </textPath>
           </text>
       </svg>
+      <button onClick={() => props.setShowExplainer(true)}>Learn More</button>
     </article>
   )
 }
