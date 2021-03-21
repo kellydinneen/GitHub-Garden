@@ -31,6 +31,10 @@
   margin: 5px;
 }
 
+.learn-more:hover {
+  border: 1px solid white;
+}
+
 @keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}

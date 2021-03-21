@@ -48,7 +48,8 @@ const DownloadModal = ({ setClickedDownload, downloadGardenImage, setTextPathCol
                 Transparent Background
               </label>
             </form>
-            <button className='download-button' onClick={() => downloadGardenImage(imageBackground)}>Download</button>
+            {imageBackground !== 'transparent' && <button className='dark' onClick={() => downloadGardenImage(imageBackground)}>Download</button>}
+            {imageBackground === 'transparent' && <button className='light' onClick={() => downloadGardenImage(imageBackground)}>Download</button>}
           </section>
         </article>
       </div>
