@@ -3,7 +3,7 @@
   left: 0;
   top: 23%;
   width: 100vw;
-  height: 45vh;
+  height: 100vh;
   backdrop-filter: blur(10px);
   z-index: 10;
 }
@@ -12,7 +12,7 @@
   position: relative;
   left: 25%;
   width: 45%;
-  height: 90%;
+  height: 40%;
   padding: 0 0 2% 5%;
   border-radius: 5%;
   background-color: black;

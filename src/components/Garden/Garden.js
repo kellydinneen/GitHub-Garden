@@ -8,7 +8,7 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
   const repositoryLives = repositories.map(repo => parseInt(repo.lifespan));
 
   const gardenWidth = 110 * repositories.length;
-  const view = `0 100 ${200 * repositories.length} 650`
+  const view = `0 100 ${200 * repositories.length} 700`
 
   const drawGarden = () => {
     const colorsByLanguage = {

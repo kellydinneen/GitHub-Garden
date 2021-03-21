@@ -21,6 +21,7 @@ const FlowerKey = (props) => {
         {keySelection === 'flower'&& <><p className='annotation'>{flowerHeadOverview}</p><p className='annotation'>{flowerHeadOverviewPtTwo}</p></>}
         {keySelection === 'stem'&& <p className='annotation'>{stemOverview}</p>}
         {keySelection === 'roots'&&<p className='annotation'>{rootsOverview}</p>}
+        <button className='learn-more' onClick={() => props.setShowExplainer(true)}>Learn More</button>
       </section>
       <svg className='flower-key' viewBox="-250 -200 700 700" >
         <svg x='-245' y='-245' className='flower-head-key' height='490' width='490' viewBox="-250 -150 500 300">
@@ -122,7 +123,6 @@ const FlowerKey = (props) => {
             </textPath>
           </text>
       </svg>
-      <button onClick={() => props.setShowExplainer(true)}>Learn More</button>
     </article>
   )
 }

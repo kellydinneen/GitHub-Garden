@@ -12,9 +12,23 @@
 }
 
 .annotation {
-  font-size: 1rem;
+  font-size: 0.9rem;
   animation: fadeIn ease 1s;
   -webkit-animation: fadeIn ease 1s;
+  color: #EFEFEF;;
+}
+
+.learn-more {
+  font-size: 14px;
+  color: #EFEFEF;
+  background-color: black;
+  font-family: Menlo;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0.5px solid grey;
+  height: 30px;
+  margin: 5px;
 }
 
 @keyframes fadeIn {

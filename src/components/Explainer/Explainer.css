@@ -6,13 +6,12 @@
 .back-to-garden-button {
   font-size: 1.2rem;
   height: 30px;
-  color: #EFEFEF;
+  color: #EFEFEF;;
   background-color: black;
   font-family: Menlo;
-  /* font-weight: bold; */
   cursor: pointer;
   border-radius: 5px;
-  border: 0.5px solid #EFEFEF;
+  border: 0.5px solid grey;
 }
 
 .back-to-garden-button:hover,
@@ -29,7 +28,7 @@
   font-weight: bold;
   cursor: pointer;
   border-radius: 5px;
-  border: 0.5px solid #EFEFEF;
+  border: 0.5px solid grey;
   height: 30px;
   margin: 5px;
 }
@@ -68,6 +67,9 @@
   display: flex;
 }
 
+.explainer {
+  margin-top: -20px;
+}
 
 .explainer,
 .inputs {
