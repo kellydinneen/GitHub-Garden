@@ -69,23 +69,23 @@ const Explainer = (props) => {
         }
         {page === 'flowers' && <article className='range-inputs code-volume-inputs'>
               <Slider
-                max={1000}
-                min={0}
+                max={100000}
+                min={100}
                 value={codeVolumes[0]}
                 onChange={value => setCodeVolumes([value, codeVolumes[1], codeVolumes[2], codeVolumes[3]])} />
               <Slider
-                max={1000}
-                min={0}
+                max={100000}
+                min={100}
                 value={codeVolumes[1]}
                 onChange={value => setCodeVolumes([codeVolumes[0], value, codeVolumes[2], codeVolumes[3]])} />
               <Slider
-                max={1000}
-                min={0}
+                max={100000}
+                min={100}
                 value={codeVolumes[2]}
                 onChange={value => setCodeVolumes([codeVolumes[0], codeVolumes[1], value, codeVolumes[3]])} />
               <Slider
-                max={1000}
-                min={0}
+                max={100000}
+                min={100}
                 value={codeVolumes[3]}
                 onChange={value => setCodeVolumes([codeVolumes[0], codeVolumes[1], codeVolumes[2], value])} />
           </article>
