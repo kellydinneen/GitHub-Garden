@@ -38,7 +38,7 @@ import * as d3 from "d3";
             .range([0.2, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9]),
         quantizeAbsolute:
           d3.scaleQuantize()
-            .domain([0, 100000])
+            .domain([100, 50000])
             .range([0.2, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9]),
         threshold:
           d3.scaleThreshold()
@@ -46,7 +46,7 @@ import * as d3 from "d3";
             .range([0.3, 0.45, 0.6, 0.75, 0.9]),
         thresholdAbsolute:
           d3.scaleThreshold()
-          .domain([500, 5000, 20000, 500000])
+          .domain([500, 5000, 20000, 50000])
           .range([0.3, 0.45, 0.6, 0.75, 0.9]),
         linear:
           d3.scaleLinear()
@@ -54,7 +54,7 @@ import * as d3 from "d3";
             .range([0.2, 0.9]),
         linearAbsolute:
           d3.scaleLinear()
-            .domain([0, 365])
+            .domain([100, 50000])
             .range([0.2, 0.9])
       }
     };
