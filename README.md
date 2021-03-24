@@ -26,7 +26,7 @@
 
 **Testing**: Cypress
 
-**Deployment**: Heroku
+**Deployment**: Heroku and Firebase
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -49,8 +49,9 @@ To run the project locally:
 
 OR
 
-We have deployed the App using Heroku. To visit, click the link below!
-- [GitHub Garden](https://githubgarden.herokuapp.com/visualizations/CJSpohn)
+We have deployed the App using Heroku and Firebase. To visit, click one of the links below!
+- [Firebase](https://github-garden.web.app/)
+- [Heroku](https://githubgarden.herokuapp.com/visualizations/CJSpohn)
 
 
 ### Testing
