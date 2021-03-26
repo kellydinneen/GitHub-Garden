@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import * as d3 from "d3";
 import './Garden.css';
 
@@ -30,7 +30,7 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
     }
     const flowerBed = d3.select('.flowerbed');
 
-    const soilLine = flowerBed.selectAll('.soil-line')
+    flowerBed.selectAll('.soil-line')
       .data(() => {
         let soilLines = [];
         repositories.forEach((repo, i) => {
@@ -48,8 +48,6 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
       .attr('stroke-width', '3px')
       .attr('fill', 'none')
 
-    const maxLifespan = d3.max(repositoryLives)
-    const minLifespan = d3.min(repositoryLives)
     const mean = d3.mean(repositoryLives)
     const deviation = d3.deviation(repositoryLives)
     const repoAgeRange = repositoryLives.filter(age => {
@@ -77,7 +75,7 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
       .attr('x', (d, i) => i * 200 - 50)
       .attr('y', 600)
 
-    const root = rootBox.selectAll('.root')
+    rootBox.selectAll('.root')
       .data(d => d.branches.map(branch => {
         return {
           repo: d.name,
@@ -98,7 +96,7 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
       })
       .attr('transform', (d,i) => `rotate(${260 + (i+1) * d.rotationFactor})`)
 
-    const stem = flowerBed.selectAll('.stem')
+    flowerBed.selectAll('.stem')
       .data(repositories).enter()
       .append('path')
       .attr('class','stem')
@@ -133,7 +131,6 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
         animation();
     }
 
-    const linesOfCode = repositories.map(repo => repo.languages[repo.languages.length - 1]);
     const flowerSizeScale = d3.scaleQuantize()
       .domain([0, 100000])
       .range([0.2, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85])
@@ -184,7 +181,7 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
       .append('g')
       .attr('class', 'petal-layer')
 
-    const petal = petalLayer.selectAll('.petal')
+    petalLayer.selectAll('.petal')
       .data(d => [d,d,d])
       .enter().append('path')
       .attr('class', 'petal clicker')
@@ -192,7 +189,7 @@ const Garden = ({ data, setClickedRepo, animate, forwardedRef, textPathColor }) 
       .attr('d', d => d.path)
       .attr('transform', (d,i) => `rotate(${d.petalRotationStart + i * 120 || 0})scale(${d.scale})`)
 
-    const flowerCenter = flowerBed.selectAll('circle')
+    flowerBed.selectAll('circle')
       .data(repositories).enter()
       .append('circle')
       .attr('class', 'center clicker')

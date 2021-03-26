@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as d3 from "d3";
 
 const FlowerDemo = ({data, scale}) => {
@@ -48,7 +48,7 @@ const FlowerDemo = ({data, scale}) => {
         .append('g')
         .attr('class', 'petal-layer')
 
-      const petal = petalLayer.selectAll('.petal')
+      petalLayer.selectAll('.petal')
         .data(d => [d,d,d])
         .enter().append('path')
         .attr('class', 'petal')

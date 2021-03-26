@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {FacebookShareButton, FacebookIcon, LinkedinShareButton, LinkedinIcon, TwitterShareButton, TwitterIcon} from "react-share";
 import './ShareModal.css';
 
